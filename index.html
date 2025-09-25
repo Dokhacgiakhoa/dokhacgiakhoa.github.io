@@ -21,48 +21,33 @@
 
   <body>
     <!-- Header / Navbar -->
-    <header class="sticky-top">
+    <header class="fixed-top">
       <nav class="navbar navbar-expand-md bg-body-tertiary px-3">
+        <!-- Logo trái -->
         <a class="navbar-brand fw-bold" href="#">ĐKGK</a>
 
-        <!-- GLOBAL THEME SWITCH (mặc định DARK) -->
+        <!-- Checkbox theme dùng chung (mặc định DARK) -->
         <input type="checkbox" id="themeSwitch" class="d-none" checked />
 
-        <!-- Mobile: switch + hamburger -->
-        <div
-          class="d-flex align-items-center gap-2 order-2 order-md-1 ms-auto ms-md-0"
+        <!-- Toggler phải -->
+        <button
+          class="navbar-toggler ms-auto"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMain"
+          aria-controls="navbarMain"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          <div
-            class="theme-switch d-inline-block d-md-none"
-            title="Đổi giao diện"
-          >
-            <label
-              for="themeSwitch"
-              class="switch-label"
-              aria-label="Đổi giao diện"
-            >
-              <span class="icon-on"><i class="bi bi-lightbulb-fill"></i></span>
-              <span class="icon-off"><i class="bi bi-lightbulb-off"></i></span>
-              <span class="slider"></span>
-            </label>
-          </div>
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarMain"
-            aria-controls="navbarMain"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-
-        <!-- Menu -->
-        <div class="collapse navbar-collapse order-3" id="navbarMain">
-          <ul class="navbar-nav me-auto my-2 my-md-0">
+        <!-- MENU + CÔNG TẮC Ở GIỮA -->
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarMain"
+        >
+          <ul class="navbar-nav align-items-md-center gap-md-2">
             <li class="nav-item">
               <a class="nav-link active" href="#home">Trang chủ</a>
             </li>
@@ -73,6 +58,7 @@
               <a class="nav-link" href="#services">Dịch vụ</a>
             </li>
 
+            <!-- Dự án dropdown -->
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -80,8 +66,9 @@
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >Dự án</a
               >
+                Dự án
+              </a>
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="#project1"
@@ -108,23 +95,27 @@
             <li class="nav-item">
               <a class="nav-link" href="#contact">Liên hệ</a>
             </li>
-          </ul>
 
-          <!-- Desktop: switch ở mép phải -->
-          <div
-            class="theme-switch d-none d-md-inline-block"
-            title="Đổi giao diện"
-          >
-            <label
-              for="themeSwitch"
-              class="switch-label"
-              aria-label="Đổi giao diện"
-            >
-              <span class="icon-on"><i class="bi bi-lightbulb-fill"></i></span>
-              <span class="icon-off"><i class="bi bi-lightbulb-off"></i></span>
-              <span class="slider"></span>
-            </label>
-          </div>
+            <!-- Công tắc đặt trong menu, vẫn nhìn thấy ở desktop;
+             khi mobile thu gọn, công tắc nằm cuối danh sách -->
+            <li class="nav-item ms-md-3">
+              <div class="theme-switch" title="Đổi giao diện">
+                <label
+                  for="themeSwitch"
+                  class="switch-label"
+                  aria-label="Đổi giao diện"
+                >
+                  <span class="icon-on"
+                    ><i class="bi bi-lightbulb-fill"></i
+                  ></span>
+                  <span class="icon-off"
+                    ><i class="bi bi-lightbulb-off"></i
+                  ></span>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
