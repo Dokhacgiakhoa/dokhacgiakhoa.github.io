@@ -1,9 +1,8 @@
 /* =========================================================
    ĐỖ KHẮC GIA KHOA — STYLE.CSS
-   - CSS-only Dark/Light switch bằng :has()
+   - CSS-only Dark/Light switch bằng :has() (mặc định Dark)
    - Navbar đổi màu theo theme
-   - Kỹ năng & Dịch vụ: thẻ gradient, % theo nhóm
-   - Không dùng JS custom
+   - Kỹ năng & Dịch vụ: thẻ gradient
 ========================================================= */
 
 /* ========== 1) BIẾN CHUNG & THEME ========== */
@@ -13,7 +12,7 @@
   --brand-gold: #f2c94c;
   --brand-ink: #0b0b12;
 
-  /* Bootstrap-esque tokens (LIGHT mặc định) */
+  /* Tokens (Light mặc định về mặt biến) */
   --bs-body-bg: #ffffff;
   --bs-body-color: #1a1a1a;
   --bs-border-color: rgba(0, 0, 0, 0.125);
@@ -22,38 +21,37 @@
   --bs-primary: var(--brand-purple);
   --bs-tertiary-bg: #f8f9fa;
 
-  /* Navbar text (light) */
+  /* Navbar (Light) */
   --nav-brand-color: #0b0b12;
   --nav-link-color: #2b2b2b;
   --nav-link-hover: #000;
 
-  /* Switch (light) */
-  --switch-bg: #f3f4f6; /* nền sáng */
-  --switch-border: rgba(0, 0, 0, 0.22); /* viền tối nhẹ */
-  --switch-knob: #111; /* knob tối */
+  /* Switch (Light) */
+  --switch-bg: #f3f4f6;
+  --switch-border: rgba(0, 0, 0, 0.22);
+  --switch-knob: #111;
   --switch-outline: 0 0 0 2px rgba(0, 0, 0, 0.03);
+  --knob-left: 3px; /* vị trí knob ở Light */
 }
 
-/* DARK khi 1 trong 2 checkbox được check */
-:root:has(#themeSwitchMobile:checked),
-:root:has(#themeSwitchDesktop:checked) {
+/* KÍCH HOẠT DARK khi #themeSwitch:checked — input mặc định checked nên trang load là Dark */
+:root:has(#themeSwitch:checked) {
   --bs-body-bg: var(--brand-ink);
   --bs-body-color: #e9e9ee;
   --bs-border-color: rgba(255, 255, 255, 0.15);
-  --bs-link-color: var(--brand-gold);
+  --bs-link-color: #f2c94c;
   --bs-link-hover-color: #e1b532;
   --bs-tertiary-bg: #0f0f19;
 
-  /* Navbar text (dark) */
   --nav-brand-color: #ffffff;
   --nav-link-color: #f1f1f5;
   --nav-link-hover: #ffffff;
 
-  /* Switch (dark) */
-  --switch-bg: #1f2130; /* nền tối */
+  --switch-bg: #1f2130;
   --switch-border: rgba(255, 255, 255, 0.38);
-  --switch-knob: #ffffff; /* knob sáng */
+  --switch-knob: #ffffff;
   --switch-outline: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  --knob-left: 35px; /* vị trí knob ở Dark */
 }
 
 /* ========== 2) CƠ BẢN & LAYOUT ========== */
@@ -79,7 +77,6 @@ a:hover {
   color: var(--bs-link-hover-color);
 }
 
-/* Thẻ chung */
 .card {
   border-radius: 0.75rem;
   border-color: var(--bs-border-color);
@@ -123,7 +120,7 @@ a:hover {
   background-color: color-mix(in srgb, var(--bs-link-color) 10%, transparent);
 }
 
-/* Hero nhẹ đổi theo theme */
+/* Hero tint */
 #home {
   background: radial-gradient(
       1200px 400px at 20% -10%,
@@ -136,8 +133,7 @@ a:hover {
       transparent 60%
     );
 }
-:root:has(#themeSwitchMobile:checked) #home,
-:root:has(#themeSwitchDesktop:checked) #home {
+:root:has(#themeSwitch:checked) #home {
   background: radial-gradient(
       1200px 400px at 20% -10%,
       rgba(111, 66, 193, 0.35),
@@ -155,7 +151,6 @@ a:hover {
   position: relative;
   width: 64px;
   height: 32px;
-  vertical-align: middle;
 }
 .theme-switch .switch-label {
   display: block;
@@ -188,26 +183,22 @@ a:hover {
   right: 10px;
 } /* icon tắt đèn */
 
-/* Màu icon:
-   - LIGHT: đen trên nền sáng
-   - DARK : vàng sáng trên nền tối */
+/* Màu icon: Light = đen; Dark = vàng tươi */
 .theme-switch .icon-on i,
 .theme-switch .icon-off i {
   color: #111;
   transition: color 0.2s ease;
 }
-:root:has(#themeSwitchMobile:checked) .theme-switch .icon-on i,
-:root:has(#themeSwitchMobile:checked) .theme-switch .icon-off i,
-:root:has(#themeSwitchDesktop:checked) .theme-switch .icon-on i,
-:root:has(#themeSwitchDesktop:checked) .theme-switch .icon-off i {
-  color: #ffffff;
+:root:has(#themeSwitch:checked) .theme-switch .icon-on i,
+:root:has(#themeSwitch:checked) .theme-switch .icon-off i {
+  color: #fff;
 }
 
-/* Nút gạt */
+/* Nút gạt (không cần selector checked + label nhờ dùng biến) */
 .theme-switch .slider {
   position: absolute;
   top: 3px;
-  left: 3px;
+  left: var(--knob-left);
   width: 26px;
   height: 26px;
   border-radius: 50%;
@@ -215,13 +206,8 @@ a:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   transition: left 0.25s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
-#themeSwitchMobile:checked + .switch-label .slider,
-#themeSwitchDesktop:checked + .switch-label .slider {
-  left: 35px;
-}
 
 /* ========== 4) KỸ NĂNG — NHÓM GRADIENT ========== */
-/* Mỗi nhóm đặt biến --grad-bg (nền) & --accent (màu điểm nhấn) để thẻ con dùng chung */
 .skill-group {
   --grad-bg: linear-gradient(135deg, #eee, #fff);
   --accent: #6f42c1;
@@ -241,7 +227,7 @@ a:hover {
   opacity: 0.6;
 }
 
-/* Màu từng nhóm */
+/* Màu nhóm */
 .group-front {
   --grad-bg: linear-gradient(135deg, #6f42c11a, #b48cff1a);
   --accent: #6f42c1;
@@ -385,8 +371,7 @@ a:hover {
   margin-right: 0.5rem;
   color: #6f42c1;
 }
-:root:has(#themeSwitchMobile:checked) .cert-card .bi,
-:root:has(#themeSwitchDesktop:checked) .cert-card .bi {
+:root:has(#themeSwitch:checked) .cert-card .bi {
   color: #f2c94c;
 }
 

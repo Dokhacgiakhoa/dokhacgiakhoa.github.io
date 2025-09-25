@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Đỗ Khắc Gia Khoa - Full Stack DevOps & AI Engineer</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <!-- Bootstrap CSS (CDN) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Bootstrap Icons -->
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
     />
-    <!-- Style riêng -->
+    <!-- Styles -->
     <link rel="stylesheet" href="./style.css" />
   </head>
 
   <body>
-    <!-- Navbar -->
-    <header>
+    <!-- Header / Navbar -->
+    <header class="sticky-top">
       <nav class="navbar navbar-expand-md bg-body-tertiary px-3">
         <a class="navbar-brand fw-bold" href="#">ĐKGK</a>
 
-        <div class="d-flex align-items-center gap-2 order-2 order-md-1">
-          <!-- SWITCH (MOBILE) -->
+        <!-- GLOBAL THEME SWITCH (mặc định DARK) -->
+        <input type="checkbox" id="themeSwitch" class="d-none" checked />
+
+        <!-- Mobile: switch + hamburger -->
+        <div
+          class="d-flex align-items-center gap-2 order-2 order-md-1 ms-auto ms-md-0"
+        >
           <div
             class="theme-switch d-inline-block d-md-none"
             title="Đổi giao diện"
           >
-            <input type="checkbox" id="themeSwitchMobile" class="d-none" />
             <label
-              for="themeSwitchMobile"
+              for="themeSwitch"
               class="switch-label"
               aria-label="Đổi giao diện"
             >
@@ -40,7 +47,6 @@
             </label>
           </div>
 
-          <!-- Hamburger -->
           <button
             class="navbar-toggler"
             type="button"
@@ -67,7 +73,6 @@
               <a class="nav-link" href="#services">Dịch vụ</a>
             </li>
 
-            <!-- Dự án dropdown -->
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -75,9 +80,8 @@
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                >Dự án</a
               >
-                Dự án
-              </a>
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="#project1"
@@ -106,14 +110,13 @@
             </li>
           </ul>
 
-          <!-- SWITCH (DESKTOP) -->
+          <!-- Desktop: switch ở mép phải -->
           <div
             class="theme-switch d-none d-md-inline-block"
             title="Đổi giao diện"
           >
-            <input type="checkbox" id="themeSwitchDesktop" class="d-none" />
             <label
-              for="themeSwitchDesktop"
+              for="themeSwitch"
               class="switch-label"
               aria-label="Đổi giao diện"
             >
@@ -129,7 +132,7 @@
     <!-- Hero -->
     <section id="home" class="py-5 text-center">
       <div class="container">
-        <h1 class="display-4 fw-bold">Đỗ Khắc Gia Khoa</h1>
+        <h1 class="display-5 fw-bold mb-1">Đỗ Khắc Gia Khoa</h1>
         <p class="lead mb-0">Full Stack DevOps &amp; AI Engineer</p>
         <p class="text-secondary">
           Xây dựng website, ứng dụng &amp; tích hợp AI cho doanh nghiệp.
@@ -137,21 +140,21 @@
       </div>
     </section>
 
-    <!-- GIỚI THIỆU -->
+    <!-- About + Skills -->
     <section id="about" class="py-5">
       <div class="container">
         <div class="row g-4 align-items-start">
           <div class="col-12">
             <h2 class="mb-1">Giới thiệu</h2>
             <p class="text-secondary mb-4">
-              Full Stack DevOps &amp; AI Engineer — xây dựng hệ thống Web/App,
-              Marketing Automation, và tích hợp AI cho doanh nghiệp.
+              Xây dựng hệ thống Web/App, Marketing Performance, tự động hóa
+              &amp; AI cho doanh nghiệp.
             </p>
           </div>
 
-          <!-- KỸ NĂNG (Gradient per group; % là tỉ lệ trong nhóm, Tỉ trọng 100%) -->
+          <!-- Skills (percent là tỉ lệ trong nhóm) -->
           <div class="col-12 col-lg-8">
-            <h5 class="mb-3">Nhóm hạng mục</h5>
+            <h5 class="mb-3">Kỹ năng theo nhóm</h5>
 
             <!-- Frontend -->
             <div class="skill-group group-front mb-3">
@@ -161,7 +164,7 @@
                 <span class="text-secondary ms-2"
                   >UI/UX, responsive, tối ưu SEO</span
                 >
-                <span class="group-note ms-auto">Tỉ trọng 100%</span>
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
               <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
@@ -173,7 +176,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">HTML5 &amp; CSS3</p>
-                      <p class="skill-desc">Semantic, Responsive, Style</p>
+                      <p class="skill-desc">Semantic, responsive</p>
                     </div>
                     <span class="skill-pct">40%</span>
                   </div>
@@ -187,7 +190,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">JavaScript</p>
-                      <p class="skill-desc">ES6+, DOM, React, Fetch API</p>
+                      <p class="skill-desc">ES6+, DOM, Fetch</p>
                     </div>
                     <span class="skill-pct">40%</span>
                   </div>
@@ -201,7 +204,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Bootstrap</p>
-                      <p class="skill-desc">Grid, Utilities, UI/UX, Forms</p>
+                      <p class="skill-desc">Grid, utilities, UI</p>
                     </div>
                     <span class="skill-pct">20%</span>
                   </div>
@@ -215,7 +218,7 @@
                 <i class="bi bi-hdd-network me-2"></i>
                 <strong>Backend</strong>
                 <span class="text-secondary ms-2">REST API, Auth, DB</span>
-                <span class="group-note ms-auto">Tỉ trọng 100%</span>
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
               <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
@@ -227,7 +230,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Node.js</p>
-                      <p class="skill-desc">Express, JWT, Abcode, Mongoose</p>
+                      <p class="skill-desc">Express, JWT</p>
                     </div>
                     <span class="skill-pct">45%</span>
                   </div>
@@ -241,7 +244,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">PHP</p>
-                      <p class="skill-desc">WordPress, MVC, CI/CD, OOP, MVC</p>
+                      <p class="skill-desc">WordPress, MVC</p>
                     </div>
                     <span class="skill-pct">25%</span>
                   </div>
@@ -255,7 +258,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">MySQL</p>
-                      <p class="skill-desc">Schema, Index, Query, Join, View</p>
+                      <p class="skill-desc">Schema, index, query</p>
                     </div>
                     <span class="skill-pct">30%</span>
                   </div>
@@ -271,7 +274,7 @@
                 <span class="text-secondary ms-2"
                   >Phân tích, trực quan hóa</span
                 >
-                <span class="group-note ms-auto">Tỉ trọng 100%</span>
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
               <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
@@ -283,9 +286,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Python</p>
-                      <p class="skill-desc">
-                        Pandas, NumPy, Matplotlib, Scikit-learn
-                      </p>
+                      <p class="skill-desc">Pandas, NumPy</p>
                     </div>
                     <span class="skill-pct">60%</span>
                   </div>
@@ -299,9 +300,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">SQL</p>
-                      <p class="skill-desc">
-                        Query, Join, Aggregate, Index, View
-                      </p>
+                      <p class="skill-desc">Query, join, aggregate</p>
                     </div>
                     <span class="skill-pct">40%</span>
                   </div>
@@ -314,28 +313,10 @@
               <div class="group-heading">
                 <i class="bi bi-robot me-2"></i>
                 <strong>AI / Machine Learning</strong>
-                <span class="text-secondary ms-2"
-                  >LLM, Chatbot, Inference, Fine-tune</span
-                >
-                <span class="group-note ms-auto">Tỉ trọng 100%</span>
+                <span class="text-secondary ms-2">LLM, chatbot, inference</span>
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
               <div class="row g-3 mt-1">
-                <div class="col-12 col-sm-6 col-xl-4">
-                  <div class="skill-card">
-                    <img
-                      class="skill-icon"
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
-                      alt="PyTorch"
-                    />
-                    <div class="skill-meta">
-                      <p class="skill-name">PyTorch</p>
-                      <p class="skill-desc">
-                        Fine-tune cơ bản, Inference, Deploy
-                      </p>
-                    </div>
-                    <span class="skill-pct">40%</span>
-                  </div>
-                </div>
                 <div class="col-12 col-sm-6 col-xl-4">
                   <div class="skill-card">
                     <img
@@ -345,9 +326,23 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">AI Tools</p>
-                      <p class="skill-desc">LLM API, RAG, Chatbot, Fine-tune</p>
+                      <p class="skill-desc">LLM API, RAG, chatbot</p>
                     </div>
                     <span class="skill-pct">60%</span>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-4">
+                  <div class="skill-card">
+                    <img
+                      class="skill-icon"
+                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
+                      alt="PyTorch"
+                    />
+                    <div class="skill-meta">
+                      <p class="skill-name">PyTorch</p>
+                      <p class="skill-desc">Fine-tune cơ bản</p>
+                    </div>
+                    <span class="skill-pct">40%</span>
                   </div>
                 </div>
               </div>
@@ -361,7 +356,7 @@
                 <span class="text-secondary ms-2"
                   >CI/CD, Docker, triển khai</span
                 >
-                <span class="group-note ms-auto">Tỉ trọng 100%</span>
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
               <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
@@ -373,7 +368,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Git &amp; CI/CD</p>
-                      <p class="skill-desc">Branching, Actions, Deployment</p>
+                      <p class="skill-desc">Branching, Actions</p>
                     </div>
                     <span class="skill-pct">55%</span>
                   </div>
@@ -387,7 +382,7 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Docker</p>
-                      <p class="skill-desc">Image, Compose, Network, Volume</p>
+                      <p class="skill-desc">Image, Compose</p>
                     </div>
                     <span class="skill-pct">45%</span>
                   </div>
@@ -396,7 +391,7 @@
             </div>
           </div>
 
-          <!-- Chứng chỉ -->
+          <!-- Certificates -->
           <div class="col-12 col-lg-4">
             <h5 class="mb-3">Chứng chỉ</h5>
             <div class="vstack gap-3">
@@ -406,8 +401,7 @@
                 </p>
                 <div class="small text-secondary">
                   “Học cách học &amp; Nuôi dưỡng tư duy phát triển” — Hoàn thành
-                  xuất sắc<br />
-                  Cấp ngày: 18/08/2025 — Ký bởi: Lê Huy Long
+                  xuất sắc
                 </div>
               </div>
               <div class="cert-card">
@@ -415,7 +409,7 @@
                   <i class="bi bi-mortarboard"></i> FPT Aptech (ACCP)
                 </p>
                 <div class="small text-secondary">
-                  Semester 1 — Web Fundamentals, Programming in C, RDBMS, v.v.
+                  Semester 1 — Web Fundamentals, Programming in C, RDBMS…
                 </div>
               </div>
             </div>
@@ -424,12 +418,12 @@
       </div>
     </section>
 
-    <!-- DỊCH VỤ (chia nhóm, gradient, ảnh + nút xem thêm) -->
+    <!-- Services -->
     <section id="services" class="py-5">
       <div class="container">
         <h2 class="mb-4">Dịch vụ</h2>
 
-        <!-- Nhóm 1: Marketing Performance -->
+        <!-- Marketing Performance -->
         <div class="svc-group group-mkt mb-4">
           <div class="group-heading">
             <i class="bi bi-graph-up-arrow me-2"></i>
@@ -439,7 +433,6 @@
             >
           </div>
           <div class="row g-4 mt-1">
-            <!-- SEO -->
             <div class="col-md-6 col-lg-4">
               <div class="svc-card">
                 <img
@@ -450,13 +443,12 @@
                 <div class="svc-body">
                   <h5 class="svc-title">SEO Tổng thể</h5>
                   <p class="svc-text">
-                    Onpage/Offpage, cấu trúc site, tốc độ, entity &amp; schema.
+                    Onpage/Offpage, cấu trúc site, tốc độ, schema &amp; entity.
                   </p>
                   <a href="#" class="btn btn-accent">Xem thêm</a>
                 </div>
               </div>
             </div>
-            <!-- Google Ads -->
             <div class="col-md-6 col-lg-4">
               <div class="svc-card">
                 <img
@@ -467,8 +459,7 @@
                 <div class="svc-body">
                   <h5 class="svc-title">Google Ads</h5>
                   <p class="svc-text">
-                    Search/Display, tối ưu điểm chất lượng &amp; theo dõi chuyển
-                    đổi.
+                    Search/Display, tối ưu điểm chất lượng, theo dõi chuyển đổi.
                   </p>
                   <a href="#" class="btn btn-accent">Xem thêm</a>
                 </div>
@@ -477,7 +468,7 @@
           </div>
         </div>
 
-        <!-- Nhóm 2: Web / App -->
+        <!-- Web / App -->
         <div class="svc-group group-web mb-4">
           <div class="group-heading">
             <i class="bi bi-window-sidebar me-2"></i>
@@ -485,7 +476,6 @@
             <span class="text-secondary ms-2">Thiết kế &amp; phát triển</span>
           </div>
           <div class="row g-4 mt-1">
-            <!-- Landing Page -->
             <div class="col-md-6 col-lg-4">
               <div class="svc-card">
                 <img
@@ -502,12 +492,11 @@
                 </div>
               </div>
             </div>
-            <!-- UI/UX -->
             <div class="col-md-6 col-lg-4">
               <div class="svc-card">
                 <img
                   src="https://picsum.photos/seed/uiux/640/360"
-                  alt="UI/UX Design"
+                  alt="UI/UX"
                   class="svc-img"
                 />
                 <div class="svc-body">
@@ -519,7 +508,6 @@
                 </div>
               </div>
             </div>
-            <!-- Website doanh nghiệp -->
             <div class="col-md-6 col-lg-4">
               <div class="svc-card">
                 <img
@@ -530,7 +518,7 @@
                 <div class="svc-body">
                   <h5 class="svc-title">Website Doanh nghiệp</h5>
                   <p class="svc-text">
-                    Trang giới thiệu, blog, tuyển dụng, tích hợp CRM.
+                    Trang giới thiệu, blog, tuyển dụng; tích hợp CRM.
                   </p>
                   <a href="#" class="btn btn-accent">Xem thêm</a>
                 </div>
@@ -539,7 +527,7 @@
           </div>
         </div>
 
-        <!-- Nhóm 3: Hệ thống Doanh nghiệp -->
+        <!-- Hệ thống Doanh nghiệp -->
         <div class="svc-group group-sys">
           <div class="group-heading">
             <i class="bi bi-building-gear me-2"></i>
@@ -547,7 +535,6 @@
             <span class="text-secondary ms-2">Quy trình &amp; vận hành</span>
           </div>
           <div class="row g-4 mt-1">
-            <!-- ERP/CRM -->
             <div class="col-md-6 col-lg-4">
               <div class="svc-card">
                 <img
@@ -558,13 +545,12 @@
                 <div class="svc-body">
                   <h5 class="svc-title">ERP / CRM</h5>
                   <p class="svc-text">
-                    Tư vấn, triển khai mô-đun, kết nối dữ liệu.
+                    Tư vấn mô-đun, triển khai &amp; kết nối dữ liệu.
                   </p>
                   <a href="#" class="btn btn-accent">Xem thêm</a>
                 </div>
               </div>
             </div>
-            <!-- AI & Automation -->
             <div class="col-md-6 col-lg-4">
               <div class="svc-card">
                 <img
@@ -581,7 +567,6 @@
                 </div>
               </div>
             </div>
-            <!-- DevOps -->
             <div class="col-md-6 col-lg-4">
               <div class="svc-card">
                 <img
@@ -603,7 +588,7 @@
       </div>
     </section>
 
-    <!-- DỰ ÁN -->
+    <!-- Projects -->
     <section id="projects" class="py-5">
       <div class="container">
         <h2 class="mb-4">Dự án</h2>
@@ -618,8 +603,7 @@
               <div class="card-body">
                 <h5 class="card-title">Website Dịch vụ Huyền học</h5>
                 <p class="card-text">
-                  Tarot, Tử vi, Phong thủy trực tuyến. Giao diện hiện đại, có
-                  đặt lịch.
+                  Tarot, Tử vi, Phong thủy trực tuyến. Có đặt lịch.
                 </p>
                 <a href="#" class="btn btn-outline-primary btn-sm"
                   >Xem chi tiết</a
@@ -627,7 +611,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-md-6" id="project2">
             <div class="card shadow-sm h-100">
               <img
@@ -638,8 +621,7 @@
               <div class="card-body">
                 <h5 class="card-title">Shop Huyền học (E-commerce)</h5>
                 <p class="card-text">
-                  Bán đá phong thủy, trầm hương, vòng ngọc. Giỏ hàng, thanh toán
-                  online.
+                  Bán đá phong thủy, trầm hương, vòng ngọc. Thanh toán online.
                 </p>
                 <a href="#" class="btn btn-outline-primary btn-sm"
                   >Xem chi tiết</a
@@ -647,19 +629,17 @@
               </div>
             </div>
           </div>
-
           <div class="col-md-6" id="project3">
             <div class="card shadow-sm h-100">
               <img
                 src="https://picsum.photos/600/400?random=13"
                 class="card-img-top"
-                alt="E-Learning Platform"
+                alt="E-Learning"
               />
               <div class="card-body">
                 <h5 class="card-title">E-Learning Platform</h5>
                 <p class="card-text">
-                  Khoá học, video, quiz; dashboard quản trị học viên &amp; nội
-                  dung.
+                  Khoá học, video, quiz; dashboard quản trị.
                 </p>
                 <a href="#" class="btn btn-outline-primary btn-sm"
                   >Xem chi tiết</a
@@ -667,7 +647,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-md-6" id="project4">
             <div class="card shadow-sm h-100">
               <img
@@ -678,8 +657,7 @@
               <div class="card-body">
                 <h5 class="card-title">Smart Landing Page Builder</h5>
                 <p class="card-text">
-                  Tạo landing page dễ dùng, tối ưu tốc độ &amp; SEO, tương tự
-                  LadiPage.
+                  Tạo landing dễ dùng, tối ưu tốc độ &amp; SEO.
                 </p>
                 <a href="#" class="btn btn-outline-primary btn-sm"
                   >Xem chi tiết</a
@@ -691,7 +669,7 @@
       </div>
     </section>
 
-    <!-- BLOG -->
+    <!-- Blog -->
     <section id="blog" class="py-5 bg-body-secondary">
       <div class="container">
         <h2 class="mb-4">Blog</h2>
@@ -702,7 +680,7 @@
       </div>
     </section>
 
-    <!-- LIÊN HỆ -->
+    <!-- Contact -->
     <section id="contact" class="py-5">
       <div class="container">
         <h2 class="mb-4">Liên hệ</h2>
@@ -722,7 +700,7 @@
       </div>
     </footer>
 
-    <!-- (Tuỳ chọn) Bootstrap JS cho hamburger -->
-    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Bundle (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
