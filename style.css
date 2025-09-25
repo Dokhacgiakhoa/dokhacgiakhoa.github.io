@@ -439,3 +439,28 @@ section {
   width: 64px;
   height: 32px;
 }
+
+/* Hamburger icon — LIGHT: vạch tối, DARK: vạch trắng */
+.navbar .navbar-toggler-icon {
+  /* Light (mặc định biến của Bootstrap đôi khi hơi nhạt) */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23222' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+:root:has(#themeSwitch:checked) .navbar .navbar-toggler-icon {
+  /* Dark: vạch trắng rõ ràng */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFFFFF' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Viền nút toggler theo theme để dễ nhìn */
+.navbar .navbar-toggler {
+  border-color: rgba(0, 0, 0, 0.25);
+}
+:root:has(#themeSwitch:checked) .navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Hover/Focus cho dễ thấy trên nền tối */
+:root:has(#themeSwitch:checked) .navbar .navbar-toggler:focus,
+:root:has(#themeSwitch:checked) .navbar .navbar-toggler:hover {
+  box-shadow: 0 0 0 0.15rem rgba(255, 255, 255, 0.25);
+}
