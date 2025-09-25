@@ -1,0 +1,41 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.ngang {
+  width: 100vw;
+  height: 50vh;
+  object-fit: cover;
+  object-position: 50% 80%;
+  transition: opacity 0.5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+}
+
+.vuong {
+  width: 50vw;
+  height: 50vh;
+  object-fit: cover;
+  object-position: 50% 80%;
+}
+
+.ngang:hover {
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* banner cao 40% viewport và crop ảnh gọn gàng */
+.carousel-item img {
+  height: 40vh;
+  object-fit: cover; /* hoặc contain nếu muốn toàn bộ ảnh */
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  transition: background-color 0.3s ease;
+}
