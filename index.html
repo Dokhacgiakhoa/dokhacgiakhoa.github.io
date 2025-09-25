@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" data-bs-theme="light">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,7 +12,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
     />
-    <!-- Style riêng (switch + skill meters + cards) -->
+    <!-- Style riêng -->
     <link rel="stylesheet" href="./style.css" />
   </head>
 
@@ -20,21 +20,27 @@
     <!-- Navbar -->
     <header>
       <nav class="navbar navbar-expand-md bg-body-tertiary px-3">
-        <!-- Logo -->
         <a class="navbar-brand fw-bold" href="#">ĐKGK</a>
 
         <div class="d-flex align-items-center gap-2 order-2 order-md-1">
-          <!-- MOBILE: cạnh hamburger -->
-          <div class="theme-switch d-inline-block d-md-none">
+          <!-- SWITCH (MOBILE) -->
+          <div
+            class="theme-switch d-inline-block d-md-none"
+            title="Đổi giao diện"
+          >
             <input type="checkbox" id="themeSwitchMobile" class="d-none" />
-            <label for="themeSwitchMobile" class="switch-label">
-              <span class="icon-sun"><i class="bi bi-sun-fill"></i></span>
-              <span class="icon-moon"><i class="bi bi-moon-fill"></i></span>
+            <label
+              for="themeSwitchMobile"
+              class="switch-label"
+              aria-label="Đổi giao diện"
+            >
+              <span class="icon-on"><i class="bi bi-lightbulb-fill"></i></span>
+              <span class="icon-off"><i class="bi bi-lightbulb-off"></i></span>
               <span class="slider"></span>
             </label>
           </div>
 
-          <!-- Nút hamburger -->
+          <!-- Hamburger -->
           <button
             class="navbar-toggler"
             type="button"
@@ -61,7 +67,7 @@
               <a class="nav-link" href="#services">Dịch vụ</a>
             </li>
 
-            <!-- Dự án dropdown (4 web) -->
+            <!-- Dự án dropdown -->
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -100,12 +106,19 @@
             </li>
           </ul>
 
-          <!-- DESKTOP: bên phải menubar -->
-          <div class="theme-switch d-none d-md-inline-block">
+          <!-- SWITCH (DESKTOP) -->
+          <div
+            class="theme-switch d-none d-md-inline-block"
+            title="Đổi giao diện"
+          >
             <input type="checkbox" id="themeSwitchDesktop" class="d-none" />
-            <label for="themeSwitchDesktop" class="switch-label">
-              <span class="icon-sun"><i class="bi bi-sun-fill"></i></span>
-              <span class="icon-moon"><i class="bi bi-moon-fill"></i></span>
+            <label
+              for="themeSwitchDesktop"
+              class="switch-label"
+              aria-label="Đổi giao diện"
+            >
+              <span class="icon-on"><i class="bi bi-lightbulb-fill"></i></span>
+              <span class="icon-off"><i class="bi bi-lightbulb-off"></i></span>
               <span class="slider"></span>
             </label>
           </div>
@@ -114,7 +127,7 @@
     </header>
 
     <!-- Hero -->
-    <section id="home" class="py-5 text-center bg-light">
+    <section id="home" class="py-5 text-center">
       <div class="container">
         <h1 class="display-4 fw-bold">Đỗ Khắc Gia Khoa</h1>
         <p class="lead mb-0">Full Stack DevOps &amp; AI Engineer</p>
@@ -124,7 +137,7 @@
       </div>
     </section>
 
-    <!-- GIỚI THIỆU (đã nhúng skill groups + meters + chứng chỉ) -->
+    <!-- GIỚI THIỆU -->
     <section id="about" class="py-5">
       <div class="container">
         <div class="row g-4 align-items-start">
@@ -136,21 +149,21 @@
             </p>
           </div>
 
-          <!-- Nhóm kỹ năng -->
+          <!-- KỸ NĂNG (Gradient per group; % là tỉ lệ trong nhóm, tổng = 100%) -->
           <div class="col-12 col-lg-8">
             <h5 class="mb-3">Kỹ năng theo nhóm</h5>
 
             <!-- Frontend -->
-            <div class="mb-3">
-              <div class="d-flex align-items-center mb-2">
+            <div class="skill-group group-front mb-3">
+              <div class="group-heading">
                 <i class="bi bi-layers me-2"></i>
-                <strong class="me-2">Frontend</strong>
-                <span class="text-secondary"
+                <strong>Frontend</strong>
+                <span class="text-secondary ms-2"
                   >UI/UX, responsive, tối ưu SEO</span
                 >
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
-              <div class="row g-3">
-                <!-- HTML/CSS -->
+              <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
                   <div class="skill-card">
                     <img
@@ -160,18 +173,11 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">HTML5 &amp; CSS3</p>
-                      <p class="skill-note">Semantic, Bootstrap, BEM</p>
+                      <p class="skill-desc">Semantic, Responsive</p>
                     </div>
-                    <div class="skill-meter meter-front" style="--val: 88">
-                      <svg viewBox="0 0 64 64" aria-hidden="true">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>88%</span></div>
-                    </div>
+                    <span class="skill-pct">40%</span>
                   </div>
                 </div>
-                <!-- JS -->
                 <div class="col-12 col-sm-6 col-xl-4">
                   <div class="skill-card">
                     <img
@@ -181,18 +187,11 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">JavaScript</p>
-                      <p class="skill-note">ES6+, DOM, Fetch API</p>
+                      <p class="skill-desc">ES6+, DOM, Fetch API</p>
                     </div>
-                    <div class="skill-meter meter-front" style="--val: 80">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>80%</span></div>
-                    </div>
+                    <span class="skill-pct">40%</span>
                   </div>
                 </div>
-                <!-- Bootstrap -->
                 <div class="col-12 col-sm-6 col-xl-4">
                   <div class="skill-card">
                     <img
@@ -202,28 +201,23 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Bootstrap</p>
-                      <p class="skill-note">Grid, utilities, components</p>
+                      <p class="skill-desc">Grid, Utilities, UI</p>
                     </div>
-                    <div class="skill-meter meter-front" style="--val: 86">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>86%</span></div>
-                    </div>
+                    <span class="skill-pct">20%</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Backend -->
-            <div class="mb-3">
-              <div class="d-flex align-items-center mb-2">
+            <div class="skill-group group-back mb-3">
+              <div class="group-heading">
                 <i class="bi bi-hdd-network me-2"></i>
-                <strong class="me-2">Backend</strong>
-                <span class="text-secondary">REST API, Auth, DB</span>
+                <strong>Backend</strong>
+                <span class="text-secondary ms-2">REST API, Auth, DB</span>
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
-              <div class="row g-3">
+              <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
                   <div class="skill-card">
                     <img
@@ -233,15 +227,9 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Node.js</p>
-                      <p class="skill-note">Express, JWT</p>
+                      <p class="skill-desc">Express, JWT</p>
                     </div>
-                    <div class="skill-meter meter-back" style="--val: 75">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>75%</span></div>
-                    </div>
+                    <span class="skill-pct">45%</span>
                   </div>
                 </div>
                 <div class="col-12 col-sm-6 col-xl-4">
@@ -253,15 +241,9 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">PHP</p>
-                      <p class="skill-note">WordPress, MVC cơ bản</p>
+                      <p class="skill-desc">WordPress, MVC</p>
                     </div>
-                    <div class="skill-meter meter-back" style="--val: 70">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>70%</span></div>
-                    </div>
+                    <span class="skill-pct">25%</span>
                   </div>
                 </div>
                 <div class="col-12 col-sm-6 col-xl-4">
@@ -273,28 +255,25 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">MySQL</p>
-                      <p class="skill-note">Schema, index, query</p>
+                      <p class="skill-desc">Schema, Index, Query</p>
                     </div>
-                    <div class="skill-meter meter-back" style="--val: 78">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>78%</span></div>
-                    </div>
+                    <span class="skill-pct">30%</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Data -->
-            <div class="mb-3">
-              <div class="d-flex align-items-center mb-2">
+            <div class="skill-group group-data mb-3">
+              <div class="group-heading">
                 <i class="bi bi-bar-chart-line me-2"></i>
-                <strong class="me-2">Data</strong>
-                <span class="text-secondary">Phân tích, trực quan hóa</span>
+                <strong>Data</strong>
+                <span class="text-secondary ms-2"
+                  >Phân tích, trực quan hóa</span
+                >
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
-              <div class="row g-3">
+              <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
                   <div class="skill-card">
                     <img
@@ -304,15 +283,9 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Python</p>
-                      <p class="skill-note">Pandas, NumPy</p>
+                      <p class="skill-desc">Pandas, NumPy</p>
                     </div>
-                    <div class="skill-meter meter-data" style="--val: 72">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>72%</span></div>
-                    </div>
+                    <span class="skill-pct">60%</span>
                   </div>
                 </div>
                 <div class="col-12 col-sm-6 col-xl-4">
@@ -324,28 +297,23 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">SQL</p>
-                      <p class="skill-note">Query, join, aggregate</p>
+                      <p class="skill-desc">Query, Join, Aggregate</p>
                     </div>
-                    <div class="skill-meter meter-data" style="--val: 76">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>76%</span></div>
-                    </div>
+                    <span class="skill-pct">40%</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- AI / ML -->
-            <div class="mb-3">
-              <div class="d-flex align-items-center mb-2">
+            <div class="skill-group group-ai mb-3">
+              <div class="group-heading">
                 <i class="bi bi-robot me-2"></i>
-                <strong class="me-2">AI / Machine Learning</strong>
-                <span class="text-secondary">LLM, chatbot, inference</span>
+                <strong>AI / Machine Learning</strong>
+                <span class="text-secondary ms-2">LLM, chatbot, inference</span>
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
-              <div class="row g-3">
+              <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
                   <div class="skill-card">
                     <img
@@ -355,15 +323,9 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">PyTorch</p>
-                      <p class="skill-note">Fine-tune cơ bản</p>
+                      <p class="skill-desc">Fine-tune cơ bản</p>
                     </div>
-                    <div class="skill-meter meter-ai" style="--val: 60">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>60%</span></div>
-                    </div>
+                    <span class="skill-pct">40%</span>
                   </div>
                 </div>
                 <div class="col-12 col-sm-6 col-xl-4">
@@ -375,48 +337,25 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">AI Tools</p>
-                      <p class="skill-note">LLM API, RAG, chatbot</p>
+                      <p class="skill-desc">LLM API, RAG, chatbot</p>
                     </div>
-                    <div class="skill-meter meter-ai" style="--val: 68">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>68%</span></div>
-                    </div>
+                    <span class="skill-pct">60%</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- DevOps -->
-            <div class="mb-4">
-              <div class="d-flex align-items-center mb-2">
+            <div class="skill-group group-devops mb-4">
+              <div class="group-heading">
                 <i class="bi bi-diagram-3 me-2"></i>
-                <strong class="me-2">DevOps</strong>
-                <span class="text-secondary">CI/CD, Docker, triển khai</span>
+                <strong>DevOps</strong>
+                <span class="text-secondary ms-2"
+                  >CI/CD, Docker, triển khai</span
+                >
+                <span class="group-note ms-auto">Tổng = 100%</span>
               </div>
-              <div class="row g-3">
-                <div class="col-12 col-sm-6 col-xl-4">
-                  <div class="skill-card">
-                    <img
-                      class="skill-icon"
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-                      alt="Docker"
-                    />
-                    <div class="skill-meta">
-                      <p class="skill-name">Docker</p>
-                      <p class="skill-note">Image, Compose</p>
-                    </div>
-                    <div class="skill-meter meter-devops" style="--val: 66">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>66%</span></div>
-                    </div>
-                  </div>
-                </div>
+              <div class="row g-3 mt-1">
                 <div class="col-12 col-sm-6 col-xl-4">
                   <div class="skill-card">
                     <img
@@ -426,15 +365,23 @@
                     />
                     <div class="skill-meta">
                       <p class="skill-name">Git &amp; CI/CD</p>
-                      <p class="skill-note">Branching, Actions</p>
+                      <p class="skill-desc">Branching, Actions</p>
                     </div>
-                    <div class="skill-meter meter-devops" style="--val: 74">
-                      <svg viewBox="0 0 64 64">
-                        <circle class="track" cx="32" cy="32" r="28"></circle>
-                        <circle class="bar" cx="32" cy="32" r="28"></circle>
-                      </svg>
-                      <div class="center"><span>74%</span></div>
+                    <span class="skill-pct">55%</span>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-4">
+                  <div class="skill-card">
+                    <img
+                      class="skill-icon"
+                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                      alt="Docker"
+                    />
+                    <div class="skill-meta">
+                      <p class="skill-name">Docker</p>
+                      <p class="skill-desc">Image, Compose</p>
                     </div>
+                    <span class="skill-pct">45%</span>
                   </div>
                 </div>
               </div>
@@ -455,7 +402,6 @@
                   Cấp ngày: 18/08/2025 — Ký bởi: Lê Huy Long
                 </div>
               </div>
-
               <div class="cert-card">
                 <p class="mb-1 fw-semibold">
                   <i class="bi bi-mortarboard"></i> FPT Aptech (ACCP)
@@ -470,80 +416,178 @@
       </div>
     </section>
 
-    <!-- DỊCH VỤ -->
-    <section id="services" class="py-5 bg-body-secondary">
+    <!-- DỊCH VỤ (chia nhóm, gradient, ảnh + nút xem thêm) -->
+    <section id="services" class="py-5">
       <div class="container">
         <h2 class="mb-4">Dịch vụ</h2>
-        <div class="row g-4">
-          <div class="col-md-3">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <i class="bi bi-graph-up fs-1 mb-3 text-primary"></i>
-                <h5 class="card-title">SEO</h5>
-                <p class="card-text">
-                  Tối ưu onpage/offpage, cấu trúc &amp; tốc độ.
-                </p>
+
+        <!-- Nhóm 1: Marketing Performance -->
+        <div class="svc-group group-mkt mb-4">
+          <div class="group-heading">
+            <i class="bi bi-graph-up-arrow me-2"></i>
+            <strong>Marketing Performance</strong>
+            <span class="text-secondary ms-2"
+              >Tăng trưởng traffic &amp; chuyển đổi</span
+            >
+          </div>
+          <div class="row g-4 mt-1">
+            <!-- SEO -->
+            <div class="col-md-6 col-lg-4">
+              <div class="svc-card">
+                <img
+                  src="https://picsum.photos/seed/seo/640/360"
+                  alt="SEO"
+                  class="svc-img"
+                />
+                <div class="svc-body">
+                  <h5 class="svc-title">SEO Tổng thể</h5>
+                  <p class="svc-text">
+                    Onpage/Offpage, cấu trúc site, tốc độ, entity &amp; schema.
+                  </p>
+                  <a href="#" class="btn btn-accent">Xem thêm</a>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <i class="bi bi-google fs-1 mb-3 text-danger"></i>
-                <h5 class="card-title">Google Ads</h5>
-                <p class="card-text">Search/Display, theo dõi chuyển đổi.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <i class="bi bi-columns-gap fs-1 mb-3 text-success"></i>
-                <h5 class="card-title">Landing Page</h5>
-                <p class="card-text">Thiết kế chuyển đổi cao, tốc độ nhanh.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <i class="bi bi-pencil-square fs-1 mb-3 text-warning"></i>
-                <h5 class="card-title">Thiết kế giao diện</h5>
-                <p class="card-text">UI/UX đồng bộ thương hiệu.</p>
+            <!-- Google Ads -->
+            <div class="col-md-6 col-lg-4">
+              <div class="svc-card">
+                <img
+                  src="https://picsum.photos/seed/ads/640/360"
+                  alt="Google Ads"
+                  class="svc-img"
+                />
+                <div class="svc-body">
+                  <h5 class="svc-title">Google Ads</h5>
+                  <p class="svc-text">
+                    Search/Display, tối ưu điểm chất lượng &amp; theo dõi chuyển
+                    đổi.
+                  </p>
+                  <a href="#" class="btn btn-accent">Xem thêm</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="row g-4 mt-1">
-          <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <i class="bi bi-building-gear fs-1 mb-3 text-info"></i>
-                <h5 class="card-title">ERP / CRM</h5>
-                <p class="card-text">
-                  Tư vấn &amp; tích hợp quy trình doanh nghiệp.
-                </p>
+        <!-- Nhóm 2: Web / App -->
+        <div class="svc-group group-web mb-4">
+          <div class="group-heading">
+            <i class="bi bi-window-sidebar me-2"></i>
+            <strong>Web / App</strong>
+            <span class="text-secondary ms-2">Thiết kế &amp; phát triển</span>
+          </div>
+          <div class="row g-4 mt-1">
+            <!-- Landing Page -->
+            <div class="col-md-6 col-lg-4">
+              <div class="svc-card">
+                <img
+                  src="https://picsum.photos/seed/landing/640/360"
+                  alt="Landing Page"
+                  class="svc-img"
+                />
+                <div class="svc-body">
+                  <h5 class="svc-title">Landing Page</h5>
+                  <p class="svc-text">
+                    Tối ưu chuyển đổi, tải nhanh, thân thiện SEO.
+                  </p>
+                  <a href="#" class="btn btn-accent">Xem thêm</a>
+                </div>
+              </div>
+            </div>
+            <!-- UI/UX -->
+            <div class="col-md-6 col-lg-4">
+              <div class="svc-card">
+                <img
+                  src="https://picsum.photos/seed/uiux/640/360"
+                  alt="UI/UX Design"
+                  class="svc-img"
+                />
+                <div class="svc-body">
+                  <h5 class="svc-title">Thiết kế giao diện (UI/UX)</h5>
+                  <p class="svc-text">
+                    Wireframe → prototype → hệ thống design đồng bộ.
+                  </p>
+                  <a href="#" class="btn btn-accent">Xem thêm</a>
+                </div>
+              </div>
+            </div>
+            <!-- Website doanh nghiệp -->
+            <div class="col-md-6 col-lg-4">
+              <div class="svc-card">
+                <img
+                  src="https://picsum.photos/seed/website/640/360"
+                  alt="Website Doanh nghiệp"
+                  class="svc-img"
+                />
+                <div class="svc-body">
+                  <h5 class="svc-title">Website Doanh nghiệp</h5>
+                  <p class="svc-text">
+                    Trang giới thiệu, blog, tuyển dụng, tích hợp CRM.
+                  </p>
+                  <a href="#" class="btn btn-accent">Xem thêm</a>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <i class="bi bi-robot fs-1 mb-3 text-secondary"></i>
-                <h5 class="card-title">AI &amp; Tự động hóa</h5>
-                <p class="card-text">Chatbot, RAG, workflow automation.</p>
+        </div>
+
+        <!-- Nhóm 3: Hệ thống Doanh nghiệp -->
+        <div class="svc-group group-sys">
+          <div class="group-heading">
+            <i class="bi bi-building-gear me-2"></i>
+            <strong>Hệ thống Doanh nghiệp</strong>
+            <span class="text-secondary ms-2">Quy trình &amp; vận hành</span>
+          </div>
+          <div class="row g-4 mt-1">
+            <!-- ERP/CRM -->
+            <div class="col-md-6 col-lg-4">
+              <div class="svc-card">
+                <img
+                  src="https://picsum.photos/seed/erp/640/360"
+                  alt="ERP/CRM"
+                  class="svc-img"
+                />
+                <div class="svc-body">
+                  <h5 class="svc-title">ERP / CRM</h5>
+                  <p class="svc-text">
+                    Tư vấn, triển khai mô-đun, kết nối dữ liệu.
+                  </p>
+                  <a href="#" class="btn btn-accent">Xem thêm</a>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <i class="bi bi-cloud-arrow-up fs-1 mb-3 text-primary"></i>
-                <h5 class="card-title">DevOps</h5>
-                <p class="card-text">
-                  CI/CD, tối ưu hạ tầng, bảo trì vận hành.
-                </p>
+            <!-- AI & Automation -->
+            <div class="col-md-6 col-lg-4">
+              <div class="svc-card">
+                <img
+                  src="https://picsum.photos/seed/automation/640/360"
+                  alt="AI & Automation"
+                  class="svc-img"
+                />
+                <div class="svc-body">
+                  <h5 class="svc-title">AI &amp; Tự động hóa</h5>
+                  <p class="svc-text">
+                    Chatbot, RAG, workflow automation đa kênh.
+                  </p>
+                  <a href="#" class="btn btn-accent">Xem thêm</a>
+                </div>
+              </div>
+            </div>
+            <!-- DevOps -->
+            <div class="col-md-6 col-lg-4">
+              <div class="svc-card">
+                <img
+                  src="https://picsum.photos/seed/devops/640/360"
+                  alt="DevOps"
+                  class="svc-img"
+                />
+                <div class="svc-body">
+                  <h5 class="svc-title">DevOps &amp; Hạ tầng</h5>
+                  <p class="svc-text">
+                    CI/CD, tối ưu tài nguyên, bảo trì vận hành.
+                  </p>
+                  <a href="#" class="btn btn-accent">Xem thêm</a>
+                </div>
               </div>
             </div>
           </div>
@@ -670,66 +714,7 @@
       </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- (Tuỳ chọn) Bootstrap JS cho hamburger -->
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script chuyển theme + animate meters -->
-    <script>
-      (function () {
-        const KEY = "color-mode";
-        const root = document.documentElement;
-        const toggles = [
-          document.getElementById("themeSwitchMobile"),
-          document.getElementById("themeSwitchDesktop"),
-        ];
-
-        const saved = localStorage.getItem(KEY);
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        const initial = saved || (prefersDark ? "dark" : "light");
-        setMode(initial, false);
-
-        toggles.forEach((toggle) => {
-          if (toggle) {
-            toggle.addEventListener("change", () => {
-              const next =
-                root.getAttribute("data-bs-theme") === "dark"
-                  ? "light"
-                  : "dark";
-              setMode(next, true);
-            });
-          }
-        });
-
-        function setMode(mode, persist) {
-          root.setAttribute("data-bs-theme", mode);
-          const isDark = mode === "dark";
-          toggles.forEach((t) => {
-            if (t) t.checked = isDark;
-          });
-          if (persist) localStorage.setItem(KEY, mode);
-        }
-
-        // Animate skill meters when visible
-        const bars = document.querySelectorAll(".skill-meter .bar");
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting) {
-                const el = e.target;
-                // restart transition once on reveal
-                el.style.transition = "none";
-                void el.offsetWidth;
-                el.style.transition = "stroke-dashoffset .8s ease";
-                io.unobserve(el);
-              }
-            });
-          },
-          { threshold: 0.35 }
-        );
-        bars.forEach((b) => io.observe(b));
-      })();
-    </script>
   </body>
 </html>
