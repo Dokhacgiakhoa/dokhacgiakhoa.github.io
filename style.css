@@ -1,41 +1,400 @@
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
+/* ================================
+   Brand palette & Bootstrap tuning
+   - data-bs-theme: "công tắc" theme của Bootstrap 5.3+
+==================================*/
+:root {
+  /* Màu thương hiệu */
+  --brand-purple: #6f42c1; /* tím */
+  --brand-gold: #f2c94c; /* vàng ấm */
+  --brand-ink: #0b0b12; /* đen xanh rất đậm */
+  --brand-slate: #141422; /* đen tím nhẹ */
+
+  /* Ánh sáng/viền mặc định */
+  --brand-card-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+
+  /* Gán vào Bootstrap vars chính */
+  --bs-primary: var(--brand-purple);
+  --bs-warning: var(--brand-gold);
 }
 
-.ngang {
-  width: 100vw;
-  height: 50vh;
-  object-fit: cover;
-  object-position: 50% 80%;
-  transition: opacity 0.5s ease-in-out;
-  -webkit-transition: opacity 0.5s ease-in-out;
-  -moz-transition: opacity 0.5s ease-in-out;
-  -ms-transition: opacity 0.5s ease-in-out;
-  -o-transition: opacity 0.5s ease-in-out;
+:root[data-bs-theme="light"] {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #1a1a1a;
+  --bs-border-color: rgba(0, 0, 0, 0.125);
+  --bs-link-color: var(--brand-purple);
+  --bs-link-hover-color: #5a35a1;
 }
 
-.vuong {
-  width: 50vw;
-  height: 50vh;
-  object-fit: cover;
-  object-position: 50% 80%;
+:root[data-bs-theme="dark"] {
+  --bs-body-bg: var(--brand-ink);
+  --bs-body-color: #e9e9ee;
+  --bs-border-color: rgba(255, 255, 255, 0.15);
+  --bs-link-color: var(--brand-gold);
+  --bs-link-hover-color: #e1b532;
+  /* Nâng độ tương phản navbar/dropdown */
+  --bs-tertiary-bg: #0f0f19;
 }
 
-.ngang:hover {
-  opacity: 0;
+/* ================================
+   Typography & general tweaks
+==================================*/
+h1,
+h2,
+h3,
+h4,
+h5 {
+  letter-spacing: 0.2px;
+}
+.card {
+  border-radius: 0.75rem;
+}
+.card:hover {
+  box-shadow: var(--brand-card-shadow);
+  transform: translateY(-1px);
+  transition: 0.2s ease;
+}
+section {
+  scroll-margin-top: 84px;
+}
+
+/* ================================
+   Hero "galaxy" nhẹ (đi theo theme)
+==================================*/
+#home {
+  background: radial-gradient(
+      1200px 400px at 20% -10%,
+      rgba(111, 66, 193, 0.2),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 400px at 80% -20%,
+      rgba(242, 201, 76, 0.15),
+      transparent 60%
+    );
+}
+:root[data-bs-theme="dark"] #home {
+  background: radial-gradient(
+      1200px 400px at 20% -10%,
+      rgba(111, 66, 193, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 400px at 80% -20%,
+      rgba(242, 201, 76, 0.22),
+      transparent 60%
+    );
+}
+
+/* ================================
+   Navbar brand nổi bật nhẹ
+==================================*/
+.navbar-brand {
+  letter-spacing: 0.5px;
+  position: relative;
+}
+.navbar-brand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-purple), var(--brand-gold));
+  opacity: 0.25;
+}
+
+/* ================================
+   THEME SWITCH — công tắc gạt sun/moon
+   HTML: .theme-switch > input#id + .switch-label
+==================================*/
+.theme-switch {
+  position: relative;
+  width: 60px;
+  height: 30px;
+}
+.switch-label {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #222; /* nền tối khi đang ở chế độ sáng */
+  border-radius: 30px;
   cursor: pointer;
+  overflow: hidden;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  border: 1px solid var(--bs-border-color);
+}
+.icon-sun,
+.icon-moon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  z-index: 2;
+  pointer-events: none;
+}
+.icon-sun {
+  left: 8px;
+  color: #ffdd00;
+} /* mặt trời vàng sáng bên trái */
+.icon-moon {
+  right: 8px;
+  color: #222;
+} /* mặt trăng tối bên phải */
+.slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  transition: all 0.3s ease;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* banner cao 40% viewport và crop ảnh gọn gàng */
-.carousel-item img {
-  height: 40vh;
-  object-fit: cover; /* hoặc contain nếu muốn toàn bộ ảnh */
+/* Checked = chế độ tối: nền sáng, gạt sang phải, nút tối */
+#themeSwitchMobile:checked + .switch-label,
+#themeSwitchDesktop:checked + .switch-label {
+  background: #eee;
+}
+#themeSwitchMobile:checked + .switch-label .slider,
+#themeSwitchDesktop:checked + .switch-label .slider {
+  left: 33px;
+  background: #000;
 }
 
-.navbar.scrolled {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-  transition: background-color 0.3s ease;
+/* Viền & tương phản theo theme */
+:root[data-bs-theme="dark"] .switch-label {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* ================================
+   SKILL METERS — vòng tròn % theo nhóm
+   Cách dùng: <div class="skill-meter meter-front" style="--val:88">...</div>
+==================================*/
+.skill-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.85rem;
+  border-radius: 0.75rem;
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.skill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--brand-card-shadow);
+}
+.skill-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.05));
+}
+.skill-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.skill-name {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.skill-note {
+  margin: 0;
+  color: var(--bs-secondary-color);
+  font-size: 0.9rem;
+}
+
+.skill-meter {
+  --size: 64px;
+  --track: var(--bs-border-color);
+  --fill: var(--bs-primary);
+  --val: 75; /* ghi đè bằng inline */
+  --r: 28;
+  --circ: 175.929; /* 2πr, r=28 */
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+}
+.skill-meter svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.skill-meter .track {
+  stroke: var(--track);
+  stroke-width: 8;
+  fill: none;
+  opacity: 0.4;
+}
+.skill-meter .bar {
+  stroke: var(--fill);
+  stroke-width: 8;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: var(--circ);
+  stroke-dashoffset: calc(var(--circ) * (1 - var(--val) / 100));
+  transition: stroke-dashoffset 0.8s ease;
+}
+.skill-meter .center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.skill-meter .center span {
+  color: var(--bs-emphasis-color);
+}
+
+/* Màu theo nhóm (đổi theo brand nếu thích) */
+.meter-front {
+  --fill: var(--brand-purple);
+}
+.meter-back {
+  --fill: #0d6efd;
+} /* xanh dương Bootstrap */
+.meter-data {
+  --fill: #20c997;
+} /* teal */
+.meter-ai {
+  --fill: var(--brand-gold);
+}
+.meter-devops {
+  --fill: #fd7e14;
+} /* cam */
+
+/* ================================
+   Certificate card
+==================================*/
+.cert-card {
+  border: 1px dashed var(--bs-border-color);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--bs-body-bg);
+}
+.cert-card .bi {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+  color: var(--brand-purple);
+}
+:root[data-bs-theme="dark"] .cert-card .bi {
+  color: var(--brand-gold);
+}
+
+/* ================================
+   Services: icon sizing
+==================================*/
+#services .bi {
+  line-height: 1;
+}
+
+/* ================================
+   Buttons subtle gradient hover
+==================================*/
+.btn-outline-primary {
+  border-color: var(--brand-purple);
+  color: var(--brand-purple);
+}
+.btn-outline-primary:hover {
+  background: linear-gradient(90deg, var(--brand-purple), var(--brand-gold));
+  border-color: transparent;
+  color: #fff;
+}
+
+/* ================================
+   Links
+==================================*/
+a {
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+a:hover {
+  opacity: 0.9;
+}
+
+/* ================================
+   Responsive tweaks
+==================================*/
+@media (max-width: 575.98px) {
+  .skill-meter {
+    --size: 56px;
+  }
+  .skill-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ==== FIX SWITCH (không dùng form-switch Bootstrap) ==== */
+.theme-switch {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  vertical-align: middle;
+}
+.theme-switch .switch-label {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  border-radius: 30px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  border: 1px solid var(--bs-border-color);
+}
+.theme-switch .icon-sun,
+.theme-switch .icon-moon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  z-index: 2;
+  line-height: 1;
+  pointer-events: none;
+}
+.theme-switch .icon-sun {
+  left: 8px;
+  color: #ffdd00;
+} /* sun trái, vàng sáng */
+.theme-switch .icon-moon {
+  right: 8px;
+  color: #222;
+} /* moon phải, tối */
+
+.theme-switch .slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  transition: all 0.3s ease;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Checked = chế độ tối: nền sáng + nút gạt sang phải màu đen */
+#themeSwitchMobile:checked + .switch-label,
+#themeSwitchDesktop:checked + .switch-label {
+  background: #eee;
+}
+#themeSwitchMobile:checked + .switch-label .slider,
+#themeSwitchDesktop:checked + .switch-label .slider {
+  left: 33px;
+  background: #000;
+}
+
+/* Viền theo theme dark để đậm hơn */
+:root[data-bs-theme="dark"] .theme-switch .switch-label {
+  border-color: rgba(255, 255, 255, 0.18);
 }
