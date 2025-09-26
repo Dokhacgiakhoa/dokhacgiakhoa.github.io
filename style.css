@@ -272,10 +272,49 @@ body{ padding-top:var(--nav-h); }
   border-color:transparent; color:#fff;
 }
 
-/* ========== 9) RESPONSIVE ========== */
-@media (max-width:575.98px){
-  .skill-icon{ width:32px; height:32px; }
-  .svc-img{ height:160px; }
+/* ===== Thu gọn khoảng cách menu khi xổ ở mobile ===== */
+@media (max-width: 767.98px){
+  /* Khối collapse: padding trên/dưới nhỏ lại + fallback */
+  .navbar .navbar-collapse{
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    padding-block: .25rem; /* trình duyệt mới */
+  }
+
+  /* Danh sách menu: xếp cột, sát nhau, bỏ margin thừa */
+  .navbar .navbar-collapse .navbar-nav{
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .1rem !important;     /* trước đó .25rem */
+    margin: 0 !important;
+  }
+
+  /* Link: giảm padding dọc để không “cách nhiều” */
+  .navbar .navbar-nav .nav-link{
+    padding: .35rem .25rem !important; /* mặc định .5rem 1rem */
+    line-height: 1.25;
+    font-size: .98rem;
+  }
+
+  /* Dropdown trong menu mobile: tránh tạo khoảng trắng lạ */
+  .navbar .dropdown-menu{
+    position: static;
+    float: none;
+    margin: .2rem 0 .4rem;
+    border-width: 0; /* nhìn liền mạch hơn */
+  }
+
+  /* Công tắc nằm sát nhóm menu */
+  .navbar .theme-switch{
+    margin-top: .25rem;
+  }
+
+  /* Loại bỏ khoảng cách thừa giữa các <li> nếu có */
+  .navbar .navbar-nav .nav-item{
+    margin: 0 !important;
+  }
 }
+
 /* =========================================================
    END OF FILE
