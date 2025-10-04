@@ -1,0 +1,279 @@
+/* ===== Reset & Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0d0d0d;
+  --bg-2: #1a1a1a;
+  --text: #eeeeee;
+  --muted: #bdbdbd;
+  --accent-1: #9b59b6; /* tím */
+  --accent-2: #ffd700; /* vàng */
+  --sidebar-w-collapsed: 70px;
+  --sidebar-w-expanded: 220px;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+body {
+  font-family: "Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== Sidebar (hover mở rộng) ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-w-collapsed);
+  background: var(--bg-2);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition: width 0.3s ease;
+  z-index: 2000; /* luôn nổi trên nội dung */
+  box-shadow: var(--shadow);
+}
+
+.sidebar ul {
+  list-style: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-block: 8px;
+}
+
+.sidebar li {
+  width: 100%;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px 14px 8px;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 10px;
+  margin: 4px 8px;
+  outline: none;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.sidebar a i {
+  font-size: 20px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.sidebar a .text {
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* Mở rộng khi hover hoặc khi focus-within (tap, tab phím) */
+.sidebar:hover,
+.sidebar:focus-within {
+  width: var(--sidebar-w-expanded);
+}
+
+.sidebar:hover a .text,
+.sidebar:focus-within a .text {
+  opacity: 1;
+}
+
+.sidebar a:hover,
+.sidebar a:focus-visible {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #111;
+}
+
+.sidebar a:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+/* ===== Content dịch theo sidebar ===== */
+.content {
+  margin-left: var(--sidebar-w-collapsed);
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover ~ .content,
+.sidebar:focus-within ~ .content {
+  margin-left: var(--sidebar-w-expanded);
+}
+
+/* ===== Sections & Utilities ===== */
+section {
+  scroll-margin-top: 16px;
+}
+
+.text-secondary {
+  color: #b8b8b8 !important;
+}
+
+.bg-body-secondary {
+  background: #151515 !important;
+}
+
+.bg-body-tertiary {
+  background: #121212 !important;
+}
+
+.card {
+  background: #171717;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.card .btn {
+  border-radius: 10px;
+}
+
+.btn-accent {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  border: none;
+  color: #111;
+}
+
+.btn-outline-primary {
+  border-color: var(--accent-1);
+  color: var(--accent-1);
+}
+.btn-outline-primary:hover {
+  background: var(--accent-1);
+  border-color: var(--accent-1);
+  color: #111;
+}
+
+/* Skill & Cert cards */
+.skill-card,
+.cert-card,
+.svc-card {
+  background: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 14px;
+  height: 100%;
+}
+
+.skill-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.skill-icon {
+  width: 28px;
+  height: 28px;
+}
+.skill-meta {
+  line-height: 1.2;
+}
+.skill-name {
+  margin: 0;
+  font-weight: 600;
+}
+.skill-desc {
+  margin: 0;
+  font-size: 12px;
+  color: #b8b8b8;
+}
+.skill-pct {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 12px;
+  color: #d8d8d8;
+}
+
+.group-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.svc-card .svc-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.svc-card .svc-body {
+  padding-top: 10px;
+}
+.svc-title {
+  margin: 0 0 6px;
+}
+.svc-text {
+  color: #c2c2c2;
+}
+
+/* Touch devices (không hover) */
+@media (hover: none) {
+  .sidebar {
+    width: var(--sidebar-w-collapsed);
+  }
+  .content {
+    margin-left: var(--sidebar-w-collapsed);
+  }
+}
+
+/* Container fix */
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+ul {
+  padding-left: 0px;
+}
+
+/* --- Tốc độ mở/thu của sidebar (mặc định: THU chậm, MỞ nhanh) --- */
+:root {
+  --sidebar-dur-collapse: 0.6s; /* khi THU (rời hover) => chậm hơn */
+  --sidebar-dur-expand: 0.18s; /* khi MỞ (đang hover/focus) => nhanh hơn */
+  --sidebar-transition: var(--sidebar-dur-collapse);
+}
+
+/* Khi đang hover hoặc focus-within, dùng thời lượng MỞ nhanh */
+:root:has(.sidebar:hover),
+:root:has(.sidebar:focus-within) {
+  --sidebar-transition: var(--sidebar-dur-expand);
+}
+
+/* Áp dụng biến thời lượng cho cả sidebar và content */
+.sidebar {
+  transition: width var(--sidebar-transition) ease;
+}
+.content {
+  transition: margin-left var(--sidebar-transition) ease;
+}
+
+/* (Tùy chọn) chuyển động mượt hơn một chút khi THU lại */
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar,
+  .content {
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.15, 1);
+  }
+}
