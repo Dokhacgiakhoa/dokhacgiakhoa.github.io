@@ -1448,26 +1448,31 @@ function initNavHighlight() {
     links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + id));
   }
 
-  // Compute active section on every scroll update — reliable for both smooth and instant scroll
-  ScrollTrigger.create({
-    start: 0,
-    end: 'max',
-    onUpdate() {
-      const anchor = window.innerHeight * 0.5;
-      let current = null;
-      for (let i = sectionEls.length - 1; i >= 0; i--) {
-        if (sectionEls[i].getBoundingClientRect().top <= anchor) {
-          current = sectionEls[i].id;
-          break;
-        }
-      }
-      if (current) setActive(current);
-
-      if (header) {
-        header.classList.toggle('scrolled', window.scrollY > 10);
+  function updateNav() {
+    const anchor = window.innerHeight * 0.5;
+    // Walk sections from last to first; pick the last one whose top is above anchor
+    let current = sectionEls[0]?.id ?? null; // default to first section
+    for (let i = sectionEls.length - 1; i >= 0; i--) {
+      if (sectionEls[i].getBoundingClientRect().top <= anchor) {
+        current = sectionEls[i].id;
+        break;
       }
     }
-  });
+    if (current) setActive(current);
+
+    if (header) {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }
+  }
+
+  // Hook into Lenis scroll events (fires on every smooth-scroll frame)
+  if (typeof lenis !== 'undefined' && lenis) {
+    lenis.on('scroll', updateNav);
+  }
+  // Also hook into native scroll for fallback / programmatic scrolls
+  window.addEventListener('scroll', updateNav, { passive: true });
+  // Run once on init so the first section is immediately highlighted
+  updateNav();
 }
 
 // Inject footer border and animate it
