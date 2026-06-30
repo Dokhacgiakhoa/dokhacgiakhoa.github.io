@@ -8,6 +8,9 @@ gsap.registerPlugin(ScrollTrigger, Flip, TextPlugin);
 // ===== ACCESSIBILITY CHECK =====
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// ===== MOBILE / TOUCH DETECTION =====
+const isMobile = window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
+
 // ===== PERFORMANCE OPTIMIZATION: PREFETCH GITHUB API =====
 const reposCache = fetch(
   'https://api.github.com/users/dokhacgiakhoa/repos?sort=updated&per_page=20&type=owner',
@@ -16,6 +19,20 @@ const reposCache = fetch(
   console.warn('Prefetch failed, fallback will be used in initGithubRepos.', err);
   return null;
 });
+
+// ===== REPO THUMBNAIL MAP =====
+// Keys are repo names lowercased. Images go in Media/repo-thumbs/
+const REPO_THUMBS = {
+  'agent-skills-setup-for-antigravity':  'Media/repo-thumbs/agent-skills-antigravity.jpg',
+  'agent-skills-setup-for-antigravity-vercel': 'Media/repo-thumbs/agent-skills-antigravity.jpg',
+  'khoa-hoc-tam-linh':                   'Media/repo-thumbs/khoa-hoc-tam-linh.jpg',
+  'git-page-3d-infographic':             'Media/repo-thumbs/git-page-3d-infographic.jpg',
+  'videos-by-ai':                        'Media/repo-thumbs/videos-by-ai.jpg',
+  'office-box-academy':                  'Media/repo-thumbs/office-box-academy.jpg',
+  'courierxpress':                       'Media/repo-thumbs/courierxpress.jpg',
+  'dokhacgiakhoa.github.io':             'Media/repo-thumbs/portfolio.jpg',
+  'moltbot':                             'Media/repo-thumbs/moltbot.jpg',
+};
 
 // ===== LANGUAGE COLOR MAP =====
 const LANG_COLORS = {
@@ -29,7 +46,7 @@ const LANG_COLORS = {
 
 // ===== LENIS SMOOTH SCROLL =====
 let lenis;
-if (typeof Lenis !== 'undefined' && !prefersReducedMotion) {
+if (typeof Lenis !== 'undefined' && !prefersReducedMotion && !isMobile) {
   lenis = new Lenis({ lerp: 0.08 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
@@ -163,7 +180,7 @@ function initPreloader() {
     const counterObj = { val: 0 };
     tl.to(counterObj, {
       val: 100,
-      duration: 1.8,
+      duration: isMobile ? 1.2 : 1.8,
       ease: 'power2.inOut',
       onUpdate() {
         const currentVal = Math.round(counterObj.val);
@@ -258,7 +275,7 @@ function initCursor() {
   });
 
   // Hover interactions
-  const hoverSelector = 'a, button, .btn, .skill-card, .svc-card, .repo-card, .proj-card, .social-btn, .filter-btn, .magnetic';
+  const hoverSelector = 'a, button, .btn, .skill-card, .repo-card, .cert-card, .social-btn, .filter-btn, .magnetic';
   document.querySelectorAll(hoverSelector).forEach(el => {
     el.addEventListener('mouseenter', () => {
       isHovered = true;
@@ -373,7 +390,7 @@ function initSpotlight() {
 // 05_MAGNETIC BUTTONS
 // ─────────────────────────────────────────
 function initMagnetic() {
-  if (prefersReducedMotion) return;
+  if (prefersReducedMotion || isMobile) return;
 
   document.querySelectorAll('.magnetic').forEach(el => {
     el.addEventListener('mousemove', (e) => {
@@ -448,7 +465,10 @@ function initHero() {
     }, '-=0.4');
 
   // Glitch -> Settle character cascade animation
-  if (!prefersReducedMotion) {
+  if (prefersReducedMotion || isMobile) {
+    // Mobile / reduced motion: simple fade-in, skip expensive per-char split
+    gsap.set(chars, { opacity: 1 });
+  } else {
     // background-clip:text on parent does NOT paint through inline-block child spans.
     // Fix: bake the gradient into each .ch span at the correct background-position
     // so the gradient appears continuous across the full title width.
@@ -457,7 +477,7 @@ function initHero() {
     chars.forEach(char => {
       const cr = char.getBoundingClientRect();
       const offsetX = cr.left - titleRect.left;
-      char.style.background = 'linear-gradient(135deg, #c084fc 0%, #f59e0b 50%, #f472b6 100%)';
+      char.style.background = 'linear-gradient(135deg, #00C8FF 0%, #00E5FF 55%, #ffffff 100%)';
       char.style.backgroundSize = titleRect.width + 'px 100%';
       char.style.backgroundPosition = `-${offsetX}px 0`;
       char.style.webkitBackgroundClip = 'text';
@@ -467,7 +487,7 @@ function initHero() {
 
     chars.forEach((char, index) => {
       const glitchTL = gsap.timeline({ delay: 0.4 + index * 0.028 });
-      const glitchColor = index % 2 === 0 ? '#f59e0b' : '#a855f7';
+      const glitchColor = index % 2 === 0 ? '#00FFCC' : '#00C8FF';
 
       // Phase 1: Glitch — override fill with solid color
       glitchTL.to(char, {
@@ -490,9 +510,6 @@ function initHero() {
         onStart() { char.style.webkitTextFillColor = 'transparent'; }
       });
     });
-  } else {
-    // Immediate show for accessibility
-    gsap.set(chars, { opacity: 1 });
   }
 
   tl.to('.hero-sub', { opacity: 1, y: 0, duration: 0.8 }, '+=0.7')
@@ -736,150 +753,92 @@ function initStats() {
 }
 
 // ─────────────────────────────────────────
-// 09_SKILLS (Horizontal Scroll)
+// 09_SKILLS (HUD Boot Sequence)
 // ─────────────────────────────────────────
-function initSkillsScroll() {
-  const mm = gsap.matchMedia();
+function initSkills() {
+  const section = document.querySelector('#skills');
+  if (!section) return;
 
-  // Desktop horizontal pinning
-  mm.add('(min-width: 769px)', () => {
-    const wrapper = document.querySelector('.hscroll-wrapper');
-    const container = document.querySelector('.hscroll-container');
-    if (!wrapper || !container) return;
+  // Reduced motion: instantly set final state
+  if (prefersReducedMotion) {
+    section.querySelectorAll('.skill-card, .cert-card').forEach(c =>
+      gsap.set(c, { clipPath: 'inset(0 0% 0 0 round 6px)' })
+    );
+    section.querySelectorAll('.hud-panel-bar').forEach(b => gsap.set(b, { scaleX: 1 }));
+    section.querySelectorAll('.skill-card').forEach(card => {
+      const bar = card.querySelector('.skill-bar');
+      const pct = parseInt(card.dataset.pct, 10) || 0;
+      if (bar && pct) gsap.set(bar, { width: pct + '%' });
+    });
+    return;
+  }
 
-    const totalDist = wrapper.scrollWidth - window.innerWidth;
-
-    const tween = gsap.to(wrapper, {
-      x: -totalDist,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: container,
-        pin: true,
-        scrub: prefersReducedMotion ? false : 0.4,
-        snap: prefersReducedMotion ? false : {
-          snapTo: 1 / 3,
-          duration: 0.3,
-          delay: 0.1,
-          ease: 'power1.inOut'
-        },
-        start: 'top top',
-        end: () => '+=' + totalDist,
-        invalidateOnRefresh: true
+  // 1. Heading cyber-decode on scroll
+  const heading = section.querySelector('.sec-heading');
+  if (heading) {
+    const original = heading.textContent.trim();
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-=_[]|#><';
+    ScrollTrigger.create({
+      trigger: heading,
+      start: 'top 82%',
+      once: true,
+      onEnter: () => {
+        let iter = 0;
+        const tick = () => {
+          heading.textContent = original.split('').map((c, i) => {
+            if (c === ' ') return ' ';
+            if (i < iter) return c;
+            return CHARS[Math.floor(Math.random() * CHARS.length)];
+          }).join('');
+          iter += 1.5;
+          if (iter < original.length) requestAnimationFrame(tick);
+          else heading.textContent = original;
+        };
+        requestAnimationFrame(tick);
       }
     });
+  }
 
-    // Panel 1: Heading & subtext reveal
-    const introPanel = container.querySelector('.panel-intro');
-    const introHeading = introPanel.querySelector('.sec-heading');
-    const introSubText = introPanel.querySelector('.muted');
-    const introHint = introPanel.querySelector('.hint-x');
-
-    if (introHeading && !prefersReducedMotion) {
-      const text = introHeading.textContent.trim();
-      introHeading.innerHTML = text.split('').map(c => 
-        `<span class="sk-ch" style="display:inline-block">${c === ' ' ? '&nbsp;' : c}</span>`
-      ).join('');
-      
-      const chars = introHeading.querySelectorAll('.sk-ch');
-      
-      gsap.from(chars, {
-        x: () => (Math.random() - 0.5) * 450,
-        y: () => (Math.random() - 0.5) * 350,
-        rotation: () => (Math.random() - 0.5) * 120,
-        opacity: 0,
-        stagger: 0.02,
-        duration: 1.25,
-        ease: 'power4.out',
-        scrollTrigger: {
-          trigger: introPanel,
-          start: 'top 50%'
-        }
-      });
+  // 2. HUD panels fade in as a group
+  const panels = section.querySelectorAll('.hud-panel, .hud-certs');
+  gsap.from(panels, {
+    opacity: 0,
+    y: 28,
+    duration: 0.5,
+    stagger: 0.09,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: section.querySelector('.skills-hud') || section,
+      start: 'top 80%',
+      toggleActions: 'play none none none'
     }
-
-    if (introSubText) {
-      gsap.from(introSubText, {
-        opacity: 0,
-        y: 20,
-        duration: 0.7,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: introPanel, start: 'top 60%' }
-      });
-    }
-    if (introHint) {
-      gsap.from(introHint, {
-        opacity: 0,
-        x: -30,
-        duration: 0.6,
-        delay: 0.3,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: introPanel, start: 'top 60%' }
-      });
-    }
-
-    // Panels 2, 3, 4: Content reveal
-    const panels = gsap.utils.toArray('.hscroll-panel');
-    panels.forEach((panel, i) => {
-      if (i === 0) return;
-
-      gsap.from(panel.querySelectorAll('.skill-card, .cert-card, .skill-col-title'), {
-        opacity: 0,
-        y: 40,
-        scale: 0.95,
-        stagger: 0.08,
-        duration: 0.8,
-        ease: 'back.out(1.2)',
-        scrollTrigger: {
-          trigger: panel,
-          containerAnimation: tween,
-          start: 'left 85%',
-          toggleActions: 'play none none none'
-        }
-      });
-
-      // Elastic overshoot progress bars
-      panel.querySelectorAll('.skill-card').forEach(card => {
-        const pct = parseInt(card.dataset.pct, 10) || 50;
-        const bar = card.querySelector('.skill-bar');
-        if (!bar) return;
-
-        const barTL = gsap.timeline({
-          scrollTrigger: {
-            trigger: card,
-            containerAnimation: tween,
-            start: 'left 75%',
-            toggleActions: 'play none none none'
-          }
-        });
-
-        if (!prefersReducedMotion) {
-          const overshoot = Math.min(pct + 12, 100);
-          
-          barTL.to(bar, {
-            width: overshoot + '%',
-            duration: 0.75,
-            ease: 'power3.out'
-          })
-          .to(bar, {
-            width: pct + '%',
-            duration: 0.45,
-            ease: 'elastic.out(1, 0.35)'
-          });
-        } else {
-          barTL.to(bar, { width: pct + '%', duration: 0.5 });
-        }
-      });
-    });
   });
 
-  // Mobile vertical fallback
-  mm.add('(max-width: 768px)', () => {
-    document.querySelectorAll('.skill-card').forEach(card => {
-      const pct = parseInt(card.dataset.pct, 10) || 50;
-      const bar = card.querySelector('.skill-bar');
-      if (!bar) return;
+  // 3. Per-panel: scan bar + card clip-wipe + bar fill
+  panels.forEach(panel => {
+    const scanBar = panel.querySelector('.hud-panel-bar');
+    if (scanBar) {
+      gsap.fromTo(scanBar,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 0.65,
+          ease: 'power2.inOut',
+          transformOrigin: 'left center',
+          scrollTrigger: {
+            trigger: panel,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    }
 
-      const barTL = gsap.timeline({
+    panel.querySelectorAll('.skill-card').forEach(card => {
+      const pct = parseInt(card.dataset.pct, 10) || 0;
+      const skillBar = card.querySelector('.skill-bar');
+
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: card,
           start: 'top 92%',
@@ -887,22 +846,34 @@ function initSkillsScroll() {
         }
       });
 
-      if (!prefersReducedMotion) {
-        const overshoot = Math.min(pct + 12, 100);
-        
-        barTL.to(bar, {
-          width: overshoot + '%',
-          duration: 0.8,
-          ease: 'power3.out'
-        })
-        .to(bar, {
-          width: pct + '%',
-          duration: 0.45,
-          ease: 'elastic.out(1, 0.35)'
-        });
-      } else {
-        barTL.to(bar, { width: pct + '%', duration: 0.5 });
+      // Clip-path wipe left → right (data loading)
+      tl.fromTo(card,
+        { clipPath: 'inset(0 100% 0 0 round 6px)' },
+        { clipPath: 'inset(0 0% 0 0 round 6px)', duration: 0.45, ease: 'power2.inOut' }
+      );
+
+      // Skill bar fills just as the card fully appears
+      if (skillBar && pct) {
+        const overshoot = Math.min(pct + 10, 100);
+        tl.to(skillBar, { width: overshoot + '%', duration: 0.5, ease: 'power3.out' }, '-=0.1')
+          .to(skillBar, { width: pct + '%', duration: 0.35, ease: 'elastic.out(1, 0.4)' });
       }
+    });
+
+    panel.querySelectorAll('.cert-card').forEach(card => {
+      gsap.fromTo(card,
+        { clipPath: 'inset(0 100% 0 0 round 6px)' },
+        {
+          clipPath: 'inset(0 0% 0 0 round 6px)',
+          duration: 0.45,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 92%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
     });
   });
 }
@@ -1029,15 +1000,15 @@ async function initGithubRepos() {
         '<button class="filter-btn active" data-lang="all">Tất cả</button>' +
         langs.map(l => `<button class="filter-btn" data-lang="${l}">${l}</button>`).join('');
 
-      // Stagger buttons entrance
+      // Stagger buttons entrance — no ScrollTrigger, runs immediately after DOM insert
       gsap.from(filter.querySelectorAll('.filter-btn'), {
         opacity: 0,
-        y: 20,
-        scale: 0.9,
-        stagger: 0.06,
-        duration: 0.5,
+        y: 16,
+        scale: 0.88,
+        stagger: 0.07,
+        duration: 0.45,
         ease: 'back.out(1.8)',
-        scrollTrigger: { trigger: filter, start: 'top 88%', toggleActions: 'play none none none' }
+        clearProps: 'all'
       });
 
       // Filter trigger
@@ -1072,10 +1043,15 @@ async function initGithubRepos() {
       const topicsHTML = r.topics?.slice(0, 3).map(t =>
         `<span class="repo-topic">${t}</span>`
       ).join('') || '';
+      const thumb = REPO_THUMBS[r.name.toLowerCase()];
+      const thumbHTML = thumb
+        ? `<div class="repo-thumb"><img src="${thumb}" alt="${r.name} preview" loading="lazy" /></div>`
+        : `<div class="repo-thumb repo-thumb--placeholder" style="--lang-color:${color}"></div>`;
 
       return `
         <a href="${r.html_url}" target="_blank" rel="noopener noreferrer"
            class="repo-card" data-lang="${r.language || ''}">
+          ${thumbHTML}
           <div class="repo-card-top">
             <div class="repo-header">
               <div class="repo-icon-wrap">
@@ -1110,7 +1086,7 @@ async function initGithubRepos() {
                   ${r.open_issues_count}
                 </span>` : ''}
             </div>
-            <span class="repo-updated">Cập nhật ${updatedDate}</span>
+            <span class="repo-updated">Updated ${updatedDate}</span>
           </div>
           <div class="repo-border-anim" aria-hidden="true"></div>
         </a>`;
@@ -1133,7 +1109,7 @@ async function initGithubRepos() {
     });
 
     // 3D tilt on card hover
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && !isMobile) {
       cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
           const r = card.getBoundingClientRect();
@@ -1395,7 +1371,7 @@ function initContact() {
 function initScrollReveal() {
   // Eyebrow badges reveal (section headers)
   // Exclude #about because initAbout() handles its eyebrow
-  gsap.utils.toArray('#repos .eyebrow, #services .eyebrow, #projects .eyebrow, #contact .eyebrow').forEach(el => {
+  gsap.utils.toArray('#repos .eyebrow, #contact .eyebrow').forEach(el => {
     gsap.from(el, {
       scale: 0.7,
       opacity: 0,
@@ -1408,7 +1384,7 @@ function initScrollReveal() {
 
   // Section headings that weren't already handled
   if (!prefersReducedMotion) {
-    gsap.utils.toArray('#services .sec-heading, #repos .sec-heading, #projects .sec-heading').forEach(heading => {
+    gsap.utils.toArray('#repos .sec-heading').forEach(heading => {
       const words = splitWords(heading);
       gsap.from(words, {
         y: '110%',
@@ -1437,7 +1413,7 @@ function initNavHighlight() {
   const links = document.querySelectorAll('.nav-link[href^="#"]');
   if (!links.length) return;
 
-  const sectionIds = ['about', 'skills-scroll', 'repos', 'services', 'projects', 'contact'];
+  const sectionIds = ['about', 'skills', 'repos', 'contact'];
   const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   const header = document.getElementById('mainHeader');
   let lastActive = null;
@@ -1473,6 +1449,44 @@ function initNavHighlight() {
   window.addEventListener('scroll', updateNav, { passive: true });
   // Run once on init so the first section is immediately highlighted
   updateNav();
+}
+
+// Cert image lightbox
+function initCertLightbox() {
+  const lightbox  = document.getElementById('certLightbox');
+  const img       = document.getElementById('certLightboxImg');
+  const backdrop  = document.getElementById('certLightboxBackdrop');
+  const closeBtn  = document.getElementById('certLightboxClose');
+  const titleEl   = document.getElementById('certLightboxTitle');
+  const verifyBtn = document.getElementById('certLightboxVerify');
+  if (!lightbox || !img) return;
+
+  function open(link) {
+    img.src = link.href;
+    if (titleEl)   titleEl.textContent = link.dataset.title || '';
+    if (verifyBtn) verifyBtn.href      = link.dataset.verify || '#';
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  document.querySelectorAll('[data-cert-lightbox]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      open(link);
+    });
+  });
+
+  backdrop.addEventListener('click', close);
+  closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') close();
+  });
 }
 
 // Inject footer border and animate it
@@ -1740,10 +1754,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   // Pages in visual order
   initAbout();
-  initSkillsScroll();
-  initServices();
-  initProjects();
+  initSkills();
   initContact();
+  initCertLightbox();
 
   // Interactive hover animations
   initHover();
