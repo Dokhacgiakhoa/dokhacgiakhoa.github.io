@@ -1437,38 +1437,37 @@ function initNavHighlight() {
   const links = document.querySelectorAll('.nav-link[href^="#"]');
   if (!links.length) return;
 
-  const sections = ['about', 'skills-scroll', 'repos', 'services', 'projects', 'contact'];
-
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 65%',
-      // No end/onLeave: once a section enters, it stays active until the next fires
-      onEnter: () => setActive(id),
-      onEnterBack: () => setActive(id),
-    });
-  });
+  const sectionIds = ['about', 'skills-scroll', 'repos', 'services', 'projects', 'contact'];
+  const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const header = document.getElementById('mainHeader');
+  let lastActive = null;
 
   function setActive(id) {
-    links.forEach(l => {
-      l.classList.toggle('is-active', l.getAttribute('href') === '#' + id);
-    });
+    if (id === lastActive) return;
+    lastActive = id;
+    links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + id));
   }
 
-  // Header becomes more opaque on scroll
-  const header = document.getElementById('mainHeader');
-  if (header) {
-    ScrollTrigger.create({
-      start: 'top -10px',
-      end: 'max',
-      onUpdate: (self) => {
-        header.classList.toggle('scrolled', self.progress > 0);
+  // Compute active section on every scroll update — reliable for both smooth and instant scroll
+  ScrollTrigger.create({
+    start: 0,
+    end: 'max',
+    onUpdate() {
+      const anchor = window.innerHeight * 0.5;
+      let current = null;
+      for (let i = sectionEls.length - 1; i >= 0; i--) {
+        if (sectionEls[i].getBoundingClientRect().top <= anchor) {
+          current = sectionEls[i].id;
+          break;
+        }
       }
-    });
-  }
+      if (current) setActive(current);
+
+      if (header) {
+        header.classList.toggle('scrolled', window.scrollY > 10);
+      }
+    }
+  });
 }
 
 // Inject footer border and animate it
