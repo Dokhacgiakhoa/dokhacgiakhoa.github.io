@@ -430,10 +430,10 @@ function initHero() {
         eyebrow.innerHTML = '';
         if (cursor) eyebrow.appendChild(cursor);
         
-        const textNode = document.createTextNode("");
-        eyebrow.insertBefore(textNode, cursor);
-        
-        gsap.to(textNode, {
+        const textSpan = document.createElement('span');
+        eyebrow.insertBefore(textSpan, cursor);
+
+        gsap.to(textSpan, {
           text: { value: originalVal },
           duration: 1.6,
           ease: "none",
