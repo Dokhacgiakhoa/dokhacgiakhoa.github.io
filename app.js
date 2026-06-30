@@ -414,18 +414,9 @@ function initHero() {
   const titleEl = document.querySelector('.hero-title .split-text');
   if (!titleEl) return;
 
-  // Split title into individual character spans for glitch effect
-  const text = titleEl.textContent.trim();
-  titleEl.innerHTML = text.split('').map(c => 
-    `<span class="ch" style="display:inline-block; transform-style:preserve-3d;">${c === ' ' ? '&nbsp;' : c}</span>`
-  ).join('');
-
-  const chars = titleEl.querySelectorAll('.ch');
-
-  // Set initial states
+  // Set initial states (always, for all elements except titleEl on mobile)
   gsap.set('.main-header', { y: -72, opacity: 0 });
   gsap.set('.hero-eyebrow', { opacity: 0 });
-  gsap.set(chars, { opacity: 0 });
   gsap.set('.hero-sub', { opacity: 0, y: 30 });
   gsap.set('.hero-desc', { opacity: 0, y: 20 });
   gsap.set('.hero-cta .btn', { opacity: 0, scale: 0.8 });
@@ -443,10 +434,10 @@ function initHero() {
         const eyebrow = document.querySelector('.hero-eyebrow');
         const originalVal = "DevOps & AI Integration Specialist";
         const cursor = eyebrow.querySelector('.eyebrow-cursor');
-        
+
         eyebrow.innerHTML = '';
         if (cursor) eyebrow.appendChild(cursor);
-        
+
         const textSpan = document.createElement('span');
         eyebrow.insertBefore(textSpan, cursor);
 
@@ -455,7 +446,6 @@ function initHero() {
           duration: 1.6,
           ease: "none",
           onComplete() {
-            // Fade out the cursor after a short delay
             if (cursor) {
               gsap.to(cursor, { opacity: 0, duration: 0.3, delay: 1.5 });
             }
@@ -464,21 +454,24 @@ function initHero() {
       }
     }, '-=0.4');
 
-  // Glitch -> Settle character cascade animation
   if (prefersReducedMotion || isMobile) {
-    // .hero-title has -webkit-text-fill-color:transparent in CSS.
-    // .ch spans inherit it, so we must bake gradient onto each span or text stays invisible.
-    chars.forEach(char => {
-      char.style.background = 'linear-gradient(135deg, #00C8FF 0%, #00E5FF 55%, #ffffff 100%)';
-      char.style.webkitBackgroundClip = 'text';
-      char.style.backgroundClip = 'text';
-      char.style.webkitTextFillColor = 'transparent';
-    });
-    gsap.set(chars, { opacity: 1 });
+    // Mobile: keep original text so .hero-title CSS gradient (background-clip:text)
+    // applies directly — background-clip:text does NOT paint through inline-block children.
+    // Fade the title in as one unit.
+    gsap.set(titleEl, { opacity: 0 });
+    tl.to(titleEl, { opacity: 1, duration: 0.8 }, '-=0.2');
   } else {
-    // background-clip:text on parent does NOT paint through inline-block child spans.
-    // Fix: bake the gradient into each .ch span at the correct background-position
-    // so the gradient appears continuous across the full title width.
+    // Desktop: split into individual character spans for glitch effect.
+    // background-clip:text on parent does NOT paint through inline-block child spans,
+    // so we bake the gradient into each .ch span at the correct background-position.
+    const text = titleEl.textContent.trim();
+    titleEl.innerHTML = text.split('').map(c =>
+      `<span class="ch" style="display:inline-block; transform-style:preserve-3d;">${c === ' ' ? '&nbsp;' : c}</span>`
+    ).join('');
+
+    const chars = titleEl.querySelectorAll('.ch');
+    gsap.set(chars, { opacity: 0 });
+
     const heroTitleEl = titleEl.parentElement;
     const titleRect = heroTitleEl.getBoundingClientRect();
     chars.forEach(char => {
@@ -496,7 +489,6 @@ function initHero() {
       const glitchTL = gsap.timeline({ delay: 0.4 + index * 0.028 });
       const glitchColor = index % 2 === 0 ? '#00FFCC' : '#00C8FF';
 
-      // Phase 1: Glitch — override fill with solid color
       glitchTL.to(char, {
         opacity: 0.8,
         x: () => (Math.random() - 0.5) * 35,
@@ -508,7 +500,6 @@ function initHero() {
         ease: 'none',
         onStart() { char.style.webkitTextFillColor = glitchColor; }
       })
-      // Phase 2: Settle — restore gradient by reverting fill to transparent
       .to(char, {
         opacity: 1,
         x: 0, y: 0, rotation: 0, skewX: 0, scale: 1,
