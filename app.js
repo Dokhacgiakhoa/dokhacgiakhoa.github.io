@@ -449,13 +449,29 @@ function initHero() {
 
   // Glitch -> Settle character cascade animation
   if (!prefersReducedMotion) {
+    // background-clip:text on parent does NOT paint through inline-block child spans.
+    // Fix: bake the gradient into each .ch span at the correct background-position
+    // so the gradient appears continuous across the full title width.
+    const heroTitleEl = titleEl.parentElement;
+    const titleRect = heroTitleEl.getBoundingClientRect();
+    chars.forEach(char => {
+      const cr = char.getBoundingClientRect();
+      const offsetX = cr.left - titleRect.left;
+      char.style.background = 'linear-gradient(135deg, #c084fc 0%, #f59e0b 50%, #f472b6 100%)';
+      char.style.backgroundSize = titleRect.width + 'px 100%';
+      char.style.backgroundPosition = `-${offsetX}px 0`;
+      char.style.webkitBackgroundClip = 'text';
+      char.style.backgroundClip = 'text';
+      char.style.webkitTextFillColor = 'transparent';
+    });
+
     chars.forEach((char, index) => {
       const glitchTL = gsap.timeline({ delay: 0.4 + index * 0.028 });
-      const glitchColor = index % 2 === 0 ? 'var(--gold)' : 'var(--purple)';
+      const glitchColor = index % 2 === 0 ? '#f59e0b' : '#a855f7';
 
-      // Phase 1: Glitch — must set webkitTextFillColor because parent uses gradient clip
+      // Phase 1: Glitch — override fill with solid color
       glitchTL.to(char, {
-        opacity: 0.75,
+        opacity: 0.8,
         x: () => (Math.random() - 0.5) * 35,
         y: () => (Math.random() - 0.5) * 25,
         rotation: () => (Math.random() - 0.5) * 25,
@@ -463,25 +479,15 @@ function initHero() {
         scale: () => 0.85 + Math.random() * 0.3,
         duration: 0.08,
         ease: 'none',
-        onStart() {
-          char.style.webkitTextFillColor = glitchColor;
-          char.style.webkitBackgroundClip = 'unset';
-        }
+        onStart() { char.style.webkitTextFillColor = glitchColor; }
       })
-      // Phase 2: Settle back — restore gradient clip text
+      // Phase 2: Settle — restore gradient by reverting fill to transparent
       .to(char, {
         opacity: 1,
-        x: 0,
-        y: 0,
-        rotation: 0,
-        skewX: 0,
-        scale: 1,
+        x: 0, y: 0, rotation: 0, skewX: 0, scale: 1,
         duration: 0.6,
         ease: 'back.out(1.4)',
-        onStart() {
-          char.style.webkitTextFillColor = '';
-          char.style.webkitBackgroundClip = '';
-        }
+        onStart() { char.style.webkitTextFillColor = 'transparent'; }
       });
     });
   } else {
