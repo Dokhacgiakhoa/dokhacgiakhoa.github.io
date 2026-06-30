@@ -1245,7 +1245,7 @@ img {
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.3s;
-  background: linear-gradient(var(--bg-card-hov), var(--bg-card-hov)) padding-box,
+  background: var(--bg2) padding-box,
               linear-gradient(135deg, var(--purple), var(--gold), var(--purple)) border-box;
   border: 1px solid transparent;
   pointer-events: none;
