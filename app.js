@@ -578,8 +578,8 @@ function initAbout() {
       rotateX: -95,
       opacity: 0,
       transformOrigin: 'top center',
-      duration: 0.85,
-      stagger: 0.1,
+      duration: 1.2,
+      stagger: 0.14,
       ease: 'power4.out',
       scrollTrigger: {
         trigger: heading,
@@ -596,7 +596,7 @@ function initAbout() {
       scale: 0.75,
       opacity: 0,
       y: 10,
-      duration: 0.6,
+      duration: 0.9,
       ease: 'back.out(2)',
       scrollTrigger: { trigger: eyebrow, start: 'top 88%' }
     });
@@ -607,7 +607,7 @@ function initAbout() {
   paragraphs.forEach(p => {
     gsap.from(p, {
       clipPath: 'inset(0 100% 0 0)',
-      duration: 1.1,
+      duration: 1.6,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: p,
@@ -802,8 +802,8 @@ function initSkills() {
   gsap.from(panels, {
     opacity: 0,
     y: 28,
-    duration: 0.5,
-    stagger: 0.09,
+    duration: 0.75,
+    stagger: 0.13,
     ease: 'power3.out',
     scrollTrigger: {
       trigger: section.querySelector('.skills-hud') || section,
@@ -820,7 +820,7 @@ function initSkills() {
         { scaleX: 0 },
         {
           scaleX: 1,
-          duration: 0.65,
+          duration: 0.95,
           ease: 'power2.inOut',
           transformOrigin: 'left center',
           scrollTrigger: {
@@ -847,14 +847,14 @@ function initSkills() {
       // Clip-path wipe left → right (data loading)
       tl.fromTo(card,
         { clipPath: 'inset(0 100% 0 0 round 6px)' },
-        { clipPath: 'inset(0 0% 0 0 round 6px)', duration: 0.45, ease: 'power2.inOut' }
+        { clipPath: 'inset(0 0% 0 0 round 6px)', duration: 0.65, ease: 'power2.inOut' }
       );
 
       // Skill bar fills just as the card fully appears
       if (skillBar && pct) {
         const overshoot = Math.min(pct + 10, 100);
-        tl.to(skillBar, { width: overshoot + '%', duration: 0.5, ease: 'power3.out' }, '-=0.1')
-          .to(skillBar, { width: pct + '%', duration: 0.35, ease: 'elastic.out(1, 0.4)' });
+        tl.to(skillBar, { width: overshoot + '%', duration: 0.7, ease: 'power3.out' }, '-=0.1')
+          .to(skillBar, { width: pct + '%', duration: 0.5, ease: 'elastic.out(1, 0.4)' });
       }
     });
 
@@ -863,7 +863,7 @@ function initSkills() {
         { clipPath: 'inset(0 100% 0 0 round 6px)' },
         {
           clipPath: 'inset(0 0% 0 0 round 6px)',
-          duration: 0.45,
+          duration: 0.65,
           ease: 'power2.inOut',
           scrollTrigger: {
             trigger: card,
@@ -1003,8 +1003,8 @@ async function initGithubRepos() {
         opacity: 0,
         y: 16,
         scale: 0.88,
-        stagger: 0.07,
-        duration: 0.45,
+        stagger: 0.1,
+        duration: 0.65,
         ease: 'back.out(1.8)',
         clearProps: 'all'
       });
@@ -1097,8 +1097,8 @@ async function initGithubRepos() {
       y: 100,
       rotateX: prefersReducedMotion ? 0 : 45,
       transformPerspective: 1000,
-      stagger: 0.08,
-      duration: 1,
+      stagger: 0.12,
+      duration: 1.4,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: grid,
@@ -1299,7 +1299,7 @@ function initContact() {
       y: 0,
       rotation: 0,
       opacity: 1,
-      duration: 1.1,
+      duration: 1.5,
       ease: 'power4.out',
       scrollTrigger: {
         trigger: heading,
@@ -1324,29 +1324,29 @@ function initContact() {
         start: 'top 90%',
         toggleActions: 'play none none none'
       },
-      delay: index * 0.18
+      delay: index * 0.25
     });
 
     itemTL.to(icon, {
       scale: 1,
       rotation: 0,
-      duration: 0.55,
+      duration: 0.8,
       ease: prefersReducedMotion ? 'power2.out' : 'back.out(2)'
     })
     .to(text, {
       opacity: 1,
       x: 0,
-      duration: 0.45,
+      duration: 0.65,
       ease: 'power2.out'
-    }, '-=0.25');
+    }, '-=0.35');
   });
 
   // Social buttons bounce-in
   gsap.from('.social-btn', {
     scale: 0,
     opacity: 0,
-    stagger: 0.1,
-    duration: 0.6,
+    stagger: 0.15,
+    duration: 0.9,
     ease: prefersReducedMotion ? 'power2.out' : 'back.out(2.5)',
     scrollTrigger: { trigger: '.social-row', start: 'top 92%' }
   });
@@ -1356,8 +1356,8 @@ function initContact() {
   gsap.from(fields, {
     opacity: 0,
     y: 25,
-    stagger: 0.12,
-    duration: 0.65,
+    stagger: 0.18,
+    duration: 0.95,
     ease: 'power2.out',
     scrollTrigger: { trigger: '.contact-form-card', start: 'top 80%' }
   });
@@ -1374,7 +1374,7 @@ function initScrollReveal() {
       scale: 0.7,
       opacity: 0,
       y: 8,
-      duration: 0.55,
+      duration: 0.8,
       ease: 'back.out(2)',
       scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
     });
@@ -1387,8 +1387,8 @@ function initScrollReveal() {
       gsap.from(words, {
         y: '110%',
         opacity: 0,
-        duration: 0.75,
-        stagger: 0.08,
+        duration: 1.1,
+        stagger: 0.12,
         ease: 'power4.out',
         scrollTrigger: { trigger: heading, start: 'top 85%', toggleActions: 'play none none none' }
       });
