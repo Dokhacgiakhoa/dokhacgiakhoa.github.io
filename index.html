@@ -1,656 +1,614 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Đỗ Khắc Gia Khoa - Full Stack DevOps & AI Engineer</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Đỗ Khắc Gia Khoa — Full Stack DevOps & AI Engineer</title>
+  <meta name="description" content="Portfolio của Đỗ Khắc Gia Khoa - Full Stack DevOps & AI Engineer tại Hà Nội, Việt Nam." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Đỗ Khắc Gia Khoa" />
+  <meta name="keywords" content="full stack developer, devops, AI engineer, Hà Nội, Vietnam, portfolio, Đỗ Khắc Gia Khoa" />
 
-    <!-- Bootstrap CSS (CDN) -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Bootstrap Icons -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <!-- Google Font (tùy chọn) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Đỗ Khắc Gia Khoa — Full Stack DevOps & AI Engineer" />
+  <meta property="og:description" content="Portfolio cá nhân — Full Stack Developer, DevOps Engineer, AI Integration Specialist tại Hà Nội." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dokhacgiakhoa.github.io/" />
+  <meta property="og:image" content="https://dokhacgiakhoa.github.io/assets/og-cover.jpg" />
+  <meta property="og:locale" content="vi_VN" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="./style1.css" />
-  </head>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Đỗ Khắc Gia Khoa — Full Stack DevOps & AI Engineer" />
+  <meta name="twitter:image" content="https://dokhacgiakhoa.github.io/assets/og-cover.jpg" />
 
-  <body>
-    <!-- ===== Sidebar trái (hover để mở rộng) ===== -->
-    <nav class="sidebar" aria-label="Điều hướng chính">
-      <ul>
-        <li>
-          <a href="#home">
-            <i class="bi bi-house"></i>
-            <span class="text">Trang chủ</span>
-          </a>
-        </li>
-        <li>
-          <a href="#about">
-            <i class="bi bi-person"></i>
-            <span class="text">Giới thiệu</span>
-          </a>
-        </li>
-        <li>
-          <a href="#services">
-            <i class="bi bi-window-sidebar"></i>
-            <span class="text">Dịch vụ</span>
-          </a>
-        </li>
-        <li>
-          <a href="#projects">
-            <i class="bi bi-kanban"></i>
-            <span class="text">Dự án</span>
-          </a>
-        </li>
-        <li>
-          <a href="#blog">
-            <i class="bi bi-journal-text"></i>
-            <span class="text">Blog</span>
-          </a>
-        </li>
-        <li>
-          <a href="#contact">
-            <i class="bi bi-envelope"></i>
-            <span class="text">Liên hệ</span>
-          </a>
-        </li>
-      </ul>
+  <!-- Theme color -->
+  <meta name="theme-color" content="#060608" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://dokhacgiakhoa.github.io/" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23060608'/><text x='50%25' y='50%25' font-family='system-ui' font-size='18' font-weight='900' fill='%23f59e0b' text-anchor='middle' dominant-baseline='central'>D</text></svg>" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23060608'/><text x='50%25' y='50%25' font-family='system-ui' font-size='18' font-weight='900' fill='%23f59e0b' text-anchor='middle' dominant-baseline='central'>D</text></svg>" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style1.css" />
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="curtain-top"></div>
+    <div class="curtain-bottom"></div>
+    <div class="preloader-content position-relative z-2">
+      <div class="preloader-logo">DGK<span class="dot">.</span></div>
+      <div class="preloader-counter"><span id="counter-num">0</span><span class="counter-pct">%</span></div>
+      <div class="preloader-bar"><div class="preloader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div id="cursor-glow"></div>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Header -->
+  <header class="main-header" id="mainHeader">
+    <a href="#home" class="logo" aria-label="Về trang chủ">
+      DGK<span class="c-gold">.</span>
+    </a>
+    <nav class="header-nav" aria-label="Navigation">
+      <a href="#about"    class="nav-link" data-section="about">Về tớ</a>
+      <a href="#skills-scroll" class="nav-link" data-section="skills">Kỹ năng</a>
+      <a href="#repos"    class="nav-link" data-section="repos">GitHub</a>
+      <a href="#services" class="nav-link" data-section="services">Dịch vụ</a>
+      <a href="#projects" class="nav-link" data-section="projects">Dự án</a>
+      <a href="#contact"  class="btn-nav magnetic" data-section="contact">Liên hệ</a>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
-    <!-- ===== Nội dung chính (dịch theo sidebar) ===== -->
-    <main class="content">
-      <!-- Hero -->
-      <section id="home" class="py-5 text-center">
-        <div class="container">
-          <h1 class="display-5 fw-bold mb-1">Đỗ Khắc Gia Khoa</h1>
-          <p class="lead mb-0">Full Stack DevOps &amp; AI Engineer</p>
-          <p class="text-secondary">
-            Xây dựng website, ứng dụng &amp; tích hợp AI cho doanh nghiệp.
-          </p>
+  <main>
+
+    <!-- 1. Hero -->
+    <section id="home" class="hero">
+      <div class="hero-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div id="spotlight" class="spotlight"></div>
+      </div>
+
+      <!-- Floating tech badges (decorative) -->
+      <div class="hero-float-badge badge-1">
+        <i class="bi bi-braces"></i> GSAP
+      </div>
+      <div class="hero-float-badge badge-2">
+        <i class="bi bi-cloud-check"></i> DevOps
+      </div>
+      <div class="hero-float-badge badge-3">
+        <i class="bi bi-robot"></i> AI
+      </div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">
+          <span class="eyebrow-cursor">|</span>
+        </p>
+        <h1 class="hero-title">
+          <span class="split-text">Đỗ Khắc Gia Khoa</span>
+        </h1>
+        <p class="hero-sub">Xây dựng website, ứng dụng &amp; tích hợp <span class="c-purple">AI</span> tối ưu hóa vận hành.</p>
+        <p class="hero-desc">Giải pháp chuyển đổi số toàn diện — từ hạ tầng đám mây đến trải nghiệm người dùng cuối.</p>
+        <div class="hero-cta">
+          <a href="#skills-scroll" class="btn btn-primary magnetic">
+            Khám phá kỹ năng
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="https://github.com/dokhacgiakhoa" target="_blank" rel="noopener" class="btn btn-outline magnetic">
+            <i class="bi bi-github"></i> <span>GitHub Repos</span>
+          </a>
         </div>
-      </section>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <div class="mouse-icon"><div class="mouse-wheel"></div></div>
+        <span class="scroll-hint-text">Scroll</span>
+      </div>
+    </section>
 
-      <!-- About + Skills -->
-      <section id="about" class="py-5">
-        <div class="container">
-          <div class="row g-4 align-items-start">
-            <div class="col-12">
-              <h2 class="mb-1">Giới thiệu</h2>
-              <p class="text-secondary mb-4">
-                Xây dựng hệ thống Web/App, Marketing Performance, tự động hóa
-                &amp; AI cho doanh nghiệp.
-              </p>
-            </div>
-
-            <!-- Skills (percent là tỉ lệ trong nhóm) -->
-            <div class="col-12 col-lg-8">
-              <h5 class="mb-3">Kỹ năng theo nhóm</h5>
-
-              <!-- Frontend -->
-              <div class="skill-group group-front mb-3">
-                <div class="group-heading">
-                  <i class="bi bi-layers me-2"></i>
-                  <strong>Frontend</strong>
-                  <span class="text-secondary ms-2"
-                    >UI/UX, responsive, tối ưu SEO</span
-                  >
-                  <span class="group-note ms-auto">100%</span>
-                </div>
-                <div class="row g-3 mt-1">
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                        alt="HTML5"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">HTML5 &amp; CSS3</p>
-                        <p class="skill-desc">Semantic, responsive</p>
-                      </div>
-                      <span class="skill-pct">40%</span>
-                    </div>
-                  </div>
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                        alt="JavaScript"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">JavaScript</p>
-                        <p class="skill-desc">ES6+, DOM, Fetch</p>
-                      </div>
-                      <span class="skill-pct">40%</span>
-                    </div>
-                  </div>
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
-                        alt="Bootstrap"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">Bootstrap</p>
-                        <p class="skill-desc">Grid, utilities, UI</p>
-                      </div>
-                      <span class="skill-pct">20%</span>
-                    </div>
-                  </div>
-                </div>
+    <!-- 2. About -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-left">
+            <span class="eyebrow">Về bản thân</span>
+            <h2 class="sec-heading">Tớ là <span class="c-gold">ai?</span></h2>
+            <p class="body-text">Tớ tập trung vào việc tạo ra các sản phẩm công nghệ có giá trị thực tiễn, kết hợp giữa sự ổn định của hệ thống hạ tầng và tính linh hoạt của AI.</p>
+            <p class="body-text muted">Với nền tảng vững chắc về Full Stack cùng chuyên môn DevOps và AI, tớ giúp doanh nghiệp tự động hóa quy trình và chuyển đổi số hiệu quả.</p>
+            <div class="stats-row">
+              <div class="stat">
+                <div class="stat-num-wrap"><span class="stat-num" data-target="2">0</span><span class="stat-plus">+</span></div>
+                <span class="stat-label">Năm kinh nghiệm</span>
               </div>
-
-              <!-- Backend -->
-              <div class="skill-group group-back mb-3">
-                <div class="group-heading">
-                  <i class="bi bi-hdd-network me-2"></i>
-                  <strong>Backend</strong>
-                  <span class="text-secondary ms-2">REST API, Auth, DB</span>
-                  <span class="group-note ms-auto">100%</span>
-                </div>
-                <div class="row g-3 mt-1">
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                        alt="Node.js"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">Node.js</p>
-                        <p class="skill-desc">Express, JWT</p>
-                      </div>
-                      <span class="skill-pct">45%</span>
-                    </div>
-                  </div>
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-                        alt="PHP"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">PHP</p>
-                        <p class="skill-desc">WordPress, MVC</p>
-                      </div>
-                      <span class="skill-pct">25%</span>
-                    </div>
-                  </div>
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                        alt="MySQL"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">MySQL</p>
-                        <p class="skill-desc">Schema, index, query</p>
-                      </div>
-                      <span class="skill-pct">30%</span>
-                    </div>
-                  </div>
-                </div>
+              <div class="stat">
+                <div class="stat-num-wrap"><span class="stat-num" data-target="15">0</span><span class="stat-plus">+</span></div>
+                <span class="stat-label">Dự án hoàn thành</span>
               </div>
-
-              <!-- Data -->
-              <div class="skill-group group-data mb-3">
-                <div class="group-heading">
-                  <i class="bi bi-bar-chart-line me-2"></i>
-                  <strong>Data</strong>
-                  <span class="text-secondary ms-2"
-                    >Phân tích, trực quan hóa</span
-                  >
-                  <span class="group-note ms-auto">100%</span>
-                </div>
-                <div class="row g-3 mt-1">
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                        alt="Python"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">Python</p>
-                        <p class="skill-desc">Pandas, NumPy</p>
-                      </div>
-                      <span class="skill-pct">60%</span>
-                    </div>
-                  </div>
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg"
-                        alt="SQL"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">SQL</p>
-                        <p class="skill-desc">Query, join, aggregate</p>
-                      </div>
-                      <span class="skill-pct">40%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- AI / ML -->
-              <div class="skill-group group-ai mb-3">
-                <div class="group-heading">
-                  <i class="bi bi-robot me-2"></i>
-                  <strong>AI / Machine Learning</strong>
-                  <span class="text-secondary ms-2"
-                    >LLM, chatbot, inference</span
-                  >
-                  <span class="group-note ms-auto">100%</span>
-                </div>
-                <div class="row g-3 mt-1">
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"
-                        alt="AI Tools"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">AI Tools</p>
-                        <p class="skill-desc">LLM API, RAG, chatbot</p>
-                      </div>
-                      <span class="skill-pct">60%</span>
-                    </div>
-                  </div>
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
-                        alt="PyTorch"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">PyTorch</p>
-                        <p class="skill-desc">Fine-tune cơ bản</p>
-                      </div>
-                      <span class="skill-pct">40%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- DevOps -->
-              <div class="skill-group group-devops mb-4">
-                <div class="group-heading">
-                  <i class="bi bi-diagram-3 me-2"></i>
-                  <strong>DevOps</strong>
-                  <span class="text-secondary ms-2"
-                    >CI/CD, Docker, triển khai</span
-                  >
-                  <span class="group-note ms-auto">100%</span>
-                </div>
-                <div class="row g-3 mt-1">
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-                        alt="Git"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">Git &amp; CI/CD</p>
-                        <p class="skill-desc">Branching, Actions</p>
-                      </div>
-                      <span class="skill-pct">55%</span>
-                    </div>
-                  </div>
-                  <div class="col-12 col-sm-6 col-xl-4">
-                    <div class="skill-card">
-                      <img
-                        class="skill-icon"
-                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-                        alt="Docker"
-                      />
-                      <div class="skill-meta">
-                        <p class="skill-name">Docker</p>
-                        <p class="skill-desc">Image, Compose</p>
-                      </div>
-                      <span class="skill-pct">45%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Certificates -->
-            <div class="col-12 col-lg-4">
-              <h5 class="mb-3">Chứng chỉ</h5>
-              <div class="vstack gap-3">
-                <div class="cert-card">
-                  <p class="mb-1 fw-semibold">
-                    <i class="bi bi-award"></i> Học viện Agile Vietnam
-                  </p>
-                  <div class="small text-secondary">
-                    “Học cách học &amp; Nuôi dưỡng tư duy phát triển” — Hoàn
-                    thành xuất sắc
-                  </div>
-                </div>
-                <div class="cert-card">
-                  <p class="mb-1 fw-semibold">
-                    <i class="bi bi-mortarboard"></i> FPT Aptech (ACCP)
-                  </p>
-                  <div class="small text-secondary">
-                    Semester 1 — Web Fundamentals, Programming in C, RDBMS…
-                  </div>
-                </div>
+              <div class="stat">
+                <div class="stat-num-wrap"><span class="stat-num" data-target="5">0</span></div>
+                <span class="stat-label">Lĩnh vực chuyên môn</span>
               </div>
             </div>
           </div>
-          <!-- /row -->
-        </div>
-      </section>
-
-      <!-- Services -->
-      <section id="services" class="py-5">
-        <div class="container">
-          <h2 class="mb-4">Dịch vụ</h2>
-
-          <!-- Marketing Performance -->
-          <div class="svc-group group-mkt mb-4">
-            <div class="group-heading">
-              <i class="bi bi-graph-up-arrow me-2"></i>
-              <strong>Marketing Performance</strong>
-              <span class="text-secondary ms-2"
-                >Tăng trưởng traffic &amp; chuyển đổi</span
-              >
-            </div>
-            <div class="row g-4 mt-1">
-              <div class="col-md-6 col-lg-4">
-                <div class="svc-card">
-                  <img
-                    src="https://picsum.photos/seed/seo/640/360"
-                    alt="SEO"
-                    class="svc-img"
-                  />
-                  <div class="svc-body">
-                    <h5 class="svc-title">SEO Tổng thể</h5>
-                    <p class="svc-text">
-                      Onpage/Offpage, cấu trúc site, tốc độ, schema &amp;
-                      entity.
-                    </p>
-                    <a href="#" class="btn btn-accent">Xem thêm</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="svc-card">
-                  <img
-                    src="https://picsum.photos/seed/ads/640/360"
-                    alt="Google Ads"
-                    class="svc-img"
-                  />
-                  <div class="svc-body">
-                    <h5 class="svc-title">Google Ads</h5>
-                    <p class="svc-text">
-                      Search/Display, tối ưu điểm chất lượng, theo dõi chuyển
-                      đổi.
-                    </p>
-                    <a href="#" class="btn btn-accent">Xem thêm</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Web / App -->
-          <div class="svc-group group-web mb-4">
-            <div class="group-heading">
-              <i class="bi bi-window-sidebar me-2"></i>
-              <strong>Web / App</strong>
-              <span class="text-secondary ms-2">Thiết kế &amp; phát triển</span>
-            </div>
-            <div class="row g-4 mt-1">
-              <div class="col-md-6 col-lg-4">
-                <div class="svc-card">
-                  <img
-                    src="https://picsum.photos/seed/landing/640/360"
-                    alt="Landing Page"
-                    class="svc-img"
-                  />
-                  <div class="svc-body">
-                    <h5 class="svc-title">Landing Page</h5>
-                    <p class="svc-text">
-                      Tối ưu chuyển đổi, tải nhanh, thân thiện SEO.
-                    </p>
-                    <a href="#" class="btn btn-accent">Xem thêm</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="svc-card">
-                  <img
-                    src="https://picsum.photos/seed/uiux/640/360"
-                    alt="UI/UX"
-                    class="svc-img"
-                  />
-                  <div class="svc-body">
-                    <h5 class="svc-title">Thiết kế giao diện (UI/UX)</h5>
-                    <p class="svc-text">
-                      Wireframe → prototype → hệ thống design đồng bộ.
-                    </p>
-                    <a href="#" class="btn btn-accent">Xem thêm</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="svc-card">
-                  <img
-                    src="https://picsum.photos/seed/website/640/360"
-                    alt="Website Doanh nghiệp"
-                    class="svc-img"
-                  />
-                  <div class="svc-body">
-                    <h5 class="svc-title">Website Doanh nghiệp</h5>
-                    <p class="svc-text">
-                      Trang giới thiệu, blog, tuyển dụng; tích hợp CRM.
-                    </p>
-                    <a href="#" class="btn btn-accent">Xem thêm</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Hệ thống Doanh nghiệp -->
-          <div class="svc-group group-sys">
-            <div class="group-heading">
-              <i class="bi bi-building-gear me-2"></i>
-              <strong>Hệ thống Doanh nghiệp</strong>
-              <span class="text-secondary ms-2">Quy trình &amp; vận hành</span>
-            </div>
-            <div class="row g-4 mt-1">
-              <div class="col-md-6 col-lg-4">
-                <div class="svc-card">
-                  <img
-                    src="https://picsum.photos/seed/erp/640/360"
-                    alt="ERP/CRM"
-                    class="svc-img"
-                  />
-                  <div class="svc-body">
-                    <h5 class="svc-title">ERP / CRM</h5>
-                    <p class="svc-text">
-                      Tư vấn mô-đun, triển khai &amp; kết nối dữ liệu.
-                    </p>
-                    <a href="#" class="btn btn-accent">Xem thêm</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="svc-card">
-                  <img
-                    src="https://picsum.photos/seed/automation/640/360"
-                    alt="AI & Automation"
-                    class="svc-img"
-                  />
-                  <div class="svc-body">
-                    <h5 class="svc-title">AI &amp; Tự động hóa</h5>
-                    <p class="svc-text">
-                      Chatbot, RAG, workflow automation đa kênh.
-                    </p>
-                    <a href="#" class="btn btn-accent">Xem thêm</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="svc-card">
-                  <img
-                    src="https://picsum.photos/seed/devops/640/360"
-                    alt="DevOps"
-                    class="svc-img"
-                  />
-                  <div class="svc-body">
-                    <h5 class="svc-title">DevOps &amp; Hạ tầng</h5>
-                    <p class="svc-text">
-                      CI/CD, tối ưu tài nguyên, bảo trì vận hành.
-                    </p>
-                    <a href="#" class="btn btn-accent">Xem thêm</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section id="projects" class="py-5">
-        <div class="container">
-          <h2 class="mb-4">Dự án</h2>
-          <div class="row g-4">
-            <div class="col-md-6" id="project1">
-              <div class="card shadow-sm h-100">
+          
+          <div class="about-right">
+            <!-- Avatar card -->
+            <div class="avatar-card glass-card">
+              <div class="avatar-img-wrap">
                 <img
-                  src="https://picsum.photos/600/400?random=11"
-                  class="card-img-top"
-                  alt="Website Huyền học"
+                  src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&h=400&fit=crop&crop=face&auto=format&q=80"
+                  alt="Developer portrait"
+                  class="avatar-img"
+                  loading="lazy"
                 />
-                <div class="card-body">
-                  <h5 class="card-title">Website Dịch vụ Huyền học</h5>
-                  <p class="card-text">
-                    Tarot, Tử vi, Phong thủy trực tuyến. Có đặt lịch.
-                  </p>
-                  <a href="#" class="btn btn-outline-primary btn-sm"
-                    >Xem chi tiết</a
-                  >
+                <div class="avatar-ring"></div>
+              </div>
+              <div class="avatar-info">
+                <p class="avatar-name">Đỗ Khắc Gia Khoa</p>
+                <p class="avatar-role">Full Stack · DevOps · AI</p>
+                <div class="avatar-status">
+                  <span class="status-dot"></span>
+                  <span>Sẵn sàng nhận dự án</span>
                 </div>
               </div>
             </div>
-            <div class="col-md-6" id="project2">
-              <div class="card shadow-sm h-100">
-                <img
-                  src="https://picsum.photos/600/400?random=12"
-                  class="card-img-top"
-                  alt="Shop Huyền học"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Shop Huyền học (E-commerce)</h5>
-                  <p class="card-text">
-                    Bán đá phong thủy, trầm hương, vòng ngọc. Thanh toán online.
-                  </p>
-                  <a href="#" class="btn btn-outline-primary btn-sm"
-                    >Xem chi tiết</a
-                  >
+
+            <!-- Quote card -->
+            <div class="glass-card">
+              <div class="quote-header">
+                <i class="bi bi-quote c-purple"></i>
+                <h4>Triết lý làm việc</h4>
+              </div>
+              <p class="quote-text">"Không chỉ là viết mã nguồn sạch hay cấu hình server tối ưu, điều quan trọng nhất là giải quyết bài toán kinh doanh thực tế của khách hàng một cách thông minh và bền vững."</p>
+            </div>
+            
+            <!-- Location -->
+            <div class="glass-card glass-card--sm">
+              <i class="bi bi-geo-alt c-gold"></i><span>Hà Nội, Việt Nam</span>
+              <span class="sep">·</span>
+              <i class="bi bi-clock c-purple"></i><span>Mở hợp tác từ xa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Skills Horizontal Scroll -->
+    <section id="skills-scroll" class="hscroll-container">
+      <div class="hscroll-wrapper">
+
+        <div class="hscroll-panel panel-intro">
+          <div class="blob blob-3" style="top:20%;left:20%;opacity:.12;pointer-events:none;"></div>
+          <div class="container text-center">
+            <h2 class="sec-heading grad-text">Kỹ năng chuyên môn</h2>
+            <p class="muted" style="font-size:1.15rem;margin-top:1rem;">Cuộn xuống để khám phá các nhóm công nghệ.</p>
+            <p class="hint-x">Cuộn dọc để xem ngang <i class="bi bi-arrow-right anim-right"></i></p>
+          </div>
+        </div>
+
+        <div class="hscroll-panel">
+          <div class="container">
+            <div class="skill-cols">
+              <div class="skill-col">
+                <h3 class="skill-col-title c-purple">Frontend</h3>
+                <div class="skill-list">
+                  <div class="skill-card" data-pct="40"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"><div class="skill-meta"><p class="skill-name">HTML5 &amp; CSS3</p><p class="skill-desc">Semantic, Responsive, Animation</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                  <div class="skill-card" data-pct="40"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"><div class="skill-meta"><p class="skill-name">JavaScript</p><p class="skill-desc">ES6+, DOM, Fetch API, GSAP</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                  <div class="skill-card" data-pct="20"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><div class="skill-meta"><p class="skill-name">React</p><p class="skill-desc">Hooks, Context, SPA</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6" id="project3">
-              <div class="card shadow-sm h-100">
-                <img
-                  src="https://picsum.photos/600/400?random=13"
-                  class="card-img-top"
-                  alt="E-Learning"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">E-Learning Platform</h5>
-                  <p class="card-text">
-                    Khoá học, video, quiz; dashboard quản trị.
-                  </p>
-                  <a href="#" class="btn btn-outline-primary btn-sm"
-                    >Xem chi tiết</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6" id="project4">
-              <div class="card shadow-sm h-100">
-                <img
-                  src="https://picsum.photos/600/400?random=14"
-                  class="card-img-top"
-                  alt="Smart Landing Page"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Smart Landing Page Builder</h5>
-                  <p class="card-text">
-                    Tạo landing dễ dùng, tối ưu tốc độ &amp; SEO.
-                  </p>
-                  <a href="#" class="btn btn-outline-primary btn-sm"
-                    >Xem chi tiết</a
-                  >
+              <div class="skill-col">
+                <h3 class="skill-col-title c-gold">Backend</h3>
+                <div class="skill-list">
+                  <div class="skill-card" data-pct="45"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><div class="skill-meta"><p class="skill-name">Node.js</p><p class="skill-desc">Express, RESTful API, JWT Auth</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                  <div class="skill-card" data-pct="25"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"><div class="skill-meta"><p class="skill-name">PHP</p><p class="skill-desc">WordPress, Custom Plugins, MVC</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                  <div class="skill-card" data-pct="30"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"><div class="skill-meta"><p class="skill-name">MySQL</p><p class="skill-desc">Schema, Indexing, Optimization</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- Blog -->
-      <section id="blog" class="py-5 bg-body-secondary">
-        <div class="container">
-          <h2 class="mb-4">Blog</h2>
-          <p class="text-secondary">
-            Đang cập nhật các bài viết về SEO, Google Ads, Landing Page, DevOps
-            &amp; AI…
-          </p>
+        <div class="hscroll-panel">
+          <div class="container">
+            <div class="skill-cols">
+              <div class="skill-col">
+                <h3 class="skill-col-title" style="color:#22c55e">Data Analytics</h3>
+                <div class="skill-list">
+                  <div class="skill-card" data-pct="60"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><div class="skill-meta"><p class="skill-name">Python</p><p class="skill-desc">Pandas, NumPy, Scripting &amp; Automation</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                  <div class="skill-card" data-pct="40"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQL"><div class="skill-meta"><p class="skill-name">SQL</p><p class="skill-desc">Complex queries, Joins, Aggregations</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                </div>
+              </div>
+              <div class="skill-col">
+                <h3 class="skill-col-title" style="color:#f59e0b">AI / ML</h3>
+                <div class="skill-list">
+                  <div class="skill-card" data-pct="60"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="AI"><div class="skill-meta"><p class="skill-name">AI Tools &amp; Integration</p><p class="skill-desc">LLM APIs, RAG systems, Chatbots</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                  <div class="skill-card" data-pct="40"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch"><div class="skill-meta"><p class="skill-name">PyTorch</p><p class="skill-desc">Basic Model Training &amp; Fine-tuning</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
 
-      <!-- Contact -->
-      <section id="contact" class="py-5">
-        <div class="container">
-          <h2 class="mb-4">Liên hệ</h2>
-          <p>
-            Email:
-            <a href="mailto:dokhacgiakhoa666@gmail.com"
-              >dokhacgiakhoa666@gmail.com</a
-            ><br />
-            Điện thoại: 0799958589
-          </p>
+        <div class="hscroll-panel">
+          <div class="container">
+            <div class="skill-cols">
+              <div class="skill-col">
+                <h3 class="skill-col-title" style="color:#ef4444">DevOps</h3>
+                <div class="skill-list">
+                  <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><div class="skill-meta"><p class="skill-name">Git &amp; CI/CD</p><p class="skill-desc">Branching, GitHub Actions pipelines</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                  <div class="skill-card" data-pct="45"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"><div class="skill-meta"><p class="skill-name">Docker</p><p class="skill-desc">Containerization, Multi-stage, Compose</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+                </div>
+              </div>
+              <div class="skill-col">
+                <h3 class="skill-col-title" style="color:#38bdf8">Chứng chỉ</h3>
+                <div class="skill-list">
+                  <div class="cert-card"><i class="bi bi-award c-gold"></i><div><p class="skill-name">Học viện Agile Vietnam</p><p class="skill-desc">"Học cách học &amp; Nuôi dưỡng tư duy phát triển" — Xuất sắc</p></div></div>
+                  <div class="cert-card"><i class="bi bi-mortarboard c-gold"></i><div><p class="skill-name">FPT Aptech (ACCP)</p><p class="skill-desc">Semester 1 — Web Fundamentals, Programming in C, RDBMS</p></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
 
-      <!-- Footer -->
-      <footer class="py-4 bg-body-tertiary text-center">
-        <div class="container">
-          <small>&copy; 2025 Đỗ Khắc Gia Khoa. All rights reserved.</small>
+      </div>
+    </section>
+
+    <!-- 4. GitHub Repos -->
+    <section id="repos" class="section section--alt">
+      <div class="blob blob-2" style="left:-5%;top:20%;opacity:.05;pointer-events:none;"></div>
+      <div class="container">
+        <div class="sec-header">
+          <span class="eyebrow">Open Source</span>
+          <h2 class="sec-heading">GitHub <span class="c-gold">Repos</span></h2>
+          <p class="muted" style="margin-top:.75rem;">Các dự án công khai trên GitHub của tớ.</p>
         </div>
-      </footer>
-    </main>
 
-    <!-- Bootstrap Bundle (CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+        <!-- Repo stats bar -->
+        <div class="repos-stats-bar" id="reposStatsBar" style="display:none">
+          <div class="repos-stat-item">
+            <span class="repos-stat-num" id="totalRepos">0</span>
+            <span class="repos-stat-label">Repos</span>
+          </div>
+          <div class="repos-stat-sep"></div>
+          <div class="repos-stat-item">
+            <span class="repos-stat-num" id="totalStars">0</span>
+            <span class="repos-stat-label">Stars</span>
+          </div>
+          <div class="repos-stat-sep"></div>
+          <div class="repos-stat-item">
+            <span class="repos-stat-num" id="totalForks">0</span>
+            <span class="repos-stat-label">Forks</span>
+          </div>
+        </div>
+
+        <div class="repos-filter" id="reposFilter"></div>
+        
+        <div class="repos-grid" id="reposGrid">
+          <div class="repos-loading">
+            <div class="spinner"></div>
+            <p class="muted">Đang tải repos...</p>
+          </div>
+        </div>
+        
+        <div class="repos-cta">
+          <a href="https://github.com/dokhacgiakhoa" target="_blank" rel="noopener" class="btn btn-outline magnetic">
+            <i class="bi bi-github"></i> Xem tất cả trên GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Services -->
+    <section id="services" class="section">
+      <div class="blob blob-1" style="right:-10%;top:30%;opacity:.06;pointer-events:none;"></div>
+      <div class="container">
+        <div class="sec-header">
+          <span class="eyebrow">Dịch vụ</span>
+          <h2 class="sec-heading">Tớ cung cấp <span class="c-purple">gì?</span></h2>
+        </div>
+
+        <div class="svc-group">
+          <div class="svc-label"><i class="bi bi-graph-up-arrow"></i><strong>Marketing Performance</strong><span class="muted">Tăng trưởng traffic &amp; chuyển đổi</span></div>
+          <div class="svc-grid">
+            <div class="svc-card">
+              <img src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=640&h=360&fit=crop&auto=format&q=75" alt="SEO" class="svc-img" loading="lazy" />
+              <div class="svc-body">
+                <h5 class="svc-title">SEO Tổng thể</h5>
+                <p class="svc-text">Onpage/Offpage, tối ưu cấu trúc site, tốc độ và schema chuyên sâu.</p>
+                <a href="#contact" class="btn btn-accent">Liên hệ ngay</a>
+              </div>
+            </div>
+            <div class="svc-card">
+              <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=640&h=360&fit=crop&auto=format&q=75" alt="Google Ads" class="svc-img" loading="lazy" />
+              <div class="svc-body">
+                <h5 class="svc-title">Google Ads</h5>
+                <p class="svc-text">Tối ưu điểm chất lượng chiến dịch, đo lường và theo dõi chuyển đổi.</p>
+                <a href="#contact" class="btn btn-accent">Liên hệ ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-group">
+          <div class="svc-label"><i class="bi bi-window-sidebar"></i><strong>Web / App Development</strong><span class="muted">Thiết kế &amp; lập trình hệ thống</span></div>
+          <div class="svc-grid">
+            <div class="svc-card">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=640&h=360&fit=crop&auto=format&q=75" alt="Landing Page" class="svc-img" loading="lazy" />
+              <div class="svc-body">
+                <h5 class="svc-title">Landing Page</h5>
+                <p class="svc-text">Trang đích tối ưu chuyển đổi cao, tải siêu nhanh, chuẩn SEO.</p>
+                <a href="#contact" class="btn btn-accent">Liên hệ ngay</a>
+              </div>
+            </div>
+            <div class="svc-card">
+              <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=640&h=360&fit=crop&auto=format&q=75" alt="Thiết kế UI/UX" class="svc-img" loading="lazy" />
+              <div class="svc-body">
+                <h5 class="svc-title">Thiết kế UI/UX</h5>
+                <p class="svc-text">Xây dựng Wireframe, Prototype và Design System đồng bộ.</p>
+                <a href="#contact" class="btn btn-accent">Liên hệ ngay</a>
+              </div>
+            </div>
+            <div class="svc-card">
+              <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=640&h=360&fit=crop&auto=format&q=75" alt="Website Doanh nghiệp" class="svc-img" loading="lazy" />
+              <div class="svc-body">
+                <h5 class="svc-title">Website Doanh nghiệp</h5>
+                <p class="svc-text">Trang giới thiệu, blog, tin tức tích hợp các hệ thống CRM.</p>
+                <a href="#contact" class="btn btn-accent">Liên hệ ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-group">
+          <div class="svc-label"><i class="bi bi-building-gear"></i><strong>Hệ thống Doanh nghiệp</strong><span class="muted">Quy trình &amp; Vận hành tự động</span></div>
+          <div class="svc-grid">
+            <div class="svc-card">
+              <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=640&h=360&fit=crop&auto=format&q=75" alt="ERP" class="svc-img" loading="lazy" />
+              <div class="svc-body">
+                <h5 class="svc-title">Tư vấn ERP / CRM</h5>
+                <p class="svc-text">Triển khai mô-đun quản trị và kết nối luồng dữ liệu tự động.</p>
+                <a href="#contact" class="btn btn-accent">Liên hệ ngay</a>
+              </div>
+            </div>
+            <div class="svc-card">
+              <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=640&h=360&fit=crop&auto=format&q=75" alt="AI & Tự động hóa" class="svc-img" loading="lazy" />
+              <div class="svc-body">
+                <h5 class="svc-title">AI &amp; Tự động hóa</h5>
+                <p class="svc-text">Xây dựng Chatbot thông minh, RAG và hệ thống tự động hóa đa kênh.</p>
+                <a href="#contact" class="btn btn-accent">Liên hệ ngay</a>
+              </div>
+            </div>
+            <div class="svc-card">
+              <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=640&h=360&fit=crop&auto=format&q=75" alt="DevOps" class="svc-img" loading="lazy" />
+              <div class="svc-body">
+                <h5 class="svc-title">DevOps &amp; Hạ tầng</h5>
+                <p class="svc-text">Thiết lập CI/CD, tối ưu hóa hạ tầng đám mây và bảo trì vận hành.</p>
+                <a href="#contact" class="btn btn-accent">Liên hệ ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Projects -->
+    <section id="projects" class="section section--alt">
+      <div class="blob blob-3" style="left:-5%;bottom:10%;opacity:.08;pointer-events:none;"></div>
+      <div class="container">
+        <div class="sec-header">
+          <span class="eyebrow">Portfolio</span>
+          <h2 class="sec-heading">Dự án <span class="c-gold">tiêu biểu</span></h2>
+        </div>
+        <div class="bento-grid">
+
+          <!-- LARGE: Huyền học -->
+          <div class="bento-large proj-card" data-project="huyen-hoc">
+            <div class="proj-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=600&h=400&fit=crop&auto=format&q=75"
+                alt="Website Dịch vụ Huyền học"
+                class="proj-img"
+                loading="lazy"
+              />
+              <div class="proj-overlay">
+                <div class="proj-overlay-content">
+                  <a href="javascript:void(0)" class="btn btn-outline" aria-label="Coming soon"><span>Xem chi tiết →</span></a>
+                  <div class="proj-tech-stack">
+                    <span class="tech-tag">WordPress</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">WooCommerce</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-info-top">
+                <span class="proj-tag">Web · E-commerce</span>
+                <span class="proj-year">2024</span>
+              </div>
+              <h4 class="proj-title">Website Dịch vụ Huyền học</h4>
+              <p class="proj-desc muted">Nền tảng đặt lịch Tarot, Tử vi, Phong thủy trực tuyến. Tích hợp thanh toán, gửi mail tự động và hệ thống quản lý đặt lịch theo thời gian thực.</p>
+            </div>
+          </div>
+
+          <!-- SMALL: Shop -->
+          <div class="bento-small proj-card" data-project="shop">
+            <div class="proj-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?w=600&h=400&fit=crop&auto=format&q=75"
+                alt="Shop Huyền học"
+                class="proj-img"
+                loading="lazy"
+              />
+              <div class="proj-overlay">
+                <div class="proj-overlay-content">
+                  <a href="javascript:void(0)" class="btn btn-outline" aria-label="Coming soon"><span>Xem →</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-info-top">
+                <span class="proj-tag">E-commerce</span>
+                <span class="proj-year">2024</span>
+              </div>
+              <h4 class="proj-title">Shop Huyền học</h4>
+              <p class="proj-desc muted">Hệ thống bán sản phẩm phong thủy, bảo hộ mệnh lý với cổng thanh toán bảo mật.</p>
+            </div>
+          </div>
+
+          <!-- SMALL: E-Learning -->
+          <div class="bento-small proj-card" data-project="elearning">
+            <div class="proj-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop&auto=format&q=75"
+                alt="E-Learning Platform"
+                class="proj-img"
+                loading="lazy"
+              />
+              <div class="proj-overlay">
+                <div class="proj-overlay-content">
+                  <a href="javascript:void(0)" class="btn btn-outline" aria-label="Coming soon"><span>Xem →</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-info-top">
+                <span class="proj-tag">EdTech</span>
+                <span class="proj-year">2025</span>
+              </div>
+              <h4 class="proj-title">E-Learning Platform</h4>
+              <p class="proj-desc muted">Nền tảng học trực tuyến: quản lý khóa học, phát video, theo dõi tiến độ học viên.</p>
+            </div>
+          </div>
+
+          <!-- WIDE: Landing Builder -->
+          <div class="bento-wide proj-card" data-project="builder">
+            <div class="proj-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1200&h=400&fit=crop&auto=format&q=75"
+                alt="Smart Landing Page Builder"
+                class="proj-img"
+                loading="lazy"
+              />
+              <div class="proj-overlay">
+                <div class="proj-overlay-content">
+                  <a href="javascript:void(0)" class="btn btn-outline" aria-label="Coming soon"><span>Xem chi tiết →</span></a>
+                  <div class="proj-tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">AI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-info-top">
+                <span class="proj-tag">SaaS · Builder</span>
+                <span class="proj-year">2025</span>
+              </div>
+              <h4 class="proj-title">Smart Landing Page Builder</h4>
+              <p class="proj-desc muted">Trình tạo trang đích kéo thả, hỗ trợ AI gợi ý nội dung, tối ưu hóa tốc độ tải và tỉ lệ chuyển đổi.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Contact -->
+    <section id="contact" class="section">
+      <div class="blob blob-2" style="right:-10%;bottom:-10%;opacity:.08;pointer-events:none;"></div>
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-left">
+            <span class="eyebrow">Liên hệ</span>
+            <h2 class="sec-heading">Bắt đầu <span class="c-gold">dự án</span> của bạn</h2>
+            <p class="body-text muted">Bạn đang tìm giải pháp xây dựng hệ thống bền vững hay thúc đẩy tăng trưởng chuyển đổi?</p>
+            <div class="contact-items">
+              <div class="contact-item">
+                <div class="contact-icon glass-card glass-card--icon"><i class="bi bi-envelope c-purple"></i></div>
+                <div><p class="muted small">Email</p><a href="mailto:dokhacgiakhoa666@gmail.com" class="contact-link">dokhacgiakhoa666@gmail.com</a></div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon glass-card glass-card--icon"><i class="bi bi-telephone c-purple"></i></div>
+                <div><p class="muted small">Điện thoại</p><a href="tel:0799958589" class="contact-link">0799958589</a></div>
+              </div>
+            </div>
+            <div class="social-row">
+              <a href="https://github.com/dokhacgiakhoa" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="GitHub"><i class="bi bi-github"></i></a>
+              <a href="https://linkedin.com/in/dokhacgiakhoa" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="https://facebook.com/dokhacgiakhoa" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            </div>
+          </div>
+          <div class="contact-right">
+            <div class="glass-card contact-form-card">
+              <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="hidden" name="_subject" value="Tin nhắn từ Portfolio" />
+                <div class="float-field">
+                  <input type="text" id="f-name" name="name" required placeholder=" ">
+                  <label for="f-name">Họ và tên</label>
+                </div>
+                <div class="float-field">
+                  <input type="email" id="f-email" name="email" required placeholder=" ">
+                  <label for="f-email">Email</label>
+                </div>
+                <div class="float-field">
+                  <textarea id="f-msg" name="message" rows="4" required placeholder=" "></textarea>
+                  <label for="f-msg">Lời nhắn</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn--full"><span>Gửi thông tin</span></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-border"></div>
+      <p>&copy; 2026 <strong>Đỗ Khắc Gia Khoa</strong>. All rights reserved.</p>
+      <p class="muted small">
+        Crafted with GSAP · Pure CSS · Vanilla JS
+        <span style="color:var(--gold);margin-left:.5rem">♥</span>
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- Scroll to top button -->
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="./app.js"></script>
+</body>
 </html>
