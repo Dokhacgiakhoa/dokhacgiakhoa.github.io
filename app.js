@@ -466,7 +466,14 @@ function initHero() {
 
   // Glitch -> Settle character cascade animation
   if (prefersReducedMotion || isMobile) {
-    // Mobile / reduced motion: simple fade-in, skip expensive per-char split
+    // .hero-title has -webkit-text-fill-color:transparent in CSS.
+    // .ch spans inherit it, so we must bake gradient onto each span or text stays invisible.
+    chars.forEach(char => {
+      char.style.background = 'linear-gradient(135deg, #00C8FF 0%, #00E5FF 55%, #ffffff 100%)';
+      char.style.webkitBackgroundClip = 'text';
+      char.style.backgroundClip = 'text';
+      char.style.webkitTextFillColor = 'transparent';
+    });
     gsap.set(chars, { opacity: 1 });
   } else {
     // background-clip:text on parent does NOT paint through inline-block child spans.
