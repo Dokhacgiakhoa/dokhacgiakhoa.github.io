@@ -50,6 +50,36 @@ const REPO_DESCRIPTIONS_EN = {
   '1000-hours-human-learning-with-ai': 'A self-designed 35-week curriculum to become an AI-integrated full-stack engineer — OKRs, the 80/20 principle, Multi-AI Ecosystem.',
 };
 
+// Display names for the repo cards — GitHub slugs are hyphenated by
+// convention (agent-skills-setup-for-antigravity), which reads fine as a
+// URL but poorly as a title. These map each repo to a clean, human title
+// per language instead of showing the raw slug.
+const REPO_DISPLAY_NAMES = {
+  'agent-skills-setup-for-antigravity': 'Agent Skills cho AntiGravity',
+  'khoa-hoc-tam-linh': 'Khoa Học Tâm Linh',
+  'multi-social-analytic-msa': 'Phân Tích Đa Nền Tảng MSA',
+  'vaic-2026-vibonymus-prepare': 'Vibonymus Chuẩn Bị VAIC 2026',
+  'web-scraping-by-k.ai-labs': 'Web Scraping bởi K.AI Labs',
+  'videos-by-ai': 'Video Bằng AI',
+  '1000-hours-human-learning-with-ai': '1000 Giờ Học Cùng AI',
+};
+
+const REPO_DISPLAY_NAMES_EN = {
+  'agent-skills-setup-for-antigravity': 'Agent Skills for AntiGravity',
+  'khoa-hoc-tam-linh': 'Spiritual Science AI',
+  'multi-social-analytic-msa': 'Multi Social Analytics (MSA)',
+  'vaic-2026-vibonymus-prepare': 'Vibonymus VAIC 2026 Prep',
+  'web-scraping-by-k.ai-labs': 'Web Scraping by K.AI Labs',
+  'videos-by-ai': 'Videos by AI',
+  '1000-hours-human-learning-with-ai': '1000 Hours Learning With AI',
+};
+
+function getRepoDisplayName(r, lang) {
+  const key = r.name.toLowerCase();
+  if (lang === 'en') return REPO_DISPLAY_NAMES_EN[key] || REPO_DISPLAY_NAMES[key] || r.name;
+  return REPO_DISPLAY_NAMES[key] || r.name;
+}
+
 function getRepoDesc(r, lang) {
   const key = r.name.toLowerCase();
   if (lang === 'en') {
@@ -182,6 +212,8 @@ function updateRepoCardsLanguage(lang) {
   document.querySelectorAll('#reposGrid .repo-card').forEach(card => {
     const repo = cachedRepos.find(r => r.name.toLowerCase() === card.dataset.repoName);
     if (!repo) return;
+    const name = card.querySelector('.repo-name');
+    if (name) name.textContent = getRepoDisplayName(repo, lang);
     const desc = card.querySelector('.repo-desc');
     if (desc) desc.textContent = getRepoDesc(repo, lang);
     const updated = card.querySelector('.repo-updated');
@@ -1223,7 +1255,7 @@ async function initGithubRepos() {
       ).join('') || '';
       const thumb = REPO_THUMBS[r.name.toLowerCase()];
       const thumbHTML = thumb
-        ? `<div class="repo-thumb"><img src="${thumb}" alt="${r.name} preview" loading="lazy" /></div>`
+        ? `<div class="repo-thumb"><img src="${thumb}" alt="${getRepoDisplayName(r, currentLang)} preview" loading="lazy" /></div>`
         : `<div class="repo-thumb repo-thumb--placeholder" style="--lang-color:${color}"></div>`;
 
       return `
@@ -1237,7 +1269,7 @@ async function initGithubRepos() {
               </div>
               <i class="bi bi-box-arrow-up-right repo-ext-icon"></i>
             </div>
-            <h4 class="repo-name">${r.name}</h4>
+            <h4 class="repo-name">${getRepoDisplayName(r, currentLang)}</h4>
             <p class="repo-desc">${desc}</p>
           </div>
 

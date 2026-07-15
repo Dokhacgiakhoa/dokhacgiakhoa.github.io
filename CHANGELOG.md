@@ -4,6 +4,12 @@ Nhật ký các đợt chỉnh sửa portfolio, ghi lại để xem lại lịch
 
 ---
 
+## 2026-07-15 (tiếp 4) — Tên dự án hiển thị đẹp, bỏ gạch ngang
+
+Tên repo trên GitHub theo chuẩn slug có gạch ngang (`agent-skills-setup-for-antigravity`) — hợp cho URL nhưng xấu khi làm tiêu đề hiển thị. Thêm `REPO_DISPLAY_NAMES`/`REPO_DISPLAY_NAMES_EN` trong `app.js`, đổi tên hiển thị cho cả 7 dự án sang tên sạch, song ngữ, không gạch ngang (VD: "Agent Skills cho AntiGravity" / "Agent Skills for AntiGravity"). Tên đổi theo ngôn ngữ đang chọn giống cơ chế mô tả repo. Tag chủ đề nhỏ bên dưới card (`ai-agents`, `cli`...) giữ nguyên dạng kebab-case vì đó là quy ước bình thường cho tag, không phải tên dự án.
+
+---
+
 ## 2026-07-15 (tiếp 3) — Fix "Không tải được dữ liệu GitHub" (rate limit)
 
 **Nguyên nhân:** trang gọi trực tiếp `api.github.com` từ trình duyệt người xem để lấy danh sách repo — GitHub giới hạn 60 lượt gọi/giờ **theo IP**, dùng chung cho tất cả người trên cùng mạng. Test nhiều lần hoặc nhiều người cùng wifi/công ty/trường xem trang là dễ cạn quota, trang báo lỗi không tải được.
