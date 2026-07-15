@@ -11,6 +11,12 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 // ===== MOBILE / TOUCH DETECTION =====
 const isMobile = window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
 
+// ===== LANGUAGE (VI / EN) =====
+let currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'vi';
+// Repos are fetched once and cached here so toggling language doesn't
+// require re-fetching the GitHub API — just re-rendering existing data.
+let cachedRepos = [];
+
 // ===== PERFORMANCE OPTIMIZATION: PREFETCH GITHUB API =====
 const reposCache = fetch(
   'https://api.github.com/users/dokhacgiakhoa/repos?sort=updated&per_page=20&type=owner',
@@ -20,18 +26,66 @@ const reposCache = fetch(
   return null;
 });
 
+// ===== FEATURED AI PROJECTS =====
+// Chỉ hiện các repo liên quan AI + có giá trị ứng dụng thực tế.
+// Thứ tự = thứ tự hiển thị. Mô tả viết tay (GitHub description phần lớn để trống).
+const FEATURED_REPOS = [
+  'agent-skills-setup-for-antigravity',
+  'khoa-hoc-tam-linh',
+  'multi-social-analytic-msa',
+  'vaic-2026-vibonymus-prepare',
+  'web-scraping-by-k.ai-labs',
+  'videos-by-ai',
+  '1000-hours-human-learning-with-ai',
+];
+
+const REPO_DESCRIPTIONS = {
+  'agent-skills-setup-for-antigravity': 'Bộ CLI scaffold "skill" cho AI agent chạy trong Google AntiGravity IDE — tự động hoá việc dựng agent mới.',
+  'khoa-hoc-tam-linh': 'App AI phân tích Bát Tự & thần số học — kết hợp huyền học phương Đông với Google Gemini.',
+  'multi-social-analytic-msa': 'Hệ thống phân tích cảm xúc mạng xã hội đa nền tảng theo thời gian thực, dùng PhoBERT (NLP tiếng Việt).',
+  'vaic-2026-vibonymus-prepare': 'Dashboard điều phối cho đội Vibonymus (6 người) chuẩn bị thi Vietnam AI Innovation Hackathon 2026.',
+  'web-scraping-by-k.ai-labs': 'Extension + web app AI-first — audit SEO on-page bằng ngôn ngữ tự nhiên. Sản phẩm chính thức của K.AI Labs.',
+  'videos-by-ai': 'Pipeline tự động hoá sản xuất video bằng AI — từ ý tưởng đến video hoàn chỉnh.',
+  '1000-hours-human-learning-with-ai': 'Lộ trình tự học 35 tuần để trở thành full-stack engineer tích hợp AI — OKR, nguyên lý 80/20, Multi-AI Ecosystem.',
+};
+
+const REPO_DESCRIPTIONS_EN = {
+  'agent-skills-setup-for-antigravity': 'A CLI scaffolding toolkit for AI agent "skills" running in Google AntiGravity IDE — automates setting up new agents.',
+  'khoa-hoc-tam-linh': 'AI app for Bát Tự (Four Pillars) & numerology analysis — blending Eastern mysticism with Google Gemini.',
+  'multi-social-analytic-msa': 'Real-time, multi-platform social media sentiment analysis system, powered by PhoBERT (Vietnamese NLP).',
+  'vaic-2026-vibonymus-prepare': 'Coordination dashboard for Team Vibonymus (6 members) preparing for the Vietnam AI Innovation Hackathon 2026.',
+  'web-scraping-by-k.ai-labs': 'AI-first browser extension + web app — natural-language on-page SEO audits. Official K.AI Labs product.',
+  'videos-by-ai': 'An AI-powered video production automation pipeline — from idea to finished video.',
+  '1000-hours-human-learning-with-ai': 'A self-designed 35-week curriculum to become an AI-integrated full-stack engineer — OKRs, the 80/20 principle, Multi-AI Ecosystem.',
+};
+
+function getRepoDesc(r, lang) {
+  const key = r.name.toLowerCase();
+  if (lang === 'en') {
+    return REPO_DESCRIPTIONS_EN[key] || REPO_DESCRIPTIONS[key] ||
+      (r.description ? r.description.substring(0, 110) + (r.description.length > 110 ? '…' : '') : 'No description.');
+  }
+  return REPO_DESCRIPTIONS[key] ||
+    (r.description ? r.description.substring(0, 110) + (r.description.length > 110 ? '…' : '') : 'Không có mô tả.');
+}
+
+function formatRepoDate(iso, lang) {
+  const date = new Date(iso).toLocaleDateString(lang === 'en' ? 'en-US' : 'vi-VN', {
+    day: '2-digit', month: '2-digit', year: 'numeric'
+  });
+  return `${lang === 'en' ? 'Updated' : 'Cập nhật'} ${date}`;
+}
+
 // ===== REPO THUMBNAIL MAP =====
 // Keys are repo names lowercased. Images go in Media/repo-thumbs/
 const REPO_THUMBS = {
   'agent-skills-setup-for-antigravity':  'Media/repo-thumbs/agent-skills-antigravity.jpg',
-  'agent-skills-setup-for-antigravity-vercel': 'Media/repo-thumbs/agent-skills-antigravity.jpg',
   'khoa-hoc-tam-linh':                   'Media/repo-thumbs/khoa-hoc-tam-linh.jpg',
-  'git-page-3d-infographic':             'Media/repo-thumbs/git-page-3d-infographic.jpg',
   'videos-by-ai':                        'Media/repo-thumbs/videos-by-ai.jpg',
-  'office-box-academy':                  'Media/repo-thumbs/office-box-academy.jpg',
-  'courierxpress':                       'Media/repo-thumbs/courierxpress.jpg',
-  'dokhacgiakhoa.github.io':             'Media/repo-thumbs/portfolio.jpg',
-  'moltbot':                             'Media/repo-thumbs/moltbot.jpg',
+  'multi-social-analytic-msa':           'Media/repo-thumbs/multi-social-analytic-msa.png',
+  'vaic-2026-vibonymus-prepare':         'Media/repo-thumbs/vaic-2026-vibonymus.png',
+  'web-scraping-by-k.ai-labs':           'Media/repo-thumbs/web-scraping-kai-labs.png',
+  '1000-hours-human-learning-with-ai':   'Media/repo-thumbs/1000-hours-human-learning-with-ai.png',
 };
 
 // ===== LANGUAGE COLOR MAP =====
@@ -87,6 +141,85 @@ function splitWords(el) {
   });
 
   return words;
+}
+
+// Glitch/scramble a text element to random chars then settle back to the
+// original — reused for the repos eyebrow reveal and for hover effects.
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ01#@$%&";
+function scrambleText(el, { steps = 8, interval = 35, color } = {}) {
+  if (prefersReducedMotion || el.dataset.scrambling) return;
+  const finalVal = el.dataset.scrambleOriginal || el.textContent;
+  el.dataset.scrambleOriginal = finalVal;
+  el.dataset.scrambling = '1';
+  const prevColor = el.style.color;
+  if (color) el.style.color = color;
+  let count = 0;
+  const timer = setInterval(() => {
+    el.textContent = finalVal
+      .split('')
+      .map(c => (c === ' ' ? ' ' : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]))
+      .join('');
+    count++;
+    if (count >= steps) {
+      clearInterval(timer);
+      el.textContent = finalVal;
+      el.style.color = prevColor;
+      delete el.dataset.scrambling;
+    }
+  }, interval);
+}
+
+// ─────────────────────────────────────────
+// LANGUAGE TOGGLE (VI / EN)
+// ─────────────────────────────────────────
+// Elements carry the Vietnamese copy as their actual markup (source of
+// truth) plus a `data-en` attribute holding the English replacement.
+// Switching to EN backs up the current (Vietnamese) innerHTML into
+// `data-vi-backup` the first time, then swaps in `data-en`. Switching
+// back to VI restores that backup — no need to hand-author a data-vi
+// twin of every element.
+function translateNode(el, lang) {
+  if (lang === 'en') {
+    if (el.dataset.viBackup === undefined) el.dataset.viBackup = el.innerHTML;
+    el.innerHTML = el.dataset.en;
+  } else if (el.dataset.viBackup !== undefined) {
+    el.innerHTML = el.dataset.viBackup;
+  }
+}
+
+function updateRepoCardsLanguage(lang) {
+  document.querySelectorAll('#reposGrid .repo-card').forEach(card => {
+    const repo = cachedRepos.find(r => r.name.toLowerCase() === card.dataset.repoName);
+    if (!repo) return;
+    const desc = card.querySelector('.repo-desc');
+    if (desc) desc.textContent = getRepoDesc(repo, lang);
+    const updated = card.querySelector('.repo-updated');
+    if (updated) updated.textContent = formatRepoDate(updated.dataset.updatedIso, lang);
+  });
+  const allBtn = document.querySelector('#reposFilter .filter-btn[data-lang="all"]');
+  if (allBtn) allBtn.textContent = lang === 'en' ? 'All' : 'Tất cả';
+}
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-en]').forEach(el => translateNode(el, lang));
+  updateRepoCardsLanguage(lang);
+
+  document.querySelectorAll('.lang-opt').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.lang === lang);
+  });
+}
+
+function initLangToggle() {
+  const btn = document.getElementById('langToggle');
+  if (!btn) return;
+  applyLanguage(currentLang);
+  btn.addEventListener('click', () => {
+    applyLanguage(currentLang === 'vi' ? 'en' : 'vi');
+  });
 }
 
 // ─────────────────────────────────────────
@@ -432,7 +565,7 @@ function initHero() {
       onComplete() {
         // Typewriter effect using TextPlugin
         const eyebrow = document.querySelector('.hero-eyebrow');
-        const originalVal = "DevOps & AI Integration Specialist";
+        const originalVal = "Code less. Build more.";
         const cursor = eyebrow.querySelector('.eyebrow-cursor');
 
         eyebrow.innerHTML = '';
@@ -826,7 +959,20 @@ function initSkills() {
           scrollTrigger: {
             trigger: panel,
             start: 'top 80%',
-            toggleActions: 'play none none none'
+            toggleActions: 'play none none none',
+            onEnter: () => {
+              if (prefersReducedMotion) return;
+              // Idle HUD scanline pulse once the bar has finished filling in —
+              // reinforces the "live panel" feel instead of sitting static.
+              gsap.to(scanBar, {
+                opacity: 0.4,
+                duration: 1.4,
+                delay: 0.95,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
+              });
+            }
           }
         }
       );
@@ -921,29 +1067,27 @@ async function initGithubRepos() {
       return;
     }
     
-    // Filter out forks and main profile repo, sort by stars
-    const repos = all
-      .filter(r => !r.fork && r.name !== 'dokhacgiakhoa')
-      .sort((a, b) => b.stargazers_count - a.stargazers_count)
-      .slice(0, 9);
+    // Chỉ lấy các repo AI-related đã chọn, giữ đúng thứ tự curation
+    const byName = new Map(all.map(r => [r.name.toLowerCase(), r]));
+    const repos = FEATURED_REPOS.map(name => byName.get(name)).filter(Boolean);
 
     if (!repos.length) {
       grid.innerHTML = '<p class="muted text-center" style="padding:2rem">Không có repo nào.</p>';
       return;
     }
 
-    // Animate stats bar
-    const totalStars = all.reduce((sum, r) => sum + r.stargazers_count, 0);
-    const totalForks = all.reduce((sum, r) => sum + r.forks_count, 0);
+    // Animate stats bar (tính trên các dự án đang hiển thị)
+    const totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
+    const totalForks = repos.reduce((sum, r) => sum + r.forks_count, 0);
     const statsBar = document.getElementById('reposStatsBar');
     if (statsBar) {
       statsBar.style.display = 'flex';
-      
+
       const statsObj = { repos: 0, stars: 0, forks: 0 };
-      
+
       if (!prefersReducedMotion) {
         gsap.to(statsObj, {
-          repos: all.length,
+          repos: repos.length,
           stars: totalStars,
           forks: totalForks,
           duration: 1.5,
@@ -959,7 +1103,7 @@ async function initGithubRepos() {
           }
         });
       } else {
-        document.getElementById('totalRepos').textContent = all.length;
+        document.getElementById('totalRepos').textContent = repos.length;
         document.getElementById('totalStars').textContent = totalStars;
         document.getElementById('totalForks').textContent = totalForks;
       }
@@ -968,26 +1112,11 @@ async function initGithubRepos() {
     // Eyebrow scramble glitch effect
     const eyebrow = document.querySelector('#repos .eyebrow');
     if (eyebrow && !prefersReducedMotion) {
-      const finalVal = eyebrow.textContent.trim();
       ScrollTrigger.create({
         trigger: eyebrow,
         start: 'top 90%',
         once: true,
-        onEnter() {
-          let count = 0;
-          eyebrow.style.color = '#ef4444';
-          const interval = setInterval(() => {
-            const randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+";
-            eyebrow.textContent = Array(finalVal.length).fill(0)
-              .map(() => randomChars[Math.floor(Math.random() * randomChars.length)]).join('');
-            count++;
-            if (count > 10) {
-              clearInterval(interval);
-              eyebrow.textContent = finalVal;
-              eyebrow.style.color = '';
-            }
-          }, 35);
-        }
+        onEnter: () => scrambleText(eyebrow, { steps: 11, color: '#ef4444' })
       });
     }
 
@@ -995,7 +1124,7 @@ async function initGithubRepos() {
     const langs = [...new Set(repos.map(r => r.language).filter(Boolean))];
     if (filter && langs.length) {
       filter.innerHTML =
-        '<button class="filter-btn active" data-lang="all">Tất cả</button>' +
+        `<button class="filter-btn active" data-lang="all">${currentLang === 'en' ? 'All' : 'Tất cả'}</button>` +
         langs.map(l => `<button class="filter-btn" data-lang="${l}">${l}</button>`).join('');
 
       // Stagger buttons entrance — no ScrollTrigger, runs immediately after DOM insert
@@ -1009,35 +1138,45 @@ async function initGithubRepos() {
         clearProps: 'all'
       });
 
-      // Filter trigger
+      // Filter trigger — Flip animates the remaining cards sliding into their
+      // new grid slots instead of just fading in place, so the reflow itself
+      // reads as an intentional transition rather than a layout jump.
       filter.addEventListener('click', (e) => {
         const btn = e.target.closest('.filter-btn');
         if (!btn) return;
         filter.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const lang = btn.dataset.lang;
-        
-        grid.querySelectorAll('.repo-card').forEach(card => {
-          const match = lang === 'all' || card.dataset.lang === lang;
-          if (match) {
-            card.style.display = '';
-            gsap.to(card, { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: 'power2.out' });
-          } else {
-            gsap.to(card, { opacity: 0, scale: 0.94, y: 10, duration: 0.25, onComplete: () => { card.style.display = 'none'; } });
-          }
+        const cards = grid.querySelectorAll('.repo-card');
+
+        if (prefersReducedMotion) {
+          cards.forEach(card => {
+            card.style.display = (lang === 'all' || card.dataset.lang === lang) ? '' : 'none';
+          });
+          return;
+        }
+
+        const state = Flip.getState(cards, { props: 'opacity' });
+        cards.forEach(card => {
+          card.style.display = (lang === 'all' || card.dataset.lang === lang) ? '' : 'none';
+        });
+        Flip.from(state, {
+          duration: 0.6,
+          scale: true,
+          ease: 'power3.inOut',
+          absolute: true,
+          onEnter: els => gsap.fromTo(els, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, stagger: 0.04 }),
+          onLeave: els => gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.25 })
         });
       });
     }
 
     // Render repo cards
+    cachedRepos = repos;
     grid.innerHTML = repos.map(r => {
       const color = LANG_COLORS[r.language] || '#6b7280';
-      const desc = r.description
-        ? r.description.substring(0, 110) + (r.description.length > 110 ? '…' : '')
-        : 'Không có mô tả.';
-      const updatedDate = new Date(r.updated_at).toLocaleDateString('vi-VN', {
-        day: '2-digit', month: '2-digit', year: 'numeric'
-      });
+      const desc = getRepoDesc(r, currentLang);
+      const updatedDate = formatRepoDate(r.updated_at, currentLang);
       const topicsHTML = r.topics?.slice(0, 3).map(t =>
         `<span class="repo-topic">${t}</span>`
       ).join('') || '';
@@ -1048,7 +1187,7 @@ async function initGithubRepos() {
 
       return `
         <a href="${r.html_url}" target="_blank" rel="noopener noreferrer"
-           class="repo-card" data-lang="${r.language || ''}">
+           class="repo-card" data-lang="${r.language || ''}" data-repo-name="${r.name.toLowerCase()}">
           ${thumbHTML}
           <div class="repo-card-top">
             <div class="repo-header">
@@ -1084,7 +1223,7 @@ async function initGithubRepos() {
                   ${r.open_issues_count}
                 </span>` : ''}
             </div>
-            <span class="repo-updated">Updated ${updatedDate}</span>
+            <span class="repo-updated" data-updated-iso="${r.updated_at}">${updatedDate}</span>
           </div>
           <div class="repo-border-anim" aria-hidden="true"></div>
         </a>`;
@@ -1123,6 +1262,12 @@ async function initGithubRepos() {
 
   } catch (err) {
     showError('Không thể tải repos.');
+  } finally {
+    // Repos load async and change document height — sections rendered below
+    // (K.AI Labs, Contact, Footer) need their ScrollTrigger offsets recalculated
+    // against the final layout, otherwise their scroll-triggered reveals
+    // (e.g. .social-btn) can end up positioned against a stale, shorter page.
+    requestAnimationFrame(() => ScrollTrigger.refresh());
   }
 }
 
@@ -1309,58 +1454,61 @@ function initContact() {
     });
   }
 
-  // Contact items: Sequential icon scale-in and text slide-in
-  const items = sec.querySelectorAll('.contact-item');
-  items.forEach((item, index) => {
-    const icon = item.querySelector('.contact-icon');
-    const text = item.querySelector('div');
-
-    gsap.set(icon, { scale: 0, rotation: prefersReducedMotion ? 0 : -180 });
-    gsap.set(text, { opacity: 0, x: -30 });
-
-    const itemTL = gsap.timeline({
+  // Contact preview card: fade + slide up on scroll into view
+  const preview = sec.querySelector('.contact-preview');
+  if (preview) {
+    gsap.from(preview, {
+      opacity: 0,
+      y: 25,
+      duration: 0.8,
+      ease: 'power2.out',
       scrollTrigger: {
-        trigger: item,
+        trigger: preview,
         start: 'top 90%',
         toggleActions: 'play none none none'
-      },
-      delay: index * 0.25
+      }
     });
+  }
 
-    itemTL.to(icon, {
-      scale: 1,
-      rotation: 0,
-      duration: 0.8,
-      ease: prefersReducedMotion ? 'power2.out' : 'back.out(2)'
-    })
-    .to(text, {
-      opacity: 1,
-      x: 0,
-      duration: 0.65,
-      ease: 'power2.out'
-    }, '-=0.35');
-  });
+  // Social row icons (incl. Email) are plain <button>s, not links — they only
+  // select which channel's info shows in .contact-preview above. The actual
+  // clickable, navigable link lives solely in the preview card.
+  const socialRow = sec.querySelector('#socialRow');
+  const previewLabel = document.getElementById('contactPreviewLabel');
+  const previewLink = document.getElementById('contactPreviewLink');
+  if (socialRow && previewLabel && previewLink) {
+    socialRow.querySelectorAll('.social-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        socialRow.querySelectorAll('.social-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const href = btn.dataset.href;
+        previewLabel.textContent = btn.dataset.label;
+        previewLink.textContent = btn.dataset.display;
+        previewLink.href = href;
+        if (href.startsWith('mailto:')) {
+          previewLink.removeAttribute('target');
+          previewLink.removeAttribute('rel');
+        } else {
+          previewLink.target = '_blank';
+          previewLink.rel = 'noopener';
+        }
+        gsap.from(previewLink, { opacity: 0, y: 6, duration: 0.35, ease: 'power2.out' });
+      });
+    });
+  }
 
   // Social buttons bounce-in
-  gsap.from('.social-btn', {
-    scale: 0,
-    opacity: 0,
-    stagger: 0.15,
-    duration: 0.9,
-    ease: prefersReducedMotion ? 'power2.out' : 'back.out(2.5)',
-    scrollTrigger: { trigger: '.social-row', start: 'top 92%' }
-  });
-
-  // Form fields slide-up reveal
-  const fields = sec.querySelectorAll('.float-field');
-  gsap.from(fields, {
-    opacity: 0,
-    y: 25,
-    stagger: 0.18,
-    duration: 0.95,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: '.contact-form-card', start: 'top 80%' }
-  });
+  gsap.fromTo('.social-btn',
+    { scale: 0, opacity: 0 },
+    {
+      scale: 1,
+      opacity: 1,
+      stagger: 0.15,
+      duration: 0.9,
+      ease: prefersReducedMotion ? 'power2.out' : 'back.out(2.5)',
+      scrollTrigger: { trigger: '.social-row', start: 'top 92%' }
+    }
+  );
 }
 
 // ─────────────────────────────────────────
@@ -1676,55 +1824,14 @@ function initHover() {
     });
   });
 
-  // Contact form async submit via Formspree
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      if (!btn) return;
-      
-      btn.disabled = true;
-      const originalHTML = btn.innerHTML;
-      btn.innerHTML = '<span>Đang gửi...</span>';
-      
-      try {
-        const formData = new FormData(form);
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-        
-        if (res.ok) {
-          gsap.timeline()
-            .to(btn, { scale: 0.96, duration: 0.08 })
-            .to(btn, { scale: 1, duration: 0.2, ease: 'back.out(2)' })
-            .add(() => {
-              btn.innerHTML = '<span>✓ Đã gửi thành công!</span>';
-              btn.style.background = 'linear-gradient(90deg,#22c55e,#16a34a)';
-              form.reset();
-              
-              setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.style.background = '';
-                btn.disabled = false;
-              }, 4000);
-            });
-        } else {
-          throw new Error('Server error');
-        }
-      } catch (err) {
-        btn.innerHTML = '<span>⚠ Lỗi, thử lại sau</span>';
-        btn.style.background = 'linear-gradient(90deg,var(--red),#b91c1c)';
-        setTimeout(() => {
-          btn.innerHTML = originalHTML;
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 3000);
-      }
+  // Nav links: scramble/glitch the label on hover (skipped on touch devices —
+  // there's no hover state to trigger it, and it'd fire on tap instead)
+  if (!isMobile) {
+    document.querySelectorAll('.nav-link, .btn-nav').forEach(link => {
+      link.addEventListener('mouseenter', () => scrambleText(link, { steps: 6, interval: 28 }));
     });
   }
+
 }
 
 // ─────────────────────────────────────────
@@ -1734,6 +1841,9 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Initialize cursor and mobile menu immediately
   initCursor();
   initMobileMenu();
+
+  // Apply saved language preference before anything renders/animates
+  initLangToggle();
 
   // Wait for preloader to finish
   await initPreloader();

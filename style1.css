@@ -4,6 +4,9 @@
   --font-sans:    'Plus Jakarta Sans', system-ui, sans-serif;
   --font-display: 'Orbitron', 'Space Grotesk', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
+  /* Orbitron has no proper Vietnamese diacritic glyphs — use for Latin-only
+     decorative text (logo, digits). Vietnamese headings/prose use this instead. */
+  --font-heading-vi: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, sans-serif;
 
   /* Backgrounds — Tron black with faint blue tint */
   --bg:           #020408;
@@ -354,6 +357,40 @@ img {
   box-shadow: 0 0 14px rgba(0, 200, 255,0.25);
 }
 
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.lang-toggle:hover {
+  border-color: var(--cyan);
+  background: rgba(0, 200, 255, 0.06);
+}
+
+.lang-sep { color: var(--muted2); }
+
+.lang-opt {
+  padding: 0.1rem 0.2rem;
+  color: var(--muted2);
+  transition: color 0.2s;
+}
+
+.lang-opt.active {
+  color: var(--cyan);
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -574,7 +611,7 @@ img {
 }
 
 .sec-heading {
-  font-family: var(--font-display);
+  font-family: var(--font-heading-vi);
   font-size: clamp(2.2rem, 5vw, 3.2rem);
   font-weight: 900;
   letter-spacing: -1px;
@@ -1178,6 +1215,23 @@ img {
   flex-shrink: 0;
 }
 
+/* Monochrome brand SVGs (simple-icons) that ship black-only — recolor to white to read on dark cards */
+.skill-icon--mono {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+/* Placeholder for tools with no available logo yet — see Media/icon-requests.md */
+.skill-icon-fallback {
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: rgba(0, 200, 255, 0.08);
+  color: var(--cyan);
+  font-size: 1.1rem;
+}
+
 .skill-meta { flex: 1; }
 
 .skill-name {
@@ -1692,27 +1746,23 @@ img {
 /* ===== CONTACT SECTION ===== */
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
   gap: 5rem;
   align-items: start;
+}
+
+.contact-grid .social-row {
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .contact-left {
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-}
-
-.contact-items {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
 }
 
 .contact-link {
@@ -1734,22 +1784,41 @@ img {
 
 .social-btn {
   width: 46px; height: 46px;
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.15rem;
+  font-family: inherit;
   color: var(--muted);
   transition: all 0.25s;
   background: transparent;
   perspective: 1000px;
+  cursor: pointer;
 }
 
 .social-btn:hover {
   border-color: var(--gold);
   color: var(--gold);
   background: var(--gold-dim);
+}
+
+.social-btn.active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: rgba(0, 200, 255, 0.08);
+  box-shadow: 0 0 16px rgba(0, 200, 255, 0.18);
+}
+
+.contact-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1.1rem 1.6rem;
+  margin-top: 1rem;
 }
 
 .contact-form-card { padding: 2.5rem; }

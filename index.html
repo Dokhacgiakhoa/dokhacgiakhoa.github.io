@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Đỗ Khắc Gia Khoa — Full Stack DevOps & AI Engineer</title>
-  <meta name="description" content="Portfolio of Đỗ Khắc Gia Khoa — Full Stack DevOps & AI Engineer based in Hanoi, Vietnam." />
+  <title>Đỗ Khắc Gia Khoa — Full Stack Dev & AI Engineer | K.AI Labs</title>
+  <meta name="description" content="Portfolio Đỗ Khắc Gia Khoa — Full Stack Dev & AI Engineer, Founder K.AI Labs. Code less. Build more." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Đỗ Khắc Gia Khoa" />
-  <meta name="keywords" content="full stack developer, devops, AI engineer, Hanoi, Vietnam, portfolio, Do Khac Gia Khoa" />
+  <meta name="keywords" content="full stack developer, AI engineer, K.AI Labs, Vnonymus, Hanoi, Vietnam, portfolio, Do Khac Gia Khoa" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Đỗ Khắc Gia Khoa — Full Stack DevOps & AI Engineer" />
-  <meta property="og:description" content="Personal portfolio — Full Stack Developer, DevOps Engineer, AI Integration Specialist based in Hanoi." />
+  <meta property="og:title" content="Đỗ Khắc Gia Khoa — Full Stack Dev & AI Engineer | K.AI Labs" />
+  <meta property="og:description" content="Portfolio cá nhân — Full Stack Dev, AI Engineer, Founder K.AI Labs tại Hà Nội. Code less. Build more." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dokhacgiakhoa.github.io/" />
   <meta property="og:image" content="https://dokhacgiakhoa.github.io/assets/og-cover.jpg" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="vi_VN" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Đỗ Khắc Gia Khoa — Full Stack DevOps & AI Engineer" />
+  <meta name="twitter:title" content="Đỗ Khắc Gia Khoa — Full Stack Dev & AI Engineer | K.AI Labs" />
   <meta name="twitter:image" content="https://dokhacgiakhoa.github.io/assets/og-cover.jpg" />
 
   <!-- Theme color -->
@@ -66,10 +66,13 @@
       DKGK<span class="c-gold">.</span>
     </a>
     <nav class="header-nav" aria-label="Navigation">
-      <a href="#about"   class="nav-link" data-section="about">About</a>
-      <a href="#skills"  class="nav-link" data-section="skills">Skills</a>
-      <a href="#repos"   class="nav-link" data-section="repos">GitHub</a>
-      <a href="#contact" class="btn-nav magnetic" data-section="contact">Contact</a>
+      <a href="#about"   class="nav-link" data-section="about" data-en="About">Về mình</a>
+      <a href="#skills"  class="nav-link" data-section="skills" data-en="Skills">Kỹ năng</a>
+      <a href="#repos"   class="nav-link" data-section="repos" data-en="Projects">Dự án</a>
+      <a href="#contact" class="btn-nav magnetic" data-section="contact" data-en="Contact">Liên hệ</a>
+      <button type="button" class="lang-toggle magnetic" id="langToggle" aria-label="Switch language">
+        <span class="lang-opt lang-opt--vi active" data-lang="vi">VI</span><span class="lang-sep">/</span><span class="lang-opt" data-lang="en">EN</span>
+      </button>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -105,17 +108,17 @@
         <h1 class="hero-title">
           <span class="split-text">Đỗ Khắc Gia Khoa</span>
         </h1>
-        <p class="hero-sub">Building websites, apps &amp; integrating <span class="c-purple">AI</span> to streamline operations.</p>
-        <p class="hero-desc">End-to-end digital transformation — from cloud infrastructure to end-user experience.</p>
+        <p class="hero-sub">Full Stack Dev · AI Engineer · Founder @ K.AI Labs</p>
+        <p class="hero-desc" data-en="Second-year student at FPT Aptech, self-teaching and freelancing at the same time. Founder of K.AI Labs — where my team and I turn AI ideas into products people actually use.">Sinh viên năm 2 tại FPT Aptech, đang tự học và làm freelance song song. Founder K.AI Labs — nơi mình và team biến ý tưởng AI thành sản phẩm dùng được.</p>
         <div class="hero-cta">
           <a href="#skills" class="btn btn-primary magnetic">
-            Explore Skills
+            <span data-en="Explore Skills">Khám phá kỹ năng</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
           <a href="https://github.com/dokhacgiakhoa" target="_blank" rel="noopener" class="btn btn-outline magnetic">
-            <i class="bi bi-github"></i> <span>GitHub Repos</span>
+            <i class="bi bi-github"></i> <span data-en="View GitHub">Xem GitHub</span>
           </a>
         </div>
       </div>
@@ -130,22 +133,22 @@
       <div class="container">
         <div class="about-grid">
           <div class="about-left">
-            <span class="eyebrow">About Me</span>
-            <h2 class="sec-heading">Who <span class="c-gold">am I?</span></h2>
-            <p class="body-text">I focus on building tech products with real-world value, combining the stability of infrastructure systems with the flexibility of AI.</p>
-            <p class="body-text muted">With a solid foundation in Full Stack development alongside DevOps and AI expertise, I help businesses automate workflows and drive digital transformation effectively.</p>
+            <span class="eyebrow" data-en="About Me">Về mình</span>
+            <h2 class="sec-heading" data-en="Who <span class='c-gold'>am I?</span>">Mình là <span class="c-gold">ai?</span></h2>
+            <p class="body-text" data-en="I studied Business Administration at the University of Transport and Communications (2014–2018) before switching fully into programming. Now I'm starting over at FPT Aptech (batch T2508M, graduating 2027) — studying, freelancing, and building K.AI Labs at the same time.">Mình học Quản trị Kinh doanh ở Đại học Giao thông Vận tải (2014–2018) trước khi rẽ hẳn sang lập trình. Giờ đang học lại từ đầu tại FPT Aptech (khoá T2508M, tốt nghiệp 2027) — vừa học vừa làm freelance, vừa tự tay xây K.AI Labs.</p>
+            <p class="body-text muted" data-en="I didn't come from a traditional tech background — so I know what it feels like to start from zero. Maybe that's why I like building AI things that actually help everyday users, not just to show off technical skill. Python is the tool I use the most — from small scripts to AI pipelines, agents, and data analysis.">Mình không đến từ dân công nghệ "chính gốc" — nên mình hiểu cảm giác bắt đầu từ số 0. Có lẽ vì vậy mình thích làm những thứ AI thực sự giúp được người dùng bình thường, không chỉ để khoe kỹ thuật. Python là công cụ mình dùng nhiều nhất — từ script nhỏ đến pipeline AI, agent, phân tích dữ liệu.</p>
             <div class="stats-row">
               <div class="stat">
-                <div class="stat-num-wrap"><span class="stat-num" data-target="2">0</span><span class="stat-plus">+</span></div>
-                <span class="stat-label">Years Experience</span>
+                <div class="stat-num-wrap"><span class="stat-num" data-target="2025">0</span></div>
+                <span class="stat-label" data-en="Working with AI since">Đồng hành cùng AI từ</span>
               </div>
               <div class="stat">
-                <div class="stat-num-wrap"><span class="stat-num" data-target="15">0</span><span class="stat-plus">+</span></div>
-                <span class="stat-label">Projects Completed</span>
+                <div class="stat-num-wrap"><span class="stat-num" data-target="7">0</span><span class="stat-plus">+</span></div>
+                <span class="stat-label" data-en="AI Projects">Dự án AI</span>
               </div>
               <div class="stat">
                 <div class="stat-num-wrap"><span class="stat-num" data-target="5">0</span></div>
-                <span class="stat-label">Domains of Expertise</span>
+                <span class="stat-label" data-en="Areas of Focus">Mảng chuyên môn</span>
               </div>
             </div>
           </div>
@@ -164,10 +167,10 @@
               </div>
               <div class="avatar-info">
                 <p class="avatar-name">Đỗ Khắc Gia Khoa</p>
-                <p class="avatar-role">Full Stack · DevOps · AI</p>
+                <p class="avatar-role">Full Stack · AI Engineer · Founder K.AI Labs</p>
                 <div class="avatar-status">
                   <span class="status-dot"></span>
-                  <span>Available for projects</span>
+                  <span data-en="Available for projects">Sẵn sàng nhận dự án</span>
                 </div>
               </div>
             </div>
@@ -176,16 +179,16 @@
             <div class="glass-card">
               <div class="quote-header">
                 <i class="bi bi-quote c-purple"></i>
-                <h4>Work Philosophy</h4>
+                <h4 data-en="Work Philosophy">Triết lý làm việc</h4>
               </div>
-              <p class="quote-text">"It's not just about writing clean code or configuring optimal servers — what matters most is solving real business problems in a smart and sustainable way."</p>
+              <p class="quote-text" data-en="&quot;<strong>Code less. Build more.</strong> — to me, that means letting AI handle the repetitive, time-consuming work, while I stay the one in the driver's seat. Using AI isn't about handing off control — it's about staying in control of it: understanding what it's doing, why, and knowing when to step in.&quot;">"<strong>Code less. Build more.</strong> — với mình nghĩa là để AI làm thay phần việc lặp lại, tốn thời gian, nhưng người cầm lái vẫn phải là mình. Dùng AI không phải để phó mặc, mà để kiểm soát được nó — hiểu nó đang làm gì, vì sao làm vậy, và biết khi nào cần can thiệp."</p>
             </div>
 
             <!-- Location -->
             <div class="glass-card glass-card--sm">
-              <i class="bi bi-geo-alt c-gold"></i><span>Hanoi, Vietnam</span>
+              <i class="bi bi-geo-alt c-gold"></i><span data-en="Hanoi, Vietnam">Hà Nội, Việt Nam</span>
               <span class="sep">·</span>
-              <i class="bi bi-clock c-purple"></i><span>Open to remote work</span>
+              <i class="bi bi-clock c-purple"></i><span data-en="Open to remote/freelance work">Sẵn sàng làm remote/freelance</span>
             </div>
           </div>
         </div>
@@ -198,52 +201,69 @@
       <div class="container">
         <div class="sec-header">
           <span class="eyebrow">// tech_stack.json</span>
-          <h2 class="sec-heading grad-text">Technical Skills</h2>
-          <p class="muted" style="font-size:1.05rem;margin-top:.75rem;">Full-spectrum stack — from pixels to pipelines.</p>
+          <h2 class="sec-heading grad-text" data-en="Technical Skills">Kỹ năng kỹ thuật</h2>
+          <p class="muted" style="font-size:1.05rem;margin-top:.75rem;" data-en="Focused on AI &amp; Python — plus a full-stack foundation solid enough to build a product end to end.">Trọng tâm AI &amp; Python — cùng nền tảng full-stack đủ để tự dựng sản phẩm từ đầu đến cuối.</p>
         </div>
 
         <div class="skills-hud">
 
           <div class="hud-panel">
             <div class="hud-panel-bar"></div>
-            <h3 class="hud-panel-label c-purple">// Frontend</h3>
+            <h3 class="hud-panel-label" style="color:var(--cyan)">// AI Tools &amp; Models</h3>
             <div class="skill-list">
-              <div class="skill-card" data-pct="70"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"><div class="skill-meta"><p class="skill-name">JavaScript</p><p class="skill-desc">ES6+, DOM, Fetch API, async/await</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="80"><img class="skill-icon skill-icon--mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlegemini.svg" alt="Gemini"><div class="skill-meta"><p class="skill-name">Google Gemini</p><p class="skill-desc" data-en="Multimodal AI, RAG pipelines, chatbots, automation">AI đa phương thức, RAG pipeline, chatbot, tự động hoá</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="65"><img class="skill-icon" src="Media/icons/antigravity.svg" alt="AntiGravity"><div class="skill-meta"><p class="skill-name">Google AntiGravity</p><p class="skill-desc" data-en="Agentic IDE — the platform behind Agent-skills-setup-for-AntiGravity (506★)">IDE agentic — nền tảng cho Agent-skills-setup-for-AntiGravity (506★)</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="70"><img class="skill-icon skill-icon--mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/anthropic.svg" alt="Claude"><div class="skill-meta"><p class="skill-name">Claude</p><p class="skill-desc" data-en="Coding agent, tool-use, agentic workflows">Coding agent, tool-use, agentic workflow</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="60"><img class="skill-icon skill-icon--mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="GPT"><div class="skill-meta"><p class="skill-name">GPT (OpenAI)</p><p class="skill-desc" data-en="API, chatbots, natural language processing">API, chatbot, xử lý ngôn ngữ tự nhiên</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="40"><img class="skill-icon" src="Media/icons/codex.svg" alt="Codex"><div class="skill-meta"><p class="skill-name">Codex</p><p class="skill-desc" data-en="Coding agent CLI — code generation and automated review">Coding agent CLI — hỗ trợ sinh code, review tự động</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="35"><img class="skill-icon" src="Media/icons/nano-banana.svg" alt="Nano Banana"><div class="skill-meta"><p class="skill-name">Nano Banana</p><p class="skill-desc" data-en="Gemini's AI image generation/editing model — used for thumbnails and image assets">Model tạo/chỉnh ảnh AI của Gemini — dùng cho thumbnail, asset hình ảnh</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+            </div>
+          </div>
+
+          <div class="hud-panel">
+            <div class="hud-panel-bar"></div>
+            <h3 class="hud-panel-label c-gold" data-en="// Programming Languages">// Ngôn ngữ lập trình</h3>
+            <div class="skill-list">
+              <div class="skill-card" data-pct="70"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><div class="skill-meta"><p class="skill-name">Python</p><p class="skill-desc" data-en="Still deep in the learning journey — comfortable with popular libraries at a level I can apply to real projects">Vẫn đang trên hành trình học sâu — dùng được nhiều thư viện phổ biến ở mức áp dụng vào dự án thực tế</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="70"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><div class="skill-meta"><p class="skill-name">JavaScript</p><p class="skill-desc">ES6+, DOM, Fetch API, async/await</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
               <div class="skill-card" data-pct="60"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"><div class="skill-meta"><p class="skill-name">TypeScript</p><p class="skill-desc">Type-safe apps, interfaces, generics</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><div class="skill-meta"><p class="skill-name">React</p><p class="skill-desc">Hooks, Context, SPA — Khoa Học Tâm Linh, Office Box Academy</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind"><div class="skill-meta"><p class="skill-name">Tailwind CSS</p><p class="skill-desc">Utility-first styling, responsive design</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="45"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"><div class="skill-meta"><p class="skill-name">Java</p><p class="skill-desc" data-en="OOP, backend engineering — FPT Aptech">OOP, backend engineering — FPT Aptech</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="40"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"><div class="skill-meta"><p class="skill-name">C#</p><p class="skill-desc" data-en="OOP, .NET foundation — FPT Aptech">OOP, nền tảng .NET — FPT Aptech</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="35"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"><div class="skill-meta"><p class="skill-name">PHP</p><p class="skill-desc" data-en="Traditional web backend, MVC">Web backend truyền thống, MVC</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
             </div>
           </div>
 
           <div class="hud-panel">
             <div class="hud-panel-bar"></div>
-            <h3 class="hud-panel-label c-gold">// Backend &amp; Core Engineering</h3>
+            <h3 class="hud-panel-label c-purple" data-en="// Frameworks &amp; Libraries">// Framework &amp; Thư viện</h3>
             <div class="skill-list">
-              <div class="skill-card" data-pct="75"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><div class="skill-meta"><p class="skill-name">Python</p><p class="skill-desc">AI pipelines, scripting, automation</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><div class="skill-meta"><p class="skill-name">Node.js</p><p class="skill-desc">REST APIs, CLI tooling, video processing pipelines</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="50"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel"><div class="skill-meta"><p class="skill-name">PHP &amp; Laravel</p><p class="skill-desc">MVC, Eloquent ORM, REST API — CourierXpress</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="45"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Java"><div class="skill-meta"><p class="skill-name">Java &amp; Spring Boot</p><p class="skill-desc">OOP, C#, backend engineering — FPT Aptech</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><div class="skill-meta"><p class="skill-name">React</p><p class="skill-desc" data-en="Hooks, Context, SPA — Khoa Học Tâm Linh, Vibonymus Dashboard">Hooks, Context, SPA — Khoa Học Tâm Linh, Vibonymus Dashboard</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><div class="skill-meta"><p class="skill-name">Node.js</p><p class="skill-desc" data-en="REST APIs, CLI tooling, video processing pipeline">REST API, CLI tooling, pipeline xử lý video</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI"><div class="skill-meta"><p class="skill-name">FastAPI</p><p class="skill-desc" data-en="AI/NLP backend — PhoBERT sentiment analysis pipeline (MSA project)">Backend AI/NLP — pipeline phân tích cảm xúc PhoBERT (dự án MSA)</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS"><div class="skill-meta"><p class="skill-name">Tailwind CSS</p><p class="skill-desc">Utility-first styling, responsive design</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="50"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap"><div class="skill-meta"><p class="skill-name">Bootstrap</p><p class="skill-desc" data-en="Fast UI components, grid system">Component UI dựng nhanh, grid system</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="45"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="pandas"><div class="skill-meta"><p class="skill-name" data-en="pandas &amp; Python libraries">pandas &amp; thư viện Python</p><p class="skill-desc" data-en="Data processing, automation scripts — plus other libraries picked up per project">Xử lý dữ liệu, script tự động hoá — cùng nhiều thư viện khác học theo dự án</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
             </div>
           </div>
 
           <div class="hud-panel">
             <div class="hud-panel-bar"></div>
-            <h3 class="hud-panel-label" style="color:var(--cyan)">// AI &amp; Large Language Models</h3>
+            <h3 class="hud-panel-label" style="color:var(--red)">// Database</h3>
             <div class="skill-list">
-              <div class="skill-card" data-pct="85"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Gemini"><div class="skill-meta"><p class="skill-name">Google Gemini</p><p class="skill-desc">Multimodal AI, RAG pipelines, chatbots, automation</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="80"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="LLM APIs"><div class="skill-meta"><p class="skill-name">LLM APIs &amp; Prompt Engineering</p><p class="skill-desc">Claude, OpenAI — tool-use, agentic workflows</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="80"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="AI Agents"><div class="skill-meta"><p class="skill-name">AI Agents &amp; Agentic AI</p><p class="skill-desc">Multi-agent orchestration, AntiGravity IDE (457★)</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="60"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"><div class="skill-meta"><p class="skill-name">MySQL</p><p class="skill-desc" data-en="Schema design, indexing, complex queries">Thiết kế schema, indexing, truy vấn phức tạp</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"><div class="skill-meta"><p class="skill-name">PostgreSQL</p><p class="skill-desc" data-en="Paired with Redis cache — MSA project">Cùng Redis cache — dự án MSA</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
             </div>
           </div>
 
           <div class="hud-panel">
             <div class="hud-panel-bar"></div>
-            <h3 class="hud-panel-label" style="color:var(--red)">// Database, Cloud &amp; Tools</h3>
+            <h3 class="hud-panel-label" style="color:#38bdf8" data-en="// Tools &amp; Apps">// Công cụ &amp; Apps</h3>
             <div class="skill-list">
-              <div class="skill-card" data-pct="60"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"><div class="skill-meta"><p class="skill-name">MySQL</p><p class="skill-desc">Schema design, indexing, complex queries</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="60"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP"><div class="skill-meta"><p class="skill-name">Google Cloud &amp; Vercel</p><p class="skill-desc">Cloud infrastructure, edge deploy, serverless</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
-              <div class="skill-card" data-pct="70"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><div class="skill-meta"><p class="skill-name">Git &amp; GitHub Actions</p><p class="skill-desc">Version control, CI/CD pipelines, open source</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="70"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><div class="skill-meta"><p class="skill-name">Git &amp; GitHub Actions</p><p class="skill-desc" data-en="Version control, CI/CD pipelines, open source">Version control, CI/CD, open source</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
               <div class="skill-card" data-pct="55"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"><div class="skill-meta"><p class="skill-name">Docker</p><p class="skill-desc">Containerization, multi-stage builds, Compose</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="80"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><div class="skill-meta"><p class="skill-name">VS Code &amp; IDE</p><p class="skill-desc" data-en="Main daily driver, alongside AntiGravity IDE for AI agents">Công cụ chính hàng ngày, cùng AntiGravity IDE cho AI agent</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="40"><img class="skill-icon skill-icon--mono" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/n8n.svg" alt="n8n"><div class="skill-meta"><p class="skill-name">n8n</p><p class="skill-desc" data-en="Workflow automation, connecting AI with other tools">Tự động hoá workflow, kết nối AI với công cụ khác</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
+              <div class="skill-card" data-pct="60"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud"><div class="skill-meta"><p class="skill-name">Google Cloud &amp; Vercel</p><p class="skill-desc" data-en="Cloud infrastructure, edge deploy, serverless">Hạ tầng cloud, edge deploy, serverless</p></div><div class="skill-bar-wrap"><div class="skill-bar"></div></div></div>
             </div>
           </div>
 
@@ -251,7 +271,7 @@
 
         <div class="hud-certs">
           <div class="hud-panel-bar"></div>
-          <h3 class="hud-panel-label" style="color:#38bdf8">// Certifications</h3>
+          <h3 class="hud-panel-label" style="color:#38bdf8" data-en="// Certifications">// Chứng chỉ</h3>
 
           <!-- Notable certs -->
           <div class="certs-notable">
@@ -274,14 +294,47 @@
       </div>
     </section>
 
+    <!-- 3.5. K.AI Labs & Vnonymus -->
+    <section id="kailabs" class="section">
+      <div class="container">
+        <div class="sec-header">
+          <span class="eyebrow">// kailabs.io.vn</span>
+          <h2 class="sec-heading">K.AI Labs &amp; <span class="c-gold">Vnonymus</span></h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-left">
+            <p class="body-text" data-en="<strong>K.AI Labs</strong> is the AI lab I founded — where AI ideas become real products, from automated SEO tools and social media analytics to agents that support everyday work. The team keeps growing — member details will be updated over time.">
+              <strong>K.AI Labs</strong> là phòng thí nghiệm AI do mình sáng lập — nơi những ý tưởng về AI được biến thành sản phẩm thật, từ công cụ SEO tự động, phân tích mạng xã hội, đến các agent hỗ trợ công việc hàng ngày. Team đang tiếp tục mở rộng — thông tin thành viên sẽ cập nhật dần.
+            </p>
+            <p class="body-text muted" data-en="Inside K.AI Labs there are two teams: <strong>Vnonymus</strong> — the core crew building products day to day, and <strong>Vibonymus</strong> — a 6-member competition team I captain, currently preparing for the <strong>Vietnam AI Innovation Hackathon 2026</strong>.">
+              Trong lòng K.AI Labs có hai đội: <strong>Vnonymus</strong> — đội ngũ nòng cốt cùng xây sản phẩm hàng ngày, và <strong>Vibonymus</strong> — đội thi gồm 6 thành viên do mình làm đội trưởng, đang chuẩn bị tham gia <strong>Vietnam AI Innovation Hackathon 2026</strong>.
+            </p>
+            <div class="hero-cta" style="margin-top:1.5rem">
+              <a href="https://kailabs.io.vn" target="_blank" rel="noopener" class="btn btn-primary magnetic">
+                <span data-en="Visit K.AI Labs">Ghé thăm K.AI Labs</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="about-right">
+            <div class="glass-card glass-card--sm"><i class="bi bi-flask c-gold"></i><span data-en="K.AI Labs — AI research lab">K.AI Labs — phòng thí nghiệm AI</span></div>
+            <div class="glass-card glass-card--sm"><i class="bi bi-people c-purple"></i><span data-en="Vnonymus — core team">Vnonymus — đội ngũ nòng cốt</span></div>
+            <div class="glass-card glass-card--sm"><i class="bi bi-trophy c-gold"></i><span data-en="Vibonymus — 6 members, captain: Khoa · VAIC Hackathon 2026">Vibonymus — 6 người, đội trưởng: Khoa · VAIC Hackathon 2026</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 4. GitHub Repos -->
     <section id="repos" class="section section--alt">
       <div class="blob blob-2" style="left:-5%;top:20%;opacity:.05;pointer-events:none;"></div>
       <div class="container">
         <div class="sec-header">
-          <span class="eyebrow">// github_profile.json</span>
-          <h2 class="sec-heading grad-text">Open Source</h2>
-          <p class="muted" style="margin-top:.75rem;">Explore my public repositories — real projects built with real intent.</p>
+          <span class="eyebrow">// kho_du_an_ai.json</span>
+          <h2 class="sec-heading grad-text" data-en="AI Projects I've Built">Dự án AI mình đã làm</h2>
+          <p class="muted" style="margin-top:.75rem;" data-en="These are real AI projects I've coded myself — from agent tooling starred by 500+ people on GitHub, to a social media sentiment analysis system using PhoBERT. Not homework — products.">Đây là những dự án AI thật mình đã tự tay code — từ agent tooling được 500+ người sao trên GitHub, đến hệ thống phân tích cảm xúc mạng xã hội bằng PhoBERT. Không phải bài tập, là sản phẩm.</p>
         </div>
 
         <!-- Repo stats bar -->
@@ -313,7 +366,7 @@
 
         <div class="repos-cta">
           <a href="https://github.com/dokhacgiakhoa" target="_blank" rel="noopener" class="btn btn-outline magnetic">
-            <i class="bi bi-github"></i> View all on GitHub
+            <i class="bi bi-github"></i> <span data-en="View all on GitHub">Xem tất cả trên GitHub</span>
           </a>
         </div>
       </div>
@@ -325,40 +378,20 @@
       <div class="container">
         <div class="contact-grid">
           <div class="contact-left">
-            <span class="eyebrow">Contact</span>
-            <h2 class="sec-heading">Start <span class="c-gold">your project</span></h2>
-            <p class="body-text muted">Looking for a solution to build a robust system or drive conversion growth?</p>
-            <div class="contact-items">
-              <div class="contact-item">
-                <div class="contact-icon glass-card glass-card--icon"><i class="bi bi-envelope c-purple"></i></div>
-                <div><p class="muted small">Email</p><a href="mailto:dokhacgiakhoa666@gmail.com" class="contact-link">dokhacgiakhoa666@gmail.com</a></div>
-              </div>
-
+            <span class="eyebrow" data-en="Contact">Liên hệ</span>
+            <h2 class="sec-heading" data-en="Let's <span class='c-gold'>connect</span>">Kết nối <span class="c-gold">với mình</span></h2>
+            <p class="body-text muted" data-en="Got an idea, a question, or just want to say hi — reach me on whatever channel works for you.">Có ý tưởng hay, câu hỏi, hoặc chỉ muốn chào hỏi — nhắn mình qua kênh nào cũng được.</p>
+            <div class="contact-preview glass-card" id="contactPreview">
+              <p class="muted small" id="contactPreviewLabel">Email</p>
+              <a href="mailto:dokhacgiakhoa666@gmail.com" class="contact-link" id="contactPreviewLink">dokhacgiakhoa666@gmail.com</a>
             </div>
-            <div class="social-row">
-              <a href="https://github.com/dokhacgiakhoa" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="GitHub"><i class="bi bi-github"></i></a>
-              <a href="https://linkedin.com/in/dokhacgiakhoa" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-              <a href="https://facebook.com/dokhacgiakhoa" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-            </div>
-          </div>
-          <div class="contact-right">
-            <div class="glass-card contact-form-card">
-              <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="hidden" name="_subject" value="Message from Portfolio" />
-                <div class="float-field">
-                  <input type="text" id="f-name" name="name" required placeholder=" ">
-                  <label for="f-name">Full name</label>
-                </div>
-                <div class="float-field">
-                  <input type="email" id="f-email" name="email" required placeholder=" ">
-                  <label for="f-email">Email</label>
-                </div>
-                <div class="float-field">
-                  <textarea id="f-msg" name="message" rows="4" required placeholder=" "></textarea>
-                  <label for="f-msg">Message</label>
-                </div>
-                <button type="submit" class="btn btn-primary btn--full"><span>Send message</span></button>
-              </form>
+            <div class="social-row" id="socialRow">
+              <button type="button" class="social-btn magnetic active" aria-label="Email" data-label="Email" data-display="dokhacgiakhoa666@gmail.com" data-href="mailto:dokhacgiakhoa666@gmail.com"><i class="bi bi-envelope"></i></button>
+              <button type="button" class="social-btn magnetic" aria-label="GitHub" data-label="GitHub" data-display="github.com/dokhacgiakhoa" data-href="https://github.com/dokhacgiakhoa"><i class="bi bi-github"></i></button>
+              <button type="button" class="social-btn magnetic" aria-label="LinkedIn" data-label="LinkedIn" data-display="linkedin.com/in/dokhacgiakhoa" data-href="https://linkedin.com/in/dokhacgiakhoa"><i class="bi bi-linkedin"></i></button>
+              <button type="button" class="social-btn magnetic" aria-label="Facebook" data-label="Facebook" data-display="facebook.com/dokhacgiakhoa" data-href="https://facebook.com/dokhacgiakhoa"><i class="bi bi-facebook"></i></button>
+              <button type="button" class="social-btn magnetic" aria-label="YouTube" data-label="YouTube" data-display="youtube.com/@dokhacgiakhoa" data-href="https://youtube.com/@dokhacgiakhoa"><i class="bi bi-youtube"></i></button>
+              <button type="button" class="social-btn magnetic" aria-label="K.AI Labs" data-label="K.AI Labs" data-display="kailabs.io.vn" data-href="https://kailabs.io.vn"><i class="bi bi-globe2"></i></button>
             </div>
           </div>
         </div>
@@ -367,9 +400,9 @@
 
     <footer class="footer">
       <div class="footer-border"></div>
-      <p>&copy; 2026 <strong>Đỗ Khắc Gia Khoa</strong>. All rights reserved.</p>
+      <p>&copy; 2026 <strong>Đỗ Khắc Gia Khoa</strong> · K.AI Labs</p>
       <p class="muted small">
-        Crafted with GSAP · Pure CSS · Vanilla JS
+        <span data-en="Built with GSAP · Pure CSS · Vanilla JS">Xây bằng GSAP · Pure CSS · Vanilla JS</span>
         <span style="color:var(--gold);margin-left:.5rem">♥</span>
       </p>
     </footer>
