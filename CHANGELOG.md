@@ -4,6 +4,16 @@ Nhật ký các đợt chỉnh sửa portfolio, ghi lại để xem lại lịch
 
 ---
 
+## 2026-07-15 (tiếp 5) — Repo card: ngày cập nhật xuống dòng, hiệu ứng "khung kính" cho thumbnail
+
+- **Ngày cập nhật xuống dòng riêng**: `.repo-footer` đổi từ hàng ngang sang cột (`flex-direction: column`), "Cập nhật DD/MM/YYYY" giờ luôn nằm dòng riêng thay vì chen cùng hàng với ngôn ngữ/sao/fork.
+- **Màu chữ sáng hơn**: `.repo-updated` đổi từ `--muted2` (#112030 — gần như không đọc được trên nền đen) sang `--muted` (#2a6080).
+- **Hiệu ứng "nhìn qua khung kính 3D" cho thumbnail**: khi hover nghiêng card (hiệu ứng tilt theo chuột có sẵn), ảnh thumbnail giờ tự xoay ngược lại đúng góc mà card đang nghiêng — bù trừ triệt tiêu lẫn nhau nên ảnh trông như đứng yên, "nhìn xuyên qua" khung viền card đang nghiêng, kèm zoom nhẹ (1.12x) tăng chiều sâu. Kỹ thuật: xoay ngược trực tiếp trên `<img>` (không phải wrapper `.repo-thumb`), để phần khung viền `overflow:hidden` vẫn nghiêng tự nhiên theo card — ảnh mới là thứ "đứng yên" phía sau khung.
+- Bỏ hiệu ứng zoom CSS cũ trên ảnh (`.repo-card:hover .repo-thumb img { scale }`) vì giờ JS đã điều khiển toàn bộ transform của ảnh, tránh xung đột 2 hệ thống animate cùng lúc.
+- Đã test: ma trận transform xác nhận góc xoay ảnh và card triệt tiêu chính xác lẫn nhau; không lỗi console.
+
+---
+
 ## 2026-07-15 (tiếp 4) — Tên dự án hiển thị đẹp, bỏ gạch ngang
 
 Tên repo trên GitHub theo chuẩn slug có gạch ngang (`agent-skills-setup-for-antigravity`) — hợp cho URL nhưng xấu khi làm tiêu đề hiển thị. Thêm `REPO_DISPLAY_NAMES`/`REPO_DISPLAY_NAMES_EN` trong `app.js`, đổi tên hiển thị cho cả 7 dự án sang tên sạch, song ngữ, không gạch ngang (VD: "Agent Skills cho AntiGravity" / "Agent Skills for AntiGravity"). Tên đổi theo ngôn ngữ đang chọn giống cơ chế mô tả repo. Tag chủ đề nhỏ bên dưới card (`ai-agents`, `cli`...) giữ nguyên dạng kebab-case vì đó là quy ước bình thường cho tag, không phải tên dự án.

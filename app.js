@@ -1318,17 +1318,29 @@ async function initGithubRepos() {
       }
     });
 
-    // 3D tilt on card hover
+    // 3D tilt on card hover — the thumbnail counter-rotates by the exact
+    // opposite angle, canceling the card's own tilt so the image reads as
+    // a fixed backdrop sitting still behind a tilting glass frame, instead
+    // of tipping along with the rest of the card.
     if (!prefersReducedMotion && !isMobile) {
       cards.forEach(card => {
+        // Counter-rotate the <img> itself, not the .repo-thumb wrapper —
+        // the wrapper keeps its overflow:hidden clip tilting naturally
+        // with the card (the "window frame"), while only the image inside
+        // it cancels that rotation (the "view" staying put behind the glass).
+        const thumbImg = card.querySelector('.repo-thumb img');
         card.addEventListener('mousemove', (e) => {
           const r = card.getBoundingClientRect();
           const x = (e.clientX - r.left) / r.width - 0.5;
           const y = (e.clientY - r.top) / r.height - 0.5;
           gsap.to(card, { rotateY: x * 14, rotateX: -y * 14, duration: 0.3, ease: 'power2.out', transformPerspective: 900 });
+          if (thumbImg) {
+            gsap.to(thumbImg, { rotateY: -x * 14, rotateX: y * 14, scale: 1.12, duration: 0.3, ease: 'power2.out', transformPerspective: 900 });
+          }
         });
         card.addEventListener('mouseleave', () => {
           gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power2.out' });
+          if (thumbImg) gsap.to(thumbImg, { rotateY: 0, rotateX: 0, scale: 1, duration: 0.5, ease: 'power2.out' });
         });
       });
     }

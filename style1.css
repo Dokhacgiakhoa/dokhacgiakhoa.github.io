@@ -1441,11 +1441,6 @@ img {
   object-fit: cover;
   object-position: center 30%;
   display: block;
-  transition: transform 0.45s ease;
-}
-
-.repo-card:hover .repo-thumb img {
-  transform: scale(1.06);
 }
 
 .repo-thumb::after {
@@ -1520,9 +1515,8 @@ img {
   padding: 0.9rem 1.5rem;
   border-top: 1px solid var(--border);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 0.5rem;
 }
 
@@ -1560,7 +1554,7 @@ img {
 .repo-updated {
   font-size: 0.68rem;
   font-family: var(--font-mono);
-  color: var(--muted2);
+  color: var(--muted);
 }
 
 .repo-border-anim {
