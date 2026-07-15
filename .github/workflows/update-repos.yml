@@ -1,0 +1,43 @@
+name: Update repos snapshot
+
+# Refreshes data/repos.json from the GitHub API on a schedule, using the
+# authenticated GITHUB_TOKEN (5000 req/hour) instead of letting every site
+# visitor's browser call the unauthenticated API directly (60 req/hour,
+# shared per IP — easy to exhaust and breaks the Projects section for
+# everyone else on that network).
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-repos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch repos from GitHub API
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p data
+          curl -sSL \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/users/dokhacgiakhoa/repos?sort=updated&per_page=20&type=owner" \
+            -o data/repos.json
+          # Sanity check: bail if the response isn't a JSON array (e.g. an
+          # API error object), so a bad response never overwrites a good one.
+          python3 -c "import json,sys; data=json.load(open('data/repos.json')); sys.exit(0 if isinstance(data, list) else 1)"
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/repos.json
+          git diff --cached --quiet || git commit -m "chore: update repos.json snapshot [skip ci]"
+          git push

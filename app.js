@@ -17,15 +17,6 @@ let currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'vi';
 // require re-fetching the GitHub API — just re-rendering existing data.
 let cachedRepos = [];
 
-// ===== PERFORMANCE OPTIMIZATION: PREFETCH GITHUB API =====
-const reposCache = fetch(
-  'https://api.github.com/users/dokhacgiakhoa/repos?sort=updated&per_page=20&type=owner',
-  { headers: { 'Accept': 'application/vnd.github.mercy-preview+json' } }
-).catch(err => {
-  console.warn('Prefetch failed, fallback will be used in initGithubRepos.', err);
-  return null;
-});
-
 // ===== FEATURED AI PROJECTS =====
 // Chỉ hiện các repo liên quan AI + có giá trị ứng dụng thực tế.
 // Thứ tự = thứ tự hiển thị. Mô tả viết tay (GitHub description phần lớn để trống).
@@ -1025,6 +1016,75 @@ function initSkills() {
 // ─────────────────────────────────────────
 // 10_REPOS (Glitch Eyebrow & Cards Deal)
 // ─────────────────────────────────────────
+
+// GitHub's unauthenticated REST API caps unauthenticated callers at 60
+// requests/hour PER IP — shared by everyone on the same network. Calling
+// it fresh on every page load burns through that fast. Three layers,
+// cheapest/most-reliable first:
+//   1. localStorage (instant, no network, survives reloads for 1h)
+//   2. data/repos.json — a same-origin snapshot a GitHub Actions workflow
+//      refreshes periodically using the authenticated GITHUB_TOKEN
+//      (5000 req/hour), so visitors never touch GitHub's API directly
+//   3. Live GitHub API — last-resort fallback if the snapshot is missing
+const REPOS_CACHE_KEY = 'github_repos_cache_v1';
+const REPOS_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+function readReposCache() {
+  try {
+    const raw = localStorage.getItem(REPOS_CACHE_KEY);
+    if (!raw) return null;
+    const { data, ts } = JSON.parse(raw);
+    if (!Array.isArray(data) || Date.now() - ts > REPOS_CACHE_TTL) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+function writeReposCache(data) {
+  try {
+    localStorage.setItem(REPOS_CACHE_KEY, JSON.stringify({ data, ts: Date.now() }));
+  } catch {
+    // localStorage unavailable (private mode, quota full) — not fatal
+  }
+}
+
+async function fetchReposData() {
+  const cached = readReposCache();
+  if (cached) return cached;
+
+  try {
+    const res = await fetch('data/repos.json', { cache: 'no-store' });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length) {
+        writeReposCache(data);
+        return data;
+      }
+    }
+  } catch {
+    // snapshot not deployed yet / network hiccup — fall through to live API
+  }
+
+  let all = null;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const res = await fetch(
+      'https://api.github.com/users/dokhacgiakhoa/repos?sort=updated&per_page=20&type=owner',
+      { signal: ctrl.signal, headers: { 'Accept': 'application/vnd.github.mercy-preview+json' } }
+    );
+    if (res.ok) all = await res.json();
+  } catch (err) {
+    console.warn('Live GitHub API fetch failed.', err);
+  } finally {
+    clearTimeout(timer);
+  }
+
+  if (Array.isArray(all)) writeReposCache(all);
+  return all;
+}
+
 async function initGithubRepos() {
   const grid = document.getElementById('reposGrid');
   const filter = document.getElementById('reposFilter');
@@ -1041,26 +1101,7 @@ async function initGithubRepos() {
   };
 
   try {
-    // Await the prefetch cache promise
-    const cachedRes = await reposCache;
-    let all = null;
-
-    if (cachedRes && cachedRes.ok) {
-      all = await cachedRes.clone().json();
-    } else {
-      // Fallback if prefetch failed
-      const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 8000);
-      const res = await fetch(
-        'https://api.github.com/users/dokhacgiakhoa/repos?sort=updated&per_page=20&type=owner',
-        {
-          signal: ctrl.signal,
-          headers: { 'Accept': 'application/vnd.github.mercy-preview+json' }
-        }
-      );
-      clearTimeout(timer);
-      if (res.ok) all = await res.json();
-    }
+    const all = await fetchReposData();
 
     if (!all || !Array.isArray(all)) {
       showError('Không tải được dữ liệu GitHub.');

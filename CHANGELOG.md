@@ -4,6 +4,21 @@ Nhật ký các đợt chỉnh sửa portfolio, ghi lại để xem lại lịch
 
 ---
 
+## 2026-07-15 (tiếp 3) — Fix "Không tải được dữ liệu GitHub" (rate limit)
+
+**Nguyên nhân:** trang gọi trực tiếp `api.github.com` từ trình duyệt người xem để lấy danh sách repo — GitHub giới hạn 60 lượt gọi/giờ **theo IP**, dùng chung cho tất cả người trên cùng mạng. Test nhiều lần hoặc nhiều người cùng wifi/công ty/trường xem trang là dễ cạn quota, trang báo lỗi không tải được.
+
+**Sửa bằng 2 lớp:**
+1. **`localStorage` cache 1 giờ** (`app.js`, hàm `fetchReposData`) — tải trang lại trong vòng 1h dùng thẳng cache, không gọi mạng.
+2. **Snapshot tĩnh `data/repos.json`** — GitHub Actions (`.github/workflows/update-repos.yml`) tự chạy mỗi 6 tiếng, dùng `GITHUB_TOKEN` xác thực (quota 5000/giờ) để lấy dữ liệu và commit vào repo. Trang giờ đọc file này (cùng domain, không giới hạn nào) thay vì gọi thẳng GitHub API.
+3. Gọi `api.github.com` trực tiếp từ trình duyệt giờ chỉ còn là **phương án cuối cùng** nếu file snapshot vì lý do gì đó chưa deploy được.
+4. Bootstrap sẵn `data/repos.json` từ dữ liệu thật để cơ chế chạy được ngay, không cần chờ Action chạy lần đầu.
+5. Xóa hẳn đoạn prefetch API cố định chạy mỗi lần tải trang (trước đây tốn 1 lượt gọi dù không cần thiết).
+
+**Đã test:** tải trang lần đầu → chỉ gọi `data/repos.json`, không đụng `api.github.com`. Tải lại lần 2 → không gọi mạng gì cả, lấy từ cache. Không lỗi console.
+
+---
+
 ## 2026-07-15 (tiếp 2) — Asset thật: 4 thumbnail + 3 icon AI Tools
 
 Khoa tự tạo bằng Gemini (theo brief ở `Media/project-briefs/` và yêu cầu ở `Media/icon-requests.md`), báo cáo lại qua `REPORT_ASSET_UPDATE.md`. Claude đã review code + test trên trình duyệt, xác nhận đúng:
