@@ -973,9 +973,16 @@ img {
 
 /* ===== HORIZONTAL SCROLL SECTION ===== */
 /* ===== SKILLS HUD ===== */
+/* Skills section content runs wider than the site's default 1200px
+   container so 3 tech-stack columns and 6 cert columns have room to
+   breathe instead of feeling cramped. */
+#skills .container {
+  max-width: 85vw;
+}
+
 .skills-hud {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   margin-bottom: 1.25rem;
 }
@@ -1028,7 +1035,7 @@ img {
 
 .certs-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 0.85rem;
 }
 
@@ -1968,6 +1975,9 @@ img {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .repos-grid { grid-template-columns: repeat(2, 1fr); }
+  #skills .container { max-width: 92vw; }
+  .skills-hud { grid-template-columns: repeat(2, 1fr); }
+  .certs-gallery { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 768px) {
